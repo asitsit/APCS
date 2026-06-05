@@ -1,0 +1,382 @@
+﻿<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Contact — Au Pestacle ce soir</title>
+  <meta name="description" content="Contactez Hélène Micheau — pour soumettre un spectacle, proposer un partenariat ou poser une question sur ses recommandations.">
+  <meta name="author" content="Hélène Micheau">
+  <meta name="robots" content="index, follow">
+  <link rel="canonical" href="https://aupestaclecesoir.fr/contact.html">
+  <link rel="stylesheet" href="css/style.css">
+  <style>
+    .contact-layout {
+      display: grid;
+      grid-template-columns: 1fr 380px;
+      gap: 80px;
+      padding: clamp(60px, 8vw, 100px) 0;
+      align-items: start;
+    }
+
+    /* ── Formulaire ── */
+    .contact-form { display: flex; flex-direction: column; gap: 24px; }
+
+    .form-group { display: flex; flex-direction: column; gap: 8px; }
+
+    .form-group label {
+      font-size: 0.85rem;
+      font-weight: 700;
+      color: var(--noir);
+      text-transform: uppercase;
+      letter-spacing: 0.06em;
+    }
+
+    .form-group input,
+    .form-group select,
+    .form-group textarea {
+      font-family: var(--font-corps);
+      font-size: 1rem;
+      color: var(--noir);
+      background: var(--blanc);
+      border: 2px solid rgba(26,26,46,0.15);
+      border-radius: var(--radius-sm);
+      padding: 14px 18px;
+      transition: border-color var(--transition), box-shadow var(--transition);
+      outline: none;
+      width: 100%;
+    }
+
+    .form-group input:focus,
+    .form-group select:focus,
+    .form-group textarea:focus {
+      border-color: var(--pistache);
+      box-shadow: 0 0 0 3px rgba(181,212,75,0.18);
+    }
+
+    .form-group textarea { resize: vertical; min-height: 160px; line-height: 1.6; }
+
+    .form-group select { appearance: none; background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='16' height='16' viewBox='0 0 24 24' fill='none' stroke='%239090A0' stroke-width='2'%3E%3Cpath d='M6 9l6 6 6-6'/%3E%3C/svg%3E"); background-repeat: no-repeat; background-position: right 14px center; padding-right: 40px; cursor: pointer; }
+
+    .form-row { display: grid; grid-template-columns: 1fr 1fr; gap: 20px; }
+
+    .form-submit {
+      display: flex;
+      align-items: center;
+      gap: 16px;
+      flex-wrap: wrap;
+    }
+
+    /* État succès */
+    .form-success {
+      display: none;
+      background: rgba(181,212,75,0.12);
+      border: 2px solid var(--pistache);
+      border-radius: var(--radius-md);
+      padding: 24px 28px;
+      text-align: center;
+    }
+    .form-success__icon { font-size: 2.5rem; margin-bottom: 12px; }
+    .form-success__title { font-family: var(--font-titre); font-size: 1.4rem; font-weight: 700; margin-bottom: 8px; }
+    .form-success__sub { color: var(--gris); font-size: 0.95rem; }
+
+    /* État erreur inline */
+    .form-group .field-error {
+      font-size: 0.8rem;
+      color: var(--corail);
+      font-weight: 600;
+      display: none;
+    }
+    .form-group.has-error input,
+    .form-group.has-error select,
+    .form-group.has-error textarea {
+      border-color: var(--corail);
+    }
+    .form-group.has-error .field-error { display: block; }
+
+    /* ── Sidebar ── */
+    .contact-aside { position: sticky; top: 100px; }
+
+    .contact-info-card {
+      background: var(--blanc);
+      border-radius: var(--radius-lg);
+      padding: 32px;
+      box-shadow: var(--shadow-md);
+      margin-bottom: 20px;
+    }
+    .contact-info-card h3 {
+      font-family: var(--font-titre);
+      font-size: 1.1rem;
+      font-weight: 700;
+      margin-bottom: 20px;
+      color: var(--noir);
+    }
+    .contact-info-item {
+      display: flex;
+      gap: 14px;
+      align-items: flex-start;
+      margin-bottom: 20px;
+    }
+    .contact-info-item:last-child { margin-bottom: 0; }
+    .contact-info-icon {
+      width: 40px; height: 40px;
+      border-radius: 10px;
+      display: flex; align-items: center; justify-content: center;
+      font-size: 1.2rem;
+      flex-shrink: 0;
+    }
+    .contact-info-icon--pistache { background: rgba(181,212,75,0.15); }
+    .contact-info-icon--violet   { background: rgba(123,94,167,0.12); }
+    .contact-info-icon--corail   { background: rgba(255,107,107,0.1); }
+    .contact-info-text strong { display: block; font-size: 0.88rem; font-weight: 700; color: var(--noir); margin-bottom: 3px; }
+    .contact-info-text span   { font-size: 0.82rem; color: var(--gris); line-height: 1.5; display: block; }
+
+    .contact-note {
+      background: var(--creme-dark);
+      border-radius: var(--radius-lg);
+      padding: 24px 28px;
+      font-size: 0.88rem;
+      color: var(--noir-soft);
+      line-height: 1.65;
+    }
+    .contact-note strong { color: var(--noir); }
+
+    /* Responsive */
+    @media (max-width: 900px) {
+      .contact-layout { grid-template-columns: 1fr; gap: 48px; }
+      .contact-aside { position: static; }
+      .form-row { grid-template-columns: 1fr; }
+    }
+  </style>
+</head>
+<body>
+
+  <nav class="nav" role="navigation" aria-label="Navigation principale">
+    <div class="container nav__inner">
+      <a href="index.html" class="nav__logo">Au <strong>Pestacle</strong><span>ce soir</span></a>
+      <ul class="nav__links" role="list">
+        <li><a href="recommandations.html">Les spectacles</a></li>
+        <li class="nav__dropdown" id="dropdown-avignon">
+          <button class="nav__dropdown-toggle" aria-expanded="false" aria-haspopup="true">
+            Avignon <span class="nav__dropdown-arrow">▾</span>
+          </button>
+          <ul class="nav__dropdown-menu" role="menu">
+            <li role="none"><a href="avignon-2025.html" role="menuitem">Avignon 2025</a></li>
+            <li role="none"><a href="avignon-2026.html" role="menuitem">Avignon 2026 <span class="nav__dropdown-soon">Bientôt</span></a></li>
+          </ul>
+        </li>
+        <li><a href="a-propos.html">À propos</a></li>
+        <li><a href="contact.html" class="nav__cta">Contact</a></li>
+      </ul>
+      <button class="nav__burger" aria-label="Ouvrir le menu" aria-expanded="false"><span></span><span></span><span></span></button>
+    </div>
+  </nav>
+
+  <header class="page-header" role="banner">
+    <div class="container">
+      <p class="page-header__kicker">Écrire à Hélène</p>
+      <h1 class="page-header__title">Contact</h1>
+      <p class="page-header__lead">Une question sur une recommandation, un spectacle à me soumettre, un projet en commun ? Je lis tous les messages.</p>
+    </div>
+  </header>
+
+  <main id="main-content">
+    <div class="container">
+      <div class="contact-layout">
+
+        <!-- ── FORMULAIRE ── -->
+        <div>
+          <!-- Message de succès (caché par défaut) -->
+          <div class="form-success" id="form-success" role="alert">
+            <div class="form-success__icon">✅</div>
+            <p class="form-success__title">Message envoyé !</p>
+            <p class="form-success__sub">Merci, je vous réponds généralement sous 48h.</p>
+          </div>
+
+          <form class="contact-form" id="contact-form"
+                action="https://formspree.io/f/VOTRE_ID_FORMSPREE"
+                method="POST"
+                novalidate>
+
+            <div class="form-row">
+              <div class="form-group">
+                <label for="prenom">Prénom *</label>
+                <input type="text" id="prenom" name="prenom" placeholder="Votre prénom" required autocomplete="given-name">
+                <span class="field-error">Ce champ est requis.</span>
+              </div>
+              <div class="form-group">
+                <label for="nom">Nom *</label>
+                <input type="text" id="nom" name="nom" placeholder="Votre nom" required autocomplete="family-name">
+                <span class="field-error">Ce champ est requis.</span>
+              </div>
+            </div>
+
+            <div class="form-group">
+              <label for="email">Email *</label>
+              <input type="email" id="email" name="email" placeholder="votre@email.fr" required autocomplete="email">
+              <span class="field-error">Adresse email invalide.</span>
+            </div>
+
+            <div class="form-group">
+              <label for="objet">Objet *</label>
+              <select id="objet" name="objet" required>
+                <option value="" disabled selected>Choisissez un objet…</option>
+                <option value="soumettre-spectacle">Soumettre un spectacle à voir</option>
+                <option value="partenariat">Partenariat / collaboration</option>
+                <option value="question-reco">Question sur une recommandation</option>
+                <option value="presse">Demande presse / média</option>
+                <option value="autre">Autre</option>
+              </select>
+              <span class="field-error">Veuillez choisir un objet.</span>
+            </div>
+
+            <div class="form-group">
+              <label for="message">Message *</label>
+              <textarea id="message" name="message" placeholder="Votre message…" required></textarea>
+              <span class="field-error">Ce champ est requis.</span>
+            </div>
+
+            <!-- Honeypot anti-spam (caché) -->
+            <input type="text" name="_gotcha" style="display:none" tabindex="-1" autocomplete="off">
+            <input type="hidden" name="_subject" value="Nouveau message — Au Pestacle ce soir">
+
+            <div class="form-submit">
+              <button type="submit" class="btn btn--primary" id="submit-btn">
+                Envoyer le message →
+              </button>
+              <p style="font-size:0.8rem;color:var(--gris);">* champs obligatoires</p>
+            </div>
+
+          </form>
+        </div>
+
+        <!-- ── SIDEBAR ── -->
+        <aside class="contact-aside">
+
+          <div class="contact-info-card">
+            <h3>Pourquoi me contacter ?</h3>
+
+            <div class="contact-info-item">
+              <div class="contact-info-icon contact-info-icon--pistache">🎭</div>
+              <div class="contact-info-text">
+                <strong>Soumettre un spectacle</strong>
+                <span>Vous êtes compagnie, producteur ou programmateur et souhaitez qu'Hélène voie votre spectacle.</span>
+              </div>
+            </div>
+
+            <div class="contact-info-item">
+              <div class="contact-info-icon contact-info-icon--violet">🤝</div>
+              <div class="contact-info-text">
+                <strong>Partenariat</strong>
+                <span>Collaboration éditoriale, co-curation, prise de parole dans des événements culturels.</span>
+              </div>
+            </div>
+
+            <div class="contact-info-item">
+              <div class="contact-info-icon contact-info-icon--corail">💬</div>
+              <div class="contact-info-text">
+                <strong>Une question, un retour</strong>
+                <span>Vous avez vu un spectacle recommandé ici ? Partagez votre avis — je lis tout.</span>
+              </div>
+            </div>
+          </div>
+
+          <div class="contact-note">
+            <strong>Délai de réponse :</strong> je réponds à tous les messages sous 48h en semaine.
+          </div>
+
+        </aside>
+      </div>
+    </div>
+  </main>
+
+  <footer class="footer" role="contentinfo">
+    <div class="container">
+      <div class="footer__grid">
+        <div>
+          <p class="footer__logo">Au <em>Pestacle</em> ce soir</p>
+          <p class="footer__tagline">Des recommandations sincères pour vos prochaines sorties.</p>
+        </div>
+        <div class="footer__col">
+          <h4>Le site</h4>
+          <a href="index.html">Accueil</a>
+          <a href="recommandations.html">Les spectacles</a>
+          <a href="avignon-2025.html">Avignon 2025</a>
+          <a href="a-propos.html">À propos</a>
+          <a href="contact.html">Contact</a>
+        </div>
+        <div class="footer__col">
+          <h4>Avignon</h4>
+          <a href="avignon-2025.html">Avignon 2025</a>
+          <a href="avignon-2026.html">Avignon 2026</a>
+        </div>
+      </div>
+      <div class="footer__bottom">
+        <span>© 2026 Au Pestacle ce soir — Hélène Micheau</span>
+        <a href="mentions-legales.html">Mentions légales</a>
+      </div>
+    </div>
+  </footer>
+
+  <script src="js/main.js"></script>
+  <script>
+    const form = document.getElementById('contact-form');
+    const successBox = document.getElementById('form-success');
+    const submitBtn = document.getElementById('submit-btn');
+
+    /* Validation champ par champ */
+    function validateField(group, input) {
+      const val = input.value.trim();
+      let ok = true;
+      if (input.required && !val) ok = false;
+      if (input.type === 'email' && val && !/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(val)) ok = false;
+      group.classList.toggle('has-error', !ok);
+      return ok;
+    }
+
+    form.querySelectorAll('input, select, textarea').forEach(el => {
+      el.addEventListener('blur', () => validateField(el.closest('.form-group'), el));
+      el.addEventListener('input', () => {
+        if (el.closest('.form-group').classList.contains('has-error')) {
+          validateField(el.closest('.form-group'), el);
+        }
+      });
+    });
+
+    /* Envoi via Formspree (fetch, sans rechargement) */
+    form.addEventListener('submit', async (e) => {
+      e.preventDefault();
+
+      /* Validation complète */
+      let valid = true;
+      form.querySelectorAll('[required]').forEach(el => {
+        if (!validateField(el.closest('.form-group'), el)) valid = false;
+      });
+      if (!valid) return;
+
+      /* État chargement */
+      submitBtn.disabled = true;
+      submitBtn.textContent = 'Envoi en cours…';
+
+      try {
+        const res = await fetch(form.action, {
+          method: 'POST',
+          body: new FormData(form),
+          headers: { 'Accept': 'application/json' }
+        });
+
+        if (res.ok) {
+          form.style.display = 'none';
+          successBox.style.display = 'block';
+          successBox.scrollIntoView({ behavior: 'smooth', block: 'center' });
+        } else {
+          throw new Error('Erreur serveur');
+        }
+      } catch {
+        submitBtn.disabled = false;
+        submitBtn.textContent = 'Envoyer le message →';
+        alert('Une erreur est survenue. Réessayez ou contactez-moi directement par email.');
+      }
+    });
+  </script>
+</body>
+</html>

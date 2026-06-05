@@ -1,0 +1,843 @@
+﻿<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Avignon OFF 2025 — La sélection d'Hélène — Au Pestacle ce soir</title>
+  <meta name="description" content="La sélection d'Hélène Micheau pour le Festival OFF d'Avignon 2025. Coups de cœur triés par niveau de recommandation.">
+  <meta name="robots" content="index, follow">
+  <link rel="canonical" href="https://aupestaclecesoir.fr/avignon-2025.html">
+  <link rel="stylesheet" href="css/style.css">
+  <style>
+    /* ── BREADCRUMB ── */
+    .breadcrumb {
+      font-size: 0.78rem;
+      font-weight: 600;
+      color: var(--gris);
+      padding: 14px 0;
+      border-bottom: 1px solid var(--gris-border);
+    }
+    .breadcrumb a { color: var(--gris); }
+    .breadcrumb a:hover { color: var(--accent); }
+
+    /* ── HERO ── */
+    .avignon-hero {
+      padding: clamp(40px, 6vw, 72px) 0 clamp(32px, 4vw, 52px);
+      background: var(--blanc);
+      border-bottom: 1px solid var(--gris-border);
+    }
+    .avignon-hero__title {
+      font-family: var(--font-titre);
+      font-size: clamp(3rem, 9vw, 7rem);
+      font-weight: 700;
+      line-height: 0.92;
+      color: var(--noir);
+      margin-bottom: 20px;
+    }
+    .avignon-hero__title em { color: var(--accent); font-style: normal; }
+    .avignon-hero__sub {
+      font-size: 1rem;
+      color: var(--gris);
+      max-width: 480px;
+      line-height: 1.65;
+    }
+    .avignon-hero__meta {
+      margin-top: 28px;
+      display: flex;
+      gap: 1px;
+      background: var(--gris-border);
+      border: 1px solid var(--gris-border);
+      width: fit-content;
+    }
+    .avignon-hero__meta-item {
+      background: var(--blanc);
+      padding: 12px 24px;
+      font-size: 0.72rem;
+      font-weight: 700;
+      color: var(--gris);
+      text-transform: uppercase;
+      letter-spacing: 0.08em;
+    }
+    .avignon-hero__meta-item span {
+      display: block;
+      font-size: 1.5rem;
+      font-family: var(--font-titre);
+      font-weight: 700;
+      color: var(--accent);
+      line-height: 1;
+      margin-bottom: 2px;
+    }
+
+    /* ── LÉGENDE ── */
+    .legende {
+      border-bottom: 1px solid var(--gris-border);
+      padding: 14px 0;
+    }
+    .legende__inner {
+      display: flex;
+      gap: 24px;
+      align-items: center;
+      flex-wrap: wrap;
+    }
+    .legende__label {
+      font-size: 0.7rem;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 0.1em;
+      color: var(--gris);
+    }
+    .legende__item {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      font-size: 0.82rem;
+      font-weight: 600;
+      color: var(--noir-soft);
+    }
+    .legende__h { font-family: var(--font-titre); font-weight: 700; color: var(--accent); letter-spacing: 2px; font-size: 0.88rem; }
+
+    /* ── SECTION ── */
+    .avignon-section { padding: clamp(36px, 5vw, 56px) 0 clamp(20px, 3vw, 32px); }
+    .avignon-section__header {
+      display: flex;
+      align-items: center;
+      gap: 16px;
+      margin-bottom: 24px;
+      padding-bottom: 14px;
+      border-bottom: 2px solid var(--noir);
+    }
+    .avignon-section__h {
+      font-family: var(--font-titre);
+      font-weight: 700;
+      font-size: 1.2rem;
+      color: var(--accent);
+      letter-spacing: 3px;
+      line-height: 1;
+    }
+    .avignon-section__title {
+      font-family: var(--font-titre);
+      font-size: clamp(1.2rem, 2.5vw, 1.7rem);
+      font-weight: 700;
+      color: var(--noir);
+    }
+    .avignon-section__count {
+      margin-left: auto;
+      font-size: 0.72rem;
+      font-weight: 700;
+      color: var(--gris);
+      text-transform: uppercase;
+      letter-spacing: 0.06em;
+    }
+
+    /* ── GRILLE ── */
+    .avignon-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(210px, 1fr));
+      gap: 1px;
+      background: var(--gris-border);
+      border: 1px solid var(--gris-border);
+    }
+
+    /* ── CARD ── */
+    .avi-card {
+      background: var(--blanc);
+      overflow: hidden;
+      display: flex;
+      flex-direction: column;
+      transition: background var(--transition);
+    }
+    .avi-card:hover { background: #FAFAFA; }
+    .avi-card--sold-out { opacity: 0.68; }
+
+    /* Barre top : note H + genre */
+    .avi-card__topbar {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 10px 14px;
+      border-bottom: 1px solid var(--gris-border);
+    }
+    .avi-card__h {
+      font-family: var(--font-titre);
+      font-weight: 700;
+      font-size: 0.88rem;
+      color: var(--accent);
+      letter-spacing: 3px;
+      line-height: 1;
+    }
+    .avi-card__right { display: flex; align-items: center; gap: 6px; }
+    .avi-card__genre {
+      font-size: 0.62rem;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 0.06em;
+      padding: 3px 8px;
+      border: 1.5px solid currentColor;
+    }
+    .avi-card__genre--theatre { color: var(--accent); }
+    .avi-card__genre--danse   { color: #0A7A4A; }
+    .avi-card__genre--cirque  { color: #C06000; }
+    .avi-card__genre--vivant  { color: #1D5080; }
+    .avi-card__badge-sold {
+      font-size: 0.58rem;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 0.04em;
+      color: var(--corail);
+      border: 1.5px solid var(--corail);
+      padding: 3px 7px;
+    }
+    .avi-card__badge-deja {
+      font-size: 0.58rem;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 0.04em;
+      color: var(--gris);
+      border: 1.5px solid var(--gris);
+      padding: 3px 7px;
+    }
+
+    /* Photo */
+    .avi-card__photo {
+      height: 130px;
+      overflow: hidden;
+      position: relative;
+    }
+    .avi-card__photo img {
+      width: 100%; height: 100%;
+      object-fit: cover;
+      transition: transform 0.4s ease;
+    }
+    .avi-card:hover .avi-card__photo img { transform: scale(1.04); }
+    .avi-card__photo-placeholder {
+      width: 100%; height: 100%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 2.8rem;
+    }
+    .avi-card__photo--theatre { background: linear-gradient(135deg, rgba(110,70,255,0.1), rgba(110,70,255,0.03)); }
+
+    /* Body */
+    .avi-card__body {
+      padding: 12px 14px;
+      flex: 1;
+      display: flex;
+      flex-direction: column;
+      gap: 3px;
+    }
+    .avi-card__title {
+      font-family: var(--font-titre);
+      font-size: 0.92rem;
+      font-weight: 700;
+      line-height: 1.25;
+      color: var(--noir);
+    }
+    .avi-card__company { font-size: 0.72rem; color: var(--gris); font-style: italic; }
+    .avi-card__venue {
+      font-size: 0.7rem;
+      color: var(--noir-soft);
+      margin-top: 6px;
+      padding-top: 7px;
+      border-top: 1px solid var(--gris-border);
+    }
+
+    /* Footer */
+    .avi-card__footer {
+      padding: 9px 14px;
+      border-top: 1px solid var(--gris-border);
+    }
+    .avi-card__link {
+      font-family: var(--font-titre);
+      font-size: 0.72rem;
+      font-weight: 700;
+      color: var(--accent);
+      text-transform: uppercase;
+      letter-spacing: 0.04em;
+      display: inline-flex;
+      align-items: center;
+      gap: 4px;
+      transition: gap var(--transition);
+    }
+    .avi-card:hover .avi-card__link { gap: 8px; }
+
+    /* Carte entièrement cliquable via stretched link */
+    .avi-card { position: relative; }
+    .avi-card__link::after {
+      content: '';
+      position: absolute;
+      inset: 0;
+    }
+    .avi-card__topbar,
+    .avi-card__badge-sold,
+    .avi-card__badge-deja {
+      position: relative;
+      z-index: 1;
+    }
+
+    /* Intro */
+    .avignon-intro {
+      border-left: 3px solid var(--accent);
+      padding: 14px 18px;
+      background: var(--creme-dark);
+      font-size: 0.9rem;
+      color: var(--noir-soft);
+      line-height: 1.65;
+      margin-bottom: 36px;
+    }
+
+    @media (max-width: 700px) {
+      .avignon-grid { grid-template-columns: repeat(2, 1fr); }
+      .avignon-hero__meta { flex-wrap: wrap; }
+    }
+    @media (max-width: 420px) {
+      .avignon-grid { grid-template-columns: 1fr; }
+    }
+  </style>
+</head>
+<body>
+
+  <nav class="nav" role="navigation" aria-label="Navigation principale">
+    <div class="container nav__inner">
+      <a href="index.html" class="nav__logo">au <strong>pestacle</strong><span> ce soir</span></a>
+      <ul class="nav__links" role="list">
+        <li><a href="recommandations.html">Les spectacles</a></li>
+        <li class="nav__dropdown" id="dropdown-avignon">
+          <button class="nav__dropdown-toggle" aria-expanded="false" aria-haspopup="true">
+            Avignon <span class="nav__dropdown-arrow">▾</span>
+          </button>
+          <ul class="nav__dropdown-menu" role="menu">
+            <li role="none"><a href="avignon-2025.html" class="active" role="menuitem">Avignon 2025</a></li>
+            <li role="none"><a href="avignon-2026.html" role="menuitem">Avignon 2026 <span class="nav__dropdown-soon">Bientôt</span></a></li>
+          </ul>
+        </li>
+        <li><a href="a-propos.html">À propos</a></li>
+        <li><a href="contact.html" class="nav__cta">Contact</a></li>
+      </ul>
+      <button class="nav__burger" aria-label="Ouvrir le menu" aria-expanded="false"><span></span><span></span><span></span></button>
+    </div>
+  </nav>
+
+  <!-- Breadcrumb -->
+  <div class="breadcrumb">
+    <div class="container"><a href="index.html">Accueil</a> / Avignon OFF 2025</div>
+  </div>
+
+  <!-- Hero -->
+  <header class="avignon-hero">
+    <div class="container">
+      <h1 class="avignon-hero__title">Avignon<br><em>OFF 2025→</em></h1>
+      <p class="avignon-hero__sub">La sélection personnelle d'Hélène — les spectacles qui lui ont fait battre le cœur, classés H, HH ou HHH.</p>
+      <div class="avignon-hero__meta">
+        <div class="avignon-hero__meta-item" style="margin-right:1px;"><span>22</span>spectacles</div>
+        <div class="avignon-hero__meta-item" style="margin-right:1px;"><span>Juil.</span>2025</div>
+        <div class="avignon-hero__meta-item"><span>OFF</span>Festival</div>
+      </div>
+    </div>
+  </header>
+
+  <!-- Légende -->
+  <div class="legende">
+    <div class="container">
+      <div class="legende__inner">
+        <span class="legende__label">Note d'Hélène</span>
+        <div class="legende__item"><span class="legende__h">HHH</span> Coup de cœur absolu</div>
+        <div class="legende__item"><span class="legende__h">HH</span> Très recommandé</div>
+        <div class="legende__item"><span class="legende__h">H</span> Recommandé</div>
+        <div class="legende__item" style="margin-left:auto;font-size:0.72rem;color:var(--gris);">Sources : programme Hélène + Annette, Sophie &amp; Fred, Emmanuelle, Cathou…</div>
+      </div>
+    </div>
+  </div>
+
+  <main id="main-content">
+    <div class="container">
+
+      <div class="avignon-intro reveal">
+        Ces spectacles sont ceux qu'Hélène a cochés dans son programme Avignon OFF 2025. Pour chaque spectacle, on indique les reprises à Paris quand elle les connaît.
+      </div>
+
+      <!-- ══ HHH ══ -->
+      <section class="avignon-section" aria-labelledby="section-hhh">
+        <div class="avignon-section__header">
+          <span class="avignon-section__h">HHH</span>
+          <h2 class="avignon-section__title" id="section-hhh">Coup de cœur absolu</h2>
+          <span class="avignon-section__count">1 spectacle</span>
+        </div>
+        <div class="avignon-grid">
+
+          <article class="avi-card reveal">
+            <div class="avi-card__topbar">
+              <span class="avi-card__h">HHH</span>
+              <span class="avi-card__genre avi-card__genre--theatre">Théâtre</span>
+            </div>
+            <div class="avi-card__photo">
+              <img src="https://picsum.photos/seed/soeurjesus/400/260" alt="La sœur de Jésus-Christ" loading="lazy">
+            </div>
+            <div class="avi-card__body">
+              <h3 class="avi-card__title">La sœur de Jésus-Christ</h3>
+              <p class="avi-card__company">Compagnie Belle de Nuit</p>
+              <p class="avi-card__venue">📍 Théâtre des Doms · 16h15 · 1h15</p>
+            </div>
+            <div class="avi-card__footer">
+              <a href="https://www.festivaloffavignon.com/spectacles/6699-la-soeur-de-jesus-christ" class="avi-card__link" target="_blank" rel="noopener">Voir →</a>
+            </div>
+          </article>
+
+        </div>
+      </section>
+
+      <!-- ══ HH ══ -->
+      <section class="avignon-section" aria-labelledby="section-hh">
+        <div class="avignon-section__header">
+          <span class="avignon-section__h">HH</span>
+          <h2 class="avignon-section__title" id="section-hh">Très recommandé</h2>
+          <span class="avignon-section__count">15 spectacles</span>
+        </div>
+        <div class="avignon-grid">
+
+          <article class="avi-card reveal">
+            <div class="avi-card__topbar">
+              <span class="avi-card__h">HH</span>
+              <div class="avi-card__right">
+                <span class="avi-card__badge-deja">Déjà reco</span>
+                <span class="avi-card__genre avi-card__genre--theatre">Théâtre</span>
+              </div>
+            </div>
+            <div class="avi-card__photo">
+              <img src="https://picsum.photos/seed/parlerpointu/400/260" alt="Parler Pointu" loading="lazy">
+            </div>
+            <div class="avi-card__body">
+              <h3 class="avi-card__title">Parler Pointu</h3>
+              <p class="avi-card__company">Studio21 — H. François &amp; B. Tholozan</p>
+              <p class="avi-card__venue">📍 Théâtre des Carmes · 10h &amp; 15h · 1h25</p>
+            </div>
+            <div class="avi-card__footer">
+              <a href="https://21b3dc36.orson.website/37/parlerpointu" class="avi-card__link" target="_blank" rel="noopener">Voir →</a>
+            </div>
+          </article>
+
+          <article class="avi-card reveal">
+            <div class="avi-card__topbar">
+              <span class="avi-card__h">HH</span>
+              <span class="avi-card__genre avi-card__genre--theatre">Théâtre</span>
+            </div>
+            <div class="avi-card__photo">
+              <img src="https://picsum.photos/seed/quatremains/400/260" alt="Quatre Mains" loading="lazy">
+            </div>
+            <div class="avi-card__body">
+              <h3 class="avi-card__title">Quatre Mains</h3>
+              <p class="avi-card__company">A. Koutchevsky / Jean Boillot</p>
+              <p class="avi-card__venue">📍 Théâtre 11 — Espace Mistral · 10h45 · 1h35</p>
+            </div>
+            <div class="avi-card__footer"><span style="font-size:0.7rem;color:var(--gris);">Lien à venir</span></div>
+          </article>
+
+          <article class="avi-card avi-card--sold-out reveal">
+            <div class="avi-card__topbar">
+              <span class="avi-card__h">HH</span>
+              <div class="avi-card__right">
+                <span class="avi-card__badge-sold">Complet</span>
+                <span class="avi-card__genre avi-card__genre--theatre">Théâtre</span>
+              </div>
+            </div>
+            <div class="avi-card__photo">
+              <img src="https://picsum.photos/seed/subversives/400/260" alt="Les Subversives" loading="lazy">
+            </div>
+            <div class="avi-card__body">
+              <h3 class="avi-card__title">Les Subversives</h3>
+              <p class="avi-card__company">Les filles de simone's</p>
+              <p class="avi-card__venue">📍 Théâtre 11 Sud · 11h15 · 1h15</p>
+            </div>
+            <div class="avi-card__footer">
+              <a href="https://www.11avignon.com/programmation/les-subversives" class="avi-card__link" target="_blank" rel="noopener">Page →</a>
+            </div>
+          </article>
+
+          <article class="avi-card reveal">
+            <div class="avi-card__topbar">
+              <span class="avi-card__h">HH</span>
+              <span class="avi-card__genre avi-card__genre--theatre">Théâtre</span>
+            </div>
+            <div class="avi-card__photo">
+              <img src="https://picsum.photos/seed/genmitterrand/400/260" alt="Génération Mitterrand" loading="lazy">
+            </div>
+            <div class="avi-card__body">
+              <h3 class="avi-card__title">Génération Mitterrand</h3>
+              <p class="avi-card__company">Léo Cohen-Paperman / Diard-Detoeuf</p>
+              <p class="avi-card__venue">📍 Théâtre du Train Bleu · 11h20 · 1h15</p>
+            </div>
+            <div class="avi-card__footer">
+              <a href="https://theatredutrainbleu.fr/festival-2025/generation-mitterrand/" class="avi-card__link" target="_blank" rel="noopener">Voir →</a>
+            </div>
+          </article>
+
+          <article class="avi-card reveal">
+            <div class="avi-card__topbar">
+              <span class="avi-card__h">HH</span>
+              <span class="avi-card__genre avi-card__genre--theatre">Théâtre</span>
+            </div>
+            <div class="avi-card__photo">
+              <img src="https://picsum.photos/seed/madeinfrance/400/260" alt="Made in France" loading="lazy">
+            </div>
+            <div class="avi-card__body">
+              <h3 class="avi-card__title">Made in France</h3>
+              <p class="avi-card__company">Paul-Éloi Forget</p>
+              <p class="avi-card__venue">📍 Théâtre 11 Sud · 12h00 · 1h35</p>
+            </div>
+            <div class="avi-card__footer">
+              <a href="https://www.11avignon.com/fr/made-in-france" class="avi-card__link" target="_blank" rel="noopener">Voir →</a>
+            </div>
+          </article>
+
+          <article class="avi-card reveal">
+            <div class="avi-card__topbar">
+              <span class="avi-card__h">HH</span>
+              <span class="avi-card__genre avi-card__genre--theatre">Théâtre</span>
+            </div>
+            <div class="avi-card__photo">
+              <img src="https://picsum.photos/seed/peintrescharbon/400/260" alt="Des Peintres au Charbon" loading="lazy">
+            </div>
+            <div class="avi-card__body">
+              <h3 class="avi-card__title">Des Peintres au Charbon</h3>
+              <p class="avi-card__company">Adrien Popineau</p>
+              <p class="avi-card__venue">📍 Théâtre 11 Sud · 13h05 · 1h35</p>
+            </div>
+            <div class="avi-card__footer">
+              <a href="https://www.11avignon.com/fr/les-peintres-aucharbon" class="avi-card__link" target="_blank" rel="noopener">Voir →</a>
+            </div>
+          </article>
+
+          <article class="avi-card reveal">
+            <div class="avi-card__topbar">
+              <span class="avi-card__h">HH</span>
+              <span class="avi-card__genre avi-card__genre--theatre">Théâtre</span>
+            </div>
+            <div class="avi-card__photo">
+              <img src="https://picsum.photos/seed/filsbatard/400/260" alt="Fils de Bâtard" loading="lazy">
+            </div>
+            <div class="avi-card__body">
+              <h3 class="avi-card__title">Fils de Bâtard</h3>
+              <p class="avi-card__company">Cie MAPS — Emmanuel De Candido</p>
+              <p class="avi-card__venue">📍 La Manufacture · 16h05 · 2h20</p>
+            </div>
+            <div class="avi-card__footer">
+              <a href="https://lamanufacture.org/programmation/fils-de-batard/" class="avi-card__link" target="_blank" rel="noopener">Voir →</a>
+            </div>
+          </article>
+
+          <article class="avi-card reveal">
+            <div class="avi-card__topbar">
+              <span class="avi-card__h">HH</span>
+              <span class="avi-card__genre avi-card__genre--theatre">Théâtre</span>
+            </div>
+            <div class="avi-card__photo">
+              <img src="https://picsum.photos/seed/kevin2025/400/260" alt="Kevin" loading="lazy">
+            </div>
+            <div class="avi-card__body">
+              <h3 class="avi-card__title">Kevin</h3>
+              <p class="avi-card__company">Cie Chantal &amp; Bernadette</p>
+              <p class="avi-card__venue">📍 Théâtre des Halles · 16h15 · 1h15</p>
+            </div>
+            <div class="avi-card__footer">
+              <a href="http://www.theatredeshalles.com/pieces/kevin/" class="avi-card__link" target="_blank" rel="noopener">Voir →</a>
+            </div>
+          </article>
+
+          <article class="avi-card reveal">
+            <div class="avi-card__topbar">
+              <span class="avi-card__h">HH</span>
+              <span class="avi-card__genre avi-card__genre--theatre">Théâtre</span>
+            </div>
+            <div class="avi-card__photo">
+              <img src="https://picsum.photos/seed/artraison/400/260" alt="L'Art d'avoir toujours raison" loading="lazy">
+            </div>
+            <div class="avi-card__body">
+              <h3 class="avi-card__title">L'Art d'avoir toujours raison</h3>
+              <p class="avi-card__company">Sébastien Valignat</p>
+              <p class="avi-card__venue">📍 Théâtre 11 Sud · 17h35 · 1h15</p>
+            </div>
+            <div class="avi-card__footer">
+              <a href="https://www.11avignon.com/programmation/lart-davoir-toujours-raison" class="avi-card__link" target="_blank" rel="noopener">Voir →</a>
+            </div>
+          </article>
+
+          <article class="avi-card reveal">
+            <div class="avi-card__topbar">
+              <span class="avi-card__h">HH</span>
+              <span class="avi-card__genre avi-card__genre--theatre">Théâtre</span>
+            </div>
+            <div class="avi-card__photo">
+              <img src="https://picsum.photos/seed/convivialite/400/260" alt="La Convivialité" loading="lazy">
+            </div>
+            <div class="avi-card__body">
+              <h3 class="avi-card__title">La Convivialité</h3>
+              <p class="avi-card__company">La faute de l'orthographe</p>
+              <p class="avi-card__venue">⏱ 16h15</p>
+            </div>
+            <div class="avi-card__footer">
+              <a href="https://theatre-traversiere.fr/spectacle/la-convivialite-la-faute-delorthographe/" class="avi-card__link" target="_blank" rel="noopener">Voir →</a>
+            </div>
+          </article>
+
+          <article class="avi-card reveal">
+            <div class="avi-card__topbar">
+              <span class="avi-card__h">HH</span>
+              <div class="avi-card__right">
+                <span class="avi-card__badge-deja">Déjà vu</span>
+                <span class="avi-card__genre avi-card__genre--theatre">Théâtre</span>
+              </div>
+            </div>
+            <div class="avi-card__photo">
+              <img src="https://picsum.photos/seed/leconimpert/400/260" alt="Leçon Impertinente" loading="lazy">
+            </div>
+            <div class="avi-card__body">
+              <h3 class="avi-card__title">Leçon Impertinente — « Mieux vaut en rire »</h3>
+              <p class="avi-card__company">Par Zou</p>
+              <p class="avi-card__venue">📍 Théâtre des Halles · 18h30</p>
+            </div>
+            <div class="avi-card__footer">
+              <a href="https://www.theatredeshalles.com/pieces/lecon-impertinente-hors-saison-par-zou-mieux-vaut-en-rire/" class="avi-card__link" target="_blank" rel="noopener">Voir →</a>
+            </div>
+          </article>
+
+          <article class="avi-card reveal">
+            <div class="avi-card__topbar">
+              <span class="avi-card__h">HH</span>
+              <span class="avi-card__genre avi-card__genre--theatre">Théâtre</span>
+            </div>
+            <div class="avi-card__photo">
+              <img src="https://picsum.photos/seed/premiersexe/400/260" alt="Le Premier Sexe" loading="lazy">
+            </div>
+            <div class="avi-card__body">
+              <h3 class="avi-card__title">Le Premier Sexe <span style="font-weight:400;font-size:0.78rem;color:var(--gris);">#1</span></h3>
+              <p class="avi-card__company">La Reine Blanche</p>
+              <p class="avi-card__venue">📍 La Reine Blanche · 18h30 · 1h10</p>
+            </div>
+            <div class="avi-card__footer">
+              <a href="https://www.reineblanche.com/calendrier/avignon/le-premiersexe/" class="avi-card__link" target="_blank" rel="noopener">Voir →</a>
+            </div>
+          </article>
+
+          <article class="avi-card reveal">
+            <div class="avi-card__topbar">
+              <span class="avi-card__h">HH</span>
+              <span class="avi-card__genre avi-card__genre--theatre">Théâtre</span>
+            </div>
+            <div class="avi-card__photo">
+              <img src="https://picsum.photos/seed/feteslip/400/260" alt="La Fête du Slip" loading="lazy">
+            </div>
+            <div class="avi-card__body">
+              <h3 class="avi-card__title">La Fête du Slip <span style="font-weight:400;font-size:0.78rem;color:var(--gris);">#2</span></h3>
+              <p class="avi-card__company">La Reine Blanche</p>
+              <p class="avi-card__venue">📍 La Reine Blanche · 20h00 · 1h10</p>
+            </div>
+            <div class="avi-card__footer">
+              <a href="https://www.reineblanche.com/calendrier/avignon/la-fete-du-slip" class="avi-card__link" target="_blank" rel="noopener">Voir →</a>
+            </div>
+          </article>
+
+          <article class="avi-card reveal">
+            <div class="avi-card__topbar">
+              <span class="avi-card__h">HH</span>
+              <span class="avi-card__genre avi-card__genre--theatre">Théâtre</span>
+            </div>
+            <div class="avi-card__photo">
+              <img src="https://picsum.photos/seed/article353/400/260" alt="Article 353 du Code pénal" loading="lazy">
+            </div>
+            <div class="avi-card__body">
+              <h3 class="avi-card__title">Article 353 du Code pénal</h3>
+              <p class="avi-card__company">Emmanuel Noblet</p>
+              <p class="avi-card__venue">📍 Salle 2 — Théâtre 11 · 21h45 · 1h35</p>
+            </div>
+            <div class="avi-card__footer">
+              <a href="https://www.11avignon.com/programmation/article-353-du-code-penal" class="avi-card__link" target="_blank" rel="noopener">Voir →</a>
+            </div>
+          </article>
+
+          <article class="avi-card avi-card--sold-out reveal">
+            <div class="avi-card__topbar">
+              <span class="avi-card__h">HH</span>
+              <div class="avi-card__right">
+                <span class="avi-card__badge-sold">Complet</span>
+                <span class="avi-card__genre avi-card__genre--theatre">Théâtre</span>
+              </div>
+            </div>
+            <div class="avi-card__photo">
+              <img src="https://picsum.photos/seed/abolition/400/260" alt="L'Abolition des Privilèges" loading="lazy">
+            </div>
+            <div class="avi-card__body">
+              <h3 class="avi-card__title">L'Abolition des Privilèges</h3>
+              <p class="avi-card__company">Hugues Duchêne</p>
+              <p class="avi-card__venue">📍 Train Bleu · 22h25 · 1h15</p>
+            </div>
+            <div class="avi-card__footer">
+              <a href="https://les-singulieres.fr/spectacle/le-royal-velours/labolition-des-privileges/" class="avi-card__link" target="_blank" rel="noopener">Page →</a>
+            </div>
+          </article>
+
+        </div>
+      </section>
+
+      <!-- ══ H ══ -->
+      <section class="avignon-section" aria-labelledby="section-h">
+        <div class="avignon-section__header">
+          <span class="avignon-section__h">H</span>
+          <h2 class="avignon-section__title" id="section-h">Recommandé</h2>
+          <span class="avignon-section__count">6 spectacles</span>
+        </div>
+        <div class="avignon-grid">
+
+          <article class="avi-card reveal">
+            <div class="avi-card__topbar">
+              <span class="avi-card__h">H</span>
+              <span class="avi-card__genre avi-card__genre--vivant">Jeune public</span>
+            </div>
+            <div class="avi-card__photo">
+              <img src="https://picsum.photos/seed/okilele/400/260" alt="Okilélé" loading="lazy">
+            </div>
+            <div class="avi-card__body">
+              <h3 class="avi-card__title">Okilélé</h3>
+              <p class="avi-card__company">Collectif Quatre Ailes</p>
+              <p class="avi-card__venue">📍 Présence Pasteur · 9h30</p>
+            </div>
+            <div class="avi-card__footer">
+              <a href="https://www.festivaloffavignon.com" class="avi-card__link" target="_blank" rel="noopener">Voir →</a>
+            </div>
+          </article>
+
+          <article class="avi-card reveal">
+            <div class="avi-card__topbar">
+              <span class="avi-card__h">H</span>
+              <span class="avi-card__genre avi-card__genre--theatre">Théâtre</span>
+            </div>
+            <div class="avi-card__photo">
+              <img src="https://picsum.photos/seed/fast-inti/400/260" alt="Fast" loading="lazy">
+            </div>
+            <div class="avi-card__body">
+              <h3 class="avi-card__title">Fast</h3>
+              <p class="avi-card__company">Inti Théâtre</p>
+              <p class="avi-card__venue">📍 Théâtre des Doms · 10h30 · 1h10</p>
+            </div>
+            <div class="avi-card__footer">
+              <a href="https://lesdoms.eu/spectacle/fast/" class="avi-card__link" target="_blank" rel="noopener">Voir →</a>
+            </div>
+          </article>
+
+          <article class="avi-card reveal">
+            <div class="avi-card__topbar">
+              <span class="avi-card__h">H</span>
+              <span class="avi-card__genre avi-card__genre--theatre">Théâtre · Musique</span>
+            </div>
+            <div class="avi-card__photo">
+              <img src="https://picsum.photos/seed/silence-vacarme/400/260" alt="Silence Vacarme" loading="lazy">
+            </div>
+            <div class="avi-card__body">
+              <h3 class="avi-card__title">Silence Vacarme</h3>
+              <p class="avi-card__company">Pauline Ringeade</p>
+              <p class="avi-card__venue">📍 Présence Pasteur · 10h50</p>
+            </div>
+            <div class="avi-card__footer">
+              <a href="https://www.festivaloffavignon.com" class="avi-card__link" target="_blank" rel="noopener">Voir →</a>
+            </div>
+          </article>
+
+          <article class="avi-card reveal">
+            <div class="avi-card__topbar">
+              <span class="avi-card__h">H</span>
+              <span class="avi-card__genre avi-card__genre--theatre">Théâtre</span>
+            </div>
+            <div class="avi-card__photo">
+              <img src="https://picsum.photos/seed/fille-sauve/400/260" alt="La fille qui se sauve" loading="lazy">
+            </div>
+            <div class="avi-card__body">
+              <h3 class="avi-card__title">La fille qui se sauve</h3>
+              <p class="avi-card__company">Cléa Petrolesi</p>
+              <p class="avi-card__venue">📍 Théâtre 11 Sud · 13h25 · 1h00</p>
+            </div>
+            <div class="avi-card__footer">
+              <a href="https://www.festivaloffavignon.com" class="avi-card__link" target="_blank" rel="noopener">Voir →</a>
+            </div>
+          </article>
+
+          <article class="avi-card reveal">
+            <div class="avi-card__topbar">
+              <span class="avi-card__h">H</span>
+              <span class="avi-card__genre avi-card__genre--theatre">Théâtre solo</span>
+            </div>
+            <div class="avi-card__photo">
+              <img src="https://picsum.photos/seed/la-reverence/400/260" alt="La Révérence" loading="lazy">
+            </div>
+            <div class="avi-card__body">
+              <h3 class="avi-card__title">La Révérence</h3>
+              <p class="avi-card__company">Émeric Cheseaux / Yolande Cie</p>
+              <p class="avi-card__venue">📍 Jardin ancien Carmel · 19h35</p>
+            </div>
+            <div class="avi-card__footer">
+              <a href="https://theatredutrainbleu.fr/festival-2025/la-reverence/" class="avi-card__link" target="_blank" rel="noopener">Voir →</a>
+            </div>
+          </article>
+
+          <article class="avi-card reveal">
+            <div class="avi-card__topbar">
+              <span class="avi-card__h">H</span>
+              <span class="avi-card__genre avi-card__genre--danse">Danse</span>
+            </div>
+            <div class="avi-card__photo">
+              <img src="https://picsum.photos/seed/icones-kilai/400/260" alt="Icônes" loading="lazy">
+            </div>
+            <div class="avi-card__body">
+              <h3 class="avi-card__title">Icônes</h3>
+              <p class="avi-card__company">Sandrine Lescourant / Cie Kilai</p>
+              <p class="avi-card__venue">📍 Les Hivernales · 20h20</p>
+            </div>
+            <div class="avi-card__footer">
+              <a href="https://www.hivernales-avignon.com/spectacle/icone-s" class="avi-card__link" target="_blank" rel="noopener">Voir →</a>
+            </div>
+          </article>
+
+        </div>
+      </section>
+
+    </div>
+  </main>
+
+  <footer class="footer">
+    <div class="container">
+      <div class="footer__grid">
+        <div>
+          <p class="footer__logo">au <em>pestacle</em> ce soir</p>
+          <p class="footer__tagline">Des recommandations sincères pour vos prochaines sorties.</p>
+        </div>
+        <div class="footer__col">
+          <h4>Le site</h4>
+          <a href="index.html">Accueil</a>
+          <a href="recommandations.html">Les spectacles</a>
+          <a href="avignon-2025.html">Avignon 2025</a>
+          <a href="a-propos.html">À propos</a>
+          <a href="contact.html">Contact</a>
+        </div>
+        <div class="footer__col">
+          <h4>Avignon</h4>
+          <a href="avignon-2025.html">Avignon 2025</a>
+          <a href="avignon-2026.html">Avignon 2026</a>
+        </div>
+      </div>
+      <div class="footer__bottom">
+        <span>© 2026 Au Pestacle ce soir — Hélène Micheau</span>
+        <a href="mentions-legales.html">Mentions légales</a>
+      </div>
+    </div>
+  </footer>
+
+  <script src="js/main.js"></script>
+  <script>
+    /* Transforme H/HH/HHH en notation avec positions inactives en gris */
+    document.querySelectorAll('.avi-card__h, .avignon-section__h').forEach(el => {
+      const n = el.textContent.trim().length;
+      el.innerHTML = Array.from({length:3}, (_,i) =>
+        `<span style="color:${i<n?'var(--accent)':'#D8D8D8'};letter-spacing:2px;">H</span>`
+      ).join('');
+    });
+  </script>
+</body>
+</html>
