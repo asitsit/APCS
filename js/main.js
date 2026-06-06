@@ -168,7 +168,7 @@ document.addEventListener('spectaclesLoaded', () => {
 
   const id = pathname.split('/spectacles/')[1].replace('.html', '');
 
-  fetch('/api/spectacles')
+  fetch('/data/spectacles.json')
     .then(r => r.json())
     .then(spectacles => {
       const s = spectacles.find(x => x.id === id);

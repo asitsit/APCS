@@ -165,7 +165,7 @@
           </div>
         </article>`;
     }
-    fetch('/api/spectacles')
+    fetch('/data/spectacles.json')
       .then(r => r.json())
       .then(data => {
         const actifs = data.filter(s => s.actif !== false);
