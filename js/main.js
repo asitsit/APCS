@@ -76,8 +76,10 @@ const PERIODE_LABELS = {
 };
 
 let activePeriode = 'toutes';
+let activeNote    = 'toutes';
 
 const periodeBtns = document.querySelectorAll('.filtre-btn--periode');
+const noteBtns    = document.querySelectorAll('.filtre-btn--note');
 const activeBar   = document.getElementById('active-filters');
 const chipsWrap   = document.getElementById('filter-chips');
 const resetBtn    = document.getElementById('reset-filters');
@@ -93,13 +95,19 @@ function applyFilters() {
 
   cards.forEach(card => {
     const period = (card.dataset.period || 'avoir').trim();
+    const note   = parseInt(card.dataset.note || '2', 10);
     let show;
+
     if (activePeriode === 'souvenir') {
       show = period === 'passe';
     } else if (activePeriode === 'avoir') {
       show = period !== 'passe';
     } else {
       show = true;
+    }
+
+    if (activeNote !== 'toutes') {
+      show = show && note === parseInt(activeNote, 10);
     }
 
     if (show) { card.removeAttribute('data-hidden'); visible++; }
@@ -125,8 +133,21 @@ function updateChips() {
     chip.addEventListener('click', () => {
       activePeriode = 'toutes';
       periodeBtns.forEach(b => b.classList.remove('active'));
-      const all = document.querySelector('[data-filtre-periode="toutes"]');
-      if (all) all.classList.add('active');
+      applyFilters();
+    });
+    chipsWrap.appendChild(chip);
+  }
+
+  if (activeNote !== 'toutes') {
+    has = true;
+    const noteLabel = { '3': 'HHH — Coups de cœur', '2': 'HH — Très recommandés', '1': 'H — Recommandés' }[activeNote] || activeNote;
+    const chip = document.createElement('button');
+    chip.className = 'filter-chip filter-chip--note';
+    chip.style.fontFamily = 'var(--font-titre)';
+    chip.innerHTML = `${noteLabel} <span class="filter-chip__x">×</span>`;
+    chip.addEventListener('click', () => {
+      activeNote = 'toutes';
+      noteBtns.forEach(b => b.classList.remove('active'));
       applyFilters();
     });
     chipsWrap.appendChild(chip);
@@ -137,17 +158,38 @@ function updateChips() {
 
 function resetFilters() {
   activePeriode = 'toutes';
+  activeNote    = 'toutes';
   periodeBtns.forEach(b => b.classList.remove('active'));
-  const all = document.querySelector('[data-filtre-periode="toutes"]');
-  if (all) all.classList.add('active');
+  noteBtns.forEach(b => b.classList.remove('active'));
   applyFilters();
 }
 
 periodeBtns.forEach(btn => {
   btn.addEventListener('click', () => {
-    periodeBtns.forEach(b => b.classList.remove('active'));
-    btn.classList.add('active');
-    activePeriode = btn.dataset.filtreperiode || btn.dataset.filtrePeriode;
+    const val = btn.dataset.filtreperiode || btn.dataset.filtrePeriode;
+    if (activePeriode === val) {
+      activePeriode = 'toutes';
+      btn.classList.remove('active');
+    } else {
+      periodeBtns.forEach(b => b.classList.remove('active'));
+      btn.classList.add('active');
+      activePeriode = val;
+    }
+    applyFilters();
+  });
+});
+
+noteBtns.forEach(btn => {
+  btn.addEventListener('click', () => {
+    const val = btn.dataset.filtreNote;
+    if (activeNote === val) {
+      activeNote = 'toutes';
+      btn.classList.remove('active');
+    } else {
+      noteBtns.forEach(b => b.classList.remove('active'));
+      btn.classList.add('active');
+      activeNote = val;
+    }
     applyFilters();
   });
 });

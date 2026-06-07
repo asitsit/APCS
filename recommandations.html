@@ -69,14 +69,42 @@
     </div>
   </header>
 
+  <!-- ═══════════════ LÉGENDE ═══════════════ -->
+  <div style="background:var(--creme);border-bottom:1px solid var(--gris-border);padding:14px 0;">
+    <div class="container">
+      <div style="display:flex;gap:28px;align-items:center;flex-wrap:wrap;">
+        <span style="font-size:0.68rem;font-weight:700;text-transform:uppercase;letter-spacing:0.1em;color:var(--gris);">Note d'Hélène</span>
+        <div style="display:flex;align-items:center;gap:8px;font-size:0.82rem;font-weight:600;">
+          <span style="font-family:var(--font-titre);font-weight:700;color:var(--accent);letter-spacing:3px;font-size:0.9rem;">HHH</span>
+          Coup de cœur absolu
+        </div>
+        <div style="display:flex;align-items:center;gap:8px;font-size:0.82rem;font-weight:600;">
+          <span style="font-family:var(--font-titre);font-weight:700;color:var(--accent);letter-spacing:3px;font-size:0.9rem;">HH</span>
+          Très recommandé
+        </div>
+        <div style="display:flex;align-items:center;gap:8px;font-size:0.82rem;font-weight:600;">
+          <span style="font-family:var(--font-titre);font-weight:700;color:var(--accent);letter-spacing:3px;font-size:0.9rem;">H</span>
+          Recommandé
+        </div>
+      </div>
+    </div>
+  </div>
+
   <!-- ═══════════════ FILTRES STICKY ═══════════════ -->
   <div class="filtres" role="navigation" aria-label="Filtrer les spectacles">
     <div class="container">
 
-      <div class="filtres__row">
-        <div class="filtres__list" role="list">
+      <div class="filtres__row" style="display:flex;flex-wrap:wrap;gap:16px;align-items:center;">
+        <div style="display:flex;gap:4px;align-items:center;">
+          <span style="font-size:0.68rem;font-weight:700;text-transform:uppercase;letter-spacing:0.08em;color:var(--gris);margin-right:6px;">Période</span>
           <button class="filtre-btn filtre-btn--periode" data-filtre-periode="avoir"    role="listitem">À voir</button>
           <button class="filtre-btn filtre-btn--periode" data-filtre-periode="souvenir" role="listitem">On s'en souvient</button>
+        </div>
+        <div style="display:flex;gap:4px;align-items:center;">
+          <span style="font-size:0.68rem;font-weight:700;text-transform:uppercase;letter-spacing:0.08em;color:var(--gris);margin-right:6px;">Note</span>
+          <button class="filtre-btn filtre-btn--note" data-filtre-note="3" role="listitem" style="font-family:var(--font-titre);letter-spacing:2px;">HHH</button>
+          <button class="filtre-btn filtre-btn--note" data-filtre-note="2" role="listitem" style="font-family:var(--font-titre);letter-spacing:2px;">HH</button>
+          <button class="filtre-btn filtre-btn--note" data-filtre-note="1" role="listitem" style="font-family:var(--font-titre);letter-spacing:2px;">H</button>
         </div>
       </div>
 
@@ -153,7 +181,7 @@
         s.duree   ? `<span>⏱ ${s.duree}</span>` : '',
       ].filter(Boolean).join('');
       return `
-        <article class="spectacle-card" data-period="${period}" role="listitem">
+        <article class="spectacle-card" data-period="${period}" data-note="${s.note||2}" role="listitem">
           <div class="spectacle-card__img">${photo}</div>
           <div class="spectacle-card__body">
             ${hRating(s.note)}
