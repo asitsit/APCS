@@ -1,0 +1,254 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Chargement… — Au Pestacle ce soir</title>
+  <meta name="description" content="">
+  <meta name="author" content="Hélène Micheau">
+  <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+
+  <!-- ═══════════════ NAVIGATION ═══════════════ -->
+  <nav class="nav" role="navigation" aria-label="Navigation principale">
+    <div class="container nav__inner">
+      <a href="index.html" class="nav__logo">au <strong>pestacle</strong><span> ce soir</span></a>
+      <ul class="nav__links" role="list">
+        <li><a href="recommandations.html">Les spectacles</a></li>
+        <li class="nav__dropdown" id="dropdown-avignon">
+          <button class="nav__dropdown-toggle" aria-expanded="false" aria-haspopup="true">
+            Avignon <span class="nav__dropdown-arrow">▾</span>
+          </button>
+          <ul class="nav__dropdown-menu" role="menu">
+            <li role="none"><a href="avignon-2025.html" role="menuitem">Avignon 2025</a></li>
+            <li role="none"><a href="avignon-2026.html" role="menuitem">Avignon 2026 <span class="nav__dropdown-soon">Bientôt</span></a></li>
+          </ul>
+        </li>
+        <li><a href="a-propos.html">À propos</a></li>
+        <li><a href="contact.html" class="nav__cta">Contact</a></li>
+      </ul>
+      <button class="nav__burger" aria-label="Ouvrir le menu" aria-expanded="false">
+        <span></span><span></span><span></span>
+      </button>
+    </div>
+  </nav>
+
+  <!-- ═══════════════ CHARGEMENT ═══════════════ -->
+  <div id="s-loading" style="padding:80px 0;text-align:center;color:var(--gris);">
+    Chargement…
+  </div>
+
+  <!-- ═══════════════ 404 ═══════════════ -->
+  <div id="s-notfound" style="display:none;padding:80px 0;text-align:center;">
+    <div class="container">
+      <p style="font-size:3rem;margin-bottom:16px;">🎭</p>
+      <h1 style="font-size:1.5rem;margin-bottom:12px;">Spectacle introuvable</h1>
+      <p style="color:var(--gris);margin-bottom:28px;">Ce spectacle n'existe pas ou n'est plus disponible.</p>
+      <a href="recommandations.html" class="btn btn--primary">← Voir toutes les recommandations</a>
+    </div>
+  </div>
+
+  <!-- ═══════════════ HEADER ARTICLE ═══════════════ -->
+  <header class="article-header" id="s-header" role="banner" style="display:none;">
+    <div class="container">
+      <nav aria-label="Fil d'Ariane" style="margin-bottom:24px;">
+        <ol style="display:flex;gap:8px;font-size:0.82rem;color:var(--gris);list-style:none;" itemscope itemtype="https://schema.org/BreadcrumbList">
+          <li itemprop="itemListElement" itemscope itemtype="https://schema.org/ListItem">
+            <a href="index.html" style="color:var(--gris);" itemprop="item"><span itemprop="name">Accueil</span></a>
+            <meta itemprop="position" content="1">
+          </li>
+          <li aria-hidden="true">›</li>
+          <li itemprop="itemListElement" itemscope itemtype="https://schema.org/ListItem">
+            <a href="recommandations.html" style="color:var(--gris);" itemprop="item"><span itemprop="name">Les spectacles</span></a>
+            <meta itemprop="position" content="2">
+          </li>
+          <li aria-hidden="true">›</li>
+          <li itemprop="itemListElement" itemscope itemtype="https://schema.org/ListItem">
+            <span id="s-breadcrumb-title" itemprop="name"></span>
+            <meta itemprop="position" content="3">
+          </li>
+        </ol>
+      </nav>
+      <h1 class="article-header__title" id="s-title"></h1>
+      <p class="article-header__intro" id="s-intro" style="display:none;"></p>
+      <div class="article-meta" role="list" aria-label="Informations pratiques" id="s-meta"></div>
+      <div class="article-note" id="s-note"></div>
+    </div>
+  </header>
+
+  <!-- ═══════════════ CORPS ═══════════════ -->
+  <div class="container" id="s-content" style="display:none;">
+    <div class="article-layout">
+
+      <article class="article-corps" aria-label="Recommandation d'Hélène Micheau" id="s-body">
+      </article>
+
+      <aside class="article-aside" aria-label="Informations pratiques et réservation" id="s-aside">
+      </aside>
+
+    </div>
+  </div>
+
+  <!-- ═══════════════ FOOTER ═══════════════ -->
+  <footer class="footer" role="contentinfo">
+    <div class="container">
+      <div class="footer__grid">
+        <div>
+          <p class="footer__logo">au <em>pestacle</em> ce soir</p>
+          <p class="footer__tagline">Des recommandations sincères pour vos prochaines sorties.</p>
+          <p style="font-size:0.78rem;">Par Hélène Micheau, curatrice culturelle</p>
+        </div>
+        <div class="footer__col">
+          <h4>Le site</h4>
+          <a href="index.html">Accueil</a>
+          <a href="recommandations.html">Les spectacles</a>
+          <a href="avignon-2025.html">Avignon 2025</a>
+          <a href="a-propos.html">À propos</a>
+          <a href="contact.html">Contact</a>
+        </div>
+        <div class="footer__col">
+          <h4>Avignon</h4>
+          <a href="avignon-2025.html">Avignon 2025</a>
+          <a href="avignon-2026.html">Avignon 2026</a>
+        </div>
+      </div>
+      <div class="footer__bottom">
+        <span>© 2026 Au Pestacle ce soir — Hélène Micheau</span>
+        <a href="mentions-legales.html">Mentions légales</a>
+      </div>
+    </div>
+  </footer>
+
+  <script src="js/supabase-config.js"></script>
+  <script src="js/main.js"></script>
+  <script>
+  (function() {
+    const params = new URLSearchParams(window.location.search);
+    const id = params.get('id');
+
+    if (!id) { show404(); return; }
+
+    fetch(`${SUPA_URL}/rest/v1/spectacles?id=eq.${encodeURIComponent(id)}&actif=eq.true`, { headers: SUPA_HEADERS })
+      .then(r => r.json())
+      .then(data => {
+        if (!data || !data.length) { show404(); return; }
+        render(data[0]);
+      })
+      .catch(() => show404());
+
+    function show404() {
+      document.getElementById('s-loading').style.display  = 'none';
+      document.getElementById('s-notfound').style.display = 'block';
+    }
+
+    function fmt(iso) {
+      if (!iso) return null;
+      return new Date(iso + 'T00:00:00').toLocaleDateString('fr-FR', { day: 'numeric', month: 'long', year: 'numeric' });
+    }
+
+    function hLabel(n) {
+      const h = 'H'.repeat(n);
+      const txt = n >= 3 ? 'Coup de cœur absolu' : n >= 2 ? 'Très recommandé' : 'Recommandé';
+      return { h, txt };
+    }
+
+    function descToParagraphs(text) {
+      if (!text) return '';
+      return text.split(/\n\n+/).map(p => `<p>${p.replace(/\n/g, '<br>')}</p>`).join('');
+    }
+
+    function render(s) {
+      document.getElementById('s-loading').style.display = 'none';
+
+      /* ── Titre de page ── */
+      const titleParts = [s.titre, s.lieu].filter(Boolean);
+      document.title = titleParts.join(' — ') + ' — Au Pestacle ce soir';
+      const metaDesc = document.querySelector('meta[name="description"]');
+      const metaText = s.description || s.intro || '';
+      if (metaDesc && metaText) metaDesc.content = metaText.substring(0, 160);
+
+      /* ── Breadcrumb & H1 ── */
+      document.getElementById('s-breadcrumb-title').textContent = s.titre;
+      document.getElementById('s-title').textContent = s.lieu ? `${s.titre} — ${s.lieu}` : s.titre;
+
+      /* ── Citation d'accroche ── */
+      if (s.intro) {
+        const introEl = document.getElementById('s-intro');
+        introEl.textContent = s.intro;
+        introEl.style.display = '';
+      }
+
+      /* ── Meta ── */
+      const metaItems = [];
+      if (s.lieu)         metaItems.push(`<div class="article-meta__item" role="listitem"><span>📍</span><div><span>Lieu</span><strong>${s.lieu}</strong></div></div>`);
+      const dateStr = buildDateStr(s.date_debut, s.date_fin);
+      if (dateStr)        metaItems.push(`<div class="article-meta__item" role="listitem"><span>🗓</span><div><span>Dates</span><strong>${dateStr}</strong></div></div>`);
+      if (s.duree)        metaItems.push(`<div class="article-meta__item" role="listitem"><span>⏱</span><div><span>Durée</span><strong>${s.duree}</strong></div></div>`);
+      if (s.public_cible) metaItems.push(`<div class="article-meta__item" role="listitem"><span>👥</span><div><span>Public</span><strong>${s.public_cible}</strong></div></div>`);
+      document.getElementById('s-meta').innerHTML = metaItems.join('');
+
+      /* ── Note ── */
+      const { h, txt } = hLabel(s.note || 2);
+      document.getElementById('s-note').innerHTML = `
+        <span class="article-note__stars" style="font-family:var(--font-titre);font-weight:700;font-size:1.5rem;letter-spacing:4px;color:var(--accent);">${h}</span>
+        <span style="font-size:0.9rem;color:var(--gris);font-weight:400;">Note d'Hélène — ${txt}</span>`;
+
+      document.getElementById('s-header').style.display = 'block';
+
+      /* ── Corps article ── */
+      const body = document.getElementById('s-body');
+      const articleContent = s.contenu || s.description;
+      body.innerHTML = articleContent
+        ? descToParagraphs(articleContent)
+        : '<p style="color:var(--gris);">Description à venir.</p>';
+
+      /* ── Aside ── */
+      const aside = document.getElementById('s-aside');
+      let asideHTML = '';
+
+      if (s.photo) {
+        asideHTML += `<div class="aside-card" style="padding:0;overflow:hidden;"><img src="${s.photo}" alt="Affiche — ${s.titre}" style="width:100%;display:block;height:280px;object-fit:cover;object-position:center top;"></div>`;
+      }
+
+      const infos = [];
+      if (s.lieu)  infos.push(`<div class="aside-card__item"><span>Lieu</span><strong>${s.lieu}</strong></div>`);
+      if (dateStr) infos.push(`<div class="aside-card__item"><span>Dates</span><strong>${dateStr}</strong></div>`);
+      if (s.duree) infos.push(`<div class="aside-card__item"><span>Durée</span><strong>${s.duree}</strong></div>`);
+      if (s.tarif) infos.push(`<div class="aside-card__item"><span>Tarif</span><strong>${s.tarif}</strong></div>`);
+      if (s.acces) infos.push(`<div class="aside-card__item"><span>Accès</span><strong>${s.acces}</strong></div>`);
+
+      if (infos.length || s.lien_resa) {
+        asideHTML += `<div class="aside-card"><h3>Infos pratiques</h3><div class="aside-card__list">${infos.join('')}</div>`;
+        if (s.lien_resa) {
+          asideHTML += `<a href="${s.lien_resa}" class="btn btn--primary" target="_blank" rel="noopener noreferrer" style="margin-top:16px;">Réserver →</a>`;
+        }
+        asideHTML += `</div>`;
+      }
+
+      asideHTML += `
+        <div class="aside-card">
+          <h3>La note d'Hélène</h3>
+          <div style="font-family:var(--font-titre);font-weight:700;font-size:2rem;letter-spacing:6px;color:var(--accent);margin-bottom:12px;">${h}</div>
+          <p style="font-size:0.88rem;color:var(--gris);line-height:1.6;">${txt}</p>
+        </div>
+        <div class="aside-card" style="background:var(--creme-dark);">
+          <h3>Pour aller plus loin</h3>
+          <a href="recommandations.html" style="display:block;font-size:0.88rem;color:var(--pistache-dark);font-weight:600;">→ Voir toutes les recommandations</a>
+        </div>`;
+
+      aside.innerHTML = asideHTML;
+      document.getElementById('s-content').style.display = 'block';
+    }
+
+    function buildDateStr(a, b) {
+      if (a && b && a !== b) return `${fmt(a)} — ${fmt(b)}`;
+      if (!a && b) return `Jusqu'au ${fmt(b)}`;
+      if (a && !b) return `À partir du ${fmt(a)}`;
+      if (a && a === b) return fmt(a);
+      return null;
+    }
+  })();
+  </script>
+</body>
+</html>

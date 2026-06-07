@@ -186,6 +186,10 @@
 
     /* ── EMPTY / LOADING ────────────────────────── */
     .state-msg { text-align: center; padding: 56px 20px; color: var(--gris); font-size: 0.95rem; }
+
+    /* ── FORM SECTIONS ──────────────────────────── */
+    .form-section { margin: 22px -32px 0; padding: 14px 32px 0; border-top: 1px solid var(--gris-border); }
+    .form-section-title { font-size: 0.65rem; font-weight: 700; text-transform: uppercase; letter-spacing: 0.12em; color: var(--gris); margin-bottom: 14px; }
   </style>
 </head>
 <body>
@@ -267,10 +271,6 @@
       <input type="text" id="f-duree" placeholder="1h30 sans entracte">
     </div>
     <div class="field">
-      <label for="f-desc">Description</label>
-      <textarea id="f-desc" placeholder="Ce que vous en pensez…"></textarea>
-    </div>
-    <div class="field">
       <label>Note d'Hélène</label>
       <div class="note-row">
         <button type="button" class="note-opt" data-n="1">H</button>
@@ -282,16 +282,61 @@
       <label for="f-photo">URL de la photo</label>
       <input type="text" id="f-photo" placeholder="/assets/spectacles/nom.jpg">
     </div>
-    <div class="field">
-      <label for="f-lien">Lien vers la fiche</label>
-      <input type="text" id="f-lien" placeholder="spectacles/nom-du-spectacle.html">
-    </div>
     <div class="toggle-row">
       <label class="toggle">
         <input type="checkbox" id="f-actif" checked>
         <span class="toggle-track"></span>
       </label>
       <span class="toggle-label">Visible sur le site</span>
+    </div>
+
+    <!-- ── Contenu de la fiche ── -->
+    <div class="form-section">
+      <p class="form-section-title">Contenu de la fiche</p>
+    </div>
+    <div class="field">
+      <label for="f-desc">Résumé court <span style="font-weight:400;font-style:italic;">(affiché sur les cartes)</span></label>
+      <textarea id="f-desc" placeholder="2-3 phrases pour donner envie…" style="min-height:70px;"></textarea>
+    </div>
+    <div class="field">
+      <label for="f-intro">Citation d'accroche <span style="font-weight:400;font-style:italic;">(en-tête de la fiche)</span></label>
+      <input type="text" id="f-intro" placeholder='"Une phrase qui résume votre ressenti…"'>
+    </div>
+    <div class="field">
+      <label for="f-contenu">Corps de l'article <span style="font-weight:400;font-style:italic;">(séparez les paragraphes par une ligne vide)</span></label>
+      <textarea id="f-contenu" placeholder="Pourquoi j'y suis allée…&#10;&#10;Ce que raconte le spectacle…&#10;&#10;Ce qui m'a marquée…" style="min-height:220px;"></textarea>
+    </div>
+    <div class="field">
+      <label for="f-public">Pour quel public</label>
+      <input type="text" id="f-public" placeholder="Toute la famille, dès 6 ans…">
+    </div>
+
+    <!-- ── Réservation ── -->
+    <div class="form-section">
+      <p class="form-section-title">Réservation</p>
+    </div>
+    <div class="field-row">
+      <div class="field">
+        <label for="f-tarif">Tarif</label>
+        <input type="text" id="f-tarif" placeholder="À partir de 25 €">
+      </div>
+      <div class="field">
+        <label for="f-acces">Accès</label>
+        <input type="text" id="f-acces" placeholder="Métro Opéra">
+      </div>
+    </div>
+    <div class="field">
+      <label for="f-lien-resa">Lien de réservation</label>
+      <input type="url" id="f-lien-resa" placeholder="https://www.billetreduc.com/…">
+    </div>
+
+    <!-- ── URL (auto) ── -->
+    <div class="form-section">
+      <p class="form-section-title">URL de la fiche</p>
+    </div>
+    <div class="field">
+      <label for="f-lien">Adresse web (auto-générée)</label>
+      <input type="text" id="f-lien" placeholder="spectacle.html?id=nom-du-spectacle" readonly style="background:var(--creme);color:var(--gris);cursor:default;">
     </div>
 
     <div class="panel-foot">
@@ -465,7 +510,14 @@ btnNew.addEventListener('click', () => {
   setNote(2);
   document.getElementById('f-actif').checked = true;
   document.getElementById('f-id').value = '';
+  document.getElementById('f-lien').value = '';
   openPanel('Nouveau spectacle');
+});
+
+document.getElementById('f-titre').addEventListener('input', function() {
+  if (editId) return;
+  const slug = slugify(this.value);
+  document.getElementById('f-lien').value = slug ? `spectacle.html?id=${slug}` : '';
 });
 
 function openEdit(id) {
@@ -478,10 +530,16 @@ function openEdit(id) {
   document.getElementById('f-debut').value = s.date_debut || '';
   document.getElementById('f-fin').value   = s.date_fin   || '';
   document.getElementById('f-duree').value = s.duree       || '';
-  document.getElementById('f-desc').value  = s.description || '';
-  document.getElementById('f-photo').value = s.photo || '';
-  document.getElementById('f-lien').value  = s.lien  || '';
-  document.getElementById('f-actif').checked = s.actif !== false;
+  document.getElementById('f-desc').value     = s.description  || '';
+  document.getElementById('f-intro').value    = s.intro        || '';
+  document.getElementById('f-contenu').value  = s.contenu      || '';
+  document.getElementById('f-public').value   = s.public_cible || '';
+  document.getElementById('f-tarif').value    = s.tarif        || '';
+  document.getElementById('f-acces').value    = s.acces        || '';
+  document.getElementById('f-photo').value    = s.photo        || '';
+  document.getElementById('f-lien').value     = s.lien         || '';
+  document.getElementById('f-lien-resa').value = s.lien_resa   || '';
+  document.getElementById('f-actif').checked  = s.actif !== false;
   setNote(s.note || 2);
   openPanel('Modifier le spectacle');
 }
@@ -504,15 +562,21 @@ spectacleForm.addEventListener('submit', async e => {
 
   const payload = {
     titre,
-    lieu:        document.getElementById('f-lieu').value.trim()  || null,
-    date_debut:  document.getElementById('f-debut').value        || null,
-    date_fin:    document.getElementById('f-fin').value          || null,
-    duree:       document.getElementById('f-duree').value.trim() || null,
-    description: document.getElementById('f-desc').value.trim()  || null,
-    note:        noteVal,
-    photo:       document.getElementById('f-photo').value.trim() || null,
-    lien:        document.getElementById('f-lien').value.trim()  || null,
-    actif:       document.getElementById('f-actif').checked,
+    lieu:         document.getElementById('f-lieu').value.trim()      || null,
+    date_debut:   document.getElementById('f-debut').value            || null,
+    date_fin:     document.getElementById('f-fin').value              || null,
+    duree:        document.getElementById('f-duree').value.trim()     || null,
+    description:  document.getElementById('f-desc').value.trim()     || null,
+    intro:        document.getElementById('f-intro').value.trim()    || null,
+    contenu:      document.getElementById('f-contenu').value.trim()  || null,
+    public_cible: document.getElementById('f-public').value.trim()  || null,
+    tarif:        document.getElementById('f-tarif').value.trim()    || null,
+    acces:        document.getElementById('f-acces').value.trim()    || null,
+    note:         noteVal,
+    photo:        document.getElementById('f-photo').value.trim()    || null,
+    lien:         document.getElementById('f-lien').value.trim()     || null,
+    lien_resa:    document.getElementById('f-lien-resa').value.trim() || null,
+    actif:        document.getElementById('f-actif').checked,
   };
 
   let error;
@@ -520,6 +584,7 @@ spectacleForm.addEventListener('submit', async e => {
     ({ error } = await sb.from('spectacles').update(payload).eq('id', editId));
   } else {
     const id = slugify(titre);
+    payload.lien = `spectacle.html?id=${id}`;
     ({ error } = await sb.from('spectacles').insert({ id, ...payload }));
   }
 
