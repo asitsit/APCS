@@ -161,7 +161,7 @@
             <p class="spectacle-card__excerpt">${s.description||''}</p>
             <div class="spectacle-card__meta">${meta}</div>
             <div class="spectacle-card__footer">
-              <a href="${s.lien||'#'}" class="spectacle-card__link">Lire la reco →</a>
+              <a href="${s.lien || ('spectacle.html?id=' + s.id)}" class="spectacle-card__link">Lire la reco →</a>
             </div>
           </div>
         </article>`;

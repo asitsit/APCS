@@ -190,6 +190,21 @@
     /* ── FORM SECTIONS ──────────────────────────── */
     .form-section { margin: 22px -32px 0; padding: 14px 32px 0; border-top: 1px solid var(--gris-border); }
     .form-section-title { font-size: 0.65rem; font-weight: 700; text-transform: uppercase; letter-spacing: 0.12em; color: var(--gris); margin-bottom: 14px; }
+
+    /* ── UPLOAD PHOTO ───────────────────────────── */
+    .upload-zone {
+      border: 2px dashed var(--gris-border); border-radius: var(--radius-sm);
+      padding: 18px; text-align: center; cursor: pointer;
+      transition: border-color var(--t), background var(--t);
+      background: var(--blanc); position: relative;
+    }
+    .upload-zone:hover, .upload-zone.drag { border-color: var(--pistache); background: rgba(181,212,75,0.05); }
+    .upload-zone input[type=file] { position: absolute; inset: 0; opacity: 0; cursor: pointer; }
+    .upload-preview { width: 100%; height: 140px; object-fit: cover; border-radius: var(--radius-sm); display: none; margin-bottom: 8px; }
+    .upload-label { font-size: 0.82rem; color: var(--gris); }
+    .upload-label strong { color: var(--noir); }
+    .upload-progress { height: 3px; background: var(--pistache); width: 0; border-radius: 3px; margin-top: 8px; transition: width 0.3s; display: none; }
+    .upload-clear { font-size: 0.75rem; color: var(--corail); cursor: pointer; margin-top: 6px; display: none; text-align: right; }
   </style>
 </head>
 <body>
@@ -279,8 +294,15 @@
       </div>
     </div>
     <div class="field">
-      <label for="f-photo">URL de la photo</label>
-      <input type="text" id="f-photo" placeholder="/assets/spectacles/nom.jpg">
+      <label>Photo du spectacle</label>
+      <div class="upload-zone" id="upload-zone">
+        <input type="file" id="f-photo-file" accept="image/jpeg,image/png,image/webp">
+        <img id="upload-preview" class="upload-preview" alt="">
+        <p class="upload-label" id="upload-label"><strong>Cliquez ou déposez</strong> une image ici<br>JPG, PNG ou WebP — 5 Mo max</p>
+        <div class="upload-progress" id="upload-progress"></div>
+      </div>
+      <span class="upload-clear" id="upload-clear">✕ Supprimer la photo</span>
+      <input type="hidden" id="f-photo" value="">
     </div>
     <div class="toggle-row">
       <label class="toggle">
@@ -498,6 +520,8 @@ function closePanel() {
   setNote(2);
   document.getElementById('f-actif').checked = true;
   document.getElementById('f-id').value = '';
+  document.getElementById('f-lien').value = '';
+  if (typeof resetUpload === 'function') resetUpload();
 }
 
 panelBg.addEventListener('click', closePanel);
@@ -537,6 +561,7 @@ function openEdit(id) {
   document.getElementById('f-tarif').value    = s.tarif        || '';
   document.getElementById('f-acces').value    = s.acces        || '';
   document.getElementById('f-photo').value    = s.photo        || '';
+  if (typeof setPreview === 'function') setPreview(s.photo || '');
   document.getElementById('f-lien').value     = s.lien         || '';
   document.getElementById('f-lien-resa').value = s.lien_resa   || '';
   document.getElementById('f-actif').checked  = s.actif !== false;
@@ -607,6 +632,79 @@ async function confirmDel(id) {
   const { error } = await sb.from('spectacles').delete().eq('id', id);
   if (error) showToast('Erreur : ' + error.message, 'err');
   else { showToast('Spectacle supprimé', 'ok'); load(); }
+}
+
+// ── Upload photo ──────────────────────────────
+const uploadZone     = document.getElementById('upload-zone');
+const uploadFileInput = document.getElementById('f-photo-file');
+const uploadPreview  = document.getElementById('upload-preview');
+const uploadLabel    = document.getElementById('upload-label');
+const uploadProgress = document.getElementById('upload-progress');
+const uploadClear    = document.getElementById('upload-clear');
+const photoHidden    = document.getElementById('f-photo');
+
+function setPreview(url) {
+  if (url) {
+    uploadPreview.src      = url;
+    uploadPreview.style.display = 'block';
+    uploadLabel.style.display  = 'none';
+    uploadClear.style.display  = 'block';
+    photoHidden.value = url;
+  } else {
+    uploadPreview.style.display = 'none';
+    uploadLabel.style.display  = 'block';
+    uploadClear.style.display  = 'none';
+    uploadPreview.src = '';
+    photoHidden.value = '';
+    uploadFileInput.value = '';
+  }
+}
+
+uploadClear.addEventListener('click', e => { e.stopPropagation(); setPreview(''); });
+
+uploadZone.addEventListener('dragover', e => { e.preventDefault(); uploadZone.classList.add('drag'); });
+uploadZone.addEventListener('dragleave', () => uploadZone.classList.remove('drag'));
+uploadZone.addEventListener('drop', e => {
+  e.preventDefault();
+  uploadZone.classList.remove('drag');
+  const file = e.dataTransfer.files[0];
+  if (file) handleUpload(file);
+});
+
+uploadFileInput.addEventListener('change', () => {
+  if (uploadFileInput.files[0]) handleUpload(uploadFileInput.files[0]);
+});
+
+async function handleUpload(file) {
+  const allowed = ['image/jpeg','image/png','image/webp'];
+  if (!allowed.includes(file.type)) { showToast('Format non supporté (JPG, PNG, WebP)', 'err'); return; }
+  if (file.size > 5 * 1024 * 1024)  { showToast('Image trop lourde (5 Mo max)', 'err'); return; }
+
+  const ext  = file.name.split('.').pop().toLowerCase();
+  const name = `${Date.now()}-${slugify(file.name.replace(/\.[^.]+$/, ''))}.${ext}`;
+
+  uploadProgress.style.display = 'block';
+  uploadProgress.style.width   = '30%';
+  uploadLabel.innerHTML = '<em>Upload en cours…</em>';
+
+  const { data, error } = await sb.storage.from('spectacles').upload(name, file, { upsert: false });
+
+  uploadProgress.style.width = '100%';
+  setTimeout(() => { uploadProgress.style.display = 'none'; uploadProgress.style.width = '0'; }, 600);
+
+  if (error) {
+    showToast('Erreur upload : ' + error.message, 'err');
+    uploadLabel.innerHTML = '<strong>Cliquez ou déposez</strong> une image ici<br>JPG, PNG ou WebP — 5 Mo max';
+    return;
+  }
+
+  const { data: { publicUrl } } = sb.storage.from('spectacles').getPublicUrl(data.path);
+  setPreview(publicUrl);
+  showToast('Photo uploadée ✓', 'ok');
+}
+
+function resetUpload() {
+  setPreview('');
 }
 
 // ── Helpers ───────────────────────────────────
