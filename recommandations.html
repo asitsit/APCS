@@ -103,7 +103,8 @@
     </div>
   </main>
 
-  <!-- Script de chargement dynamique depuis l'API -->
+  <script src="js/supabase-config.js"></script>
+  <!-- Script de chargement dynamique depuis Supabase -->
   <script>
   (function() {
     function hRating(n) {
@@ -165,14 +166,13 @@
           </div>
         </article>`;
     }
-    fetch('/data/spectacles.json')
+    fetch(`${SUPA_URL}/rest/v1/spectacles?actif=eq.true&order=created_at.asc`, { headers: SUPA_HEADERS })
       .then(r => r.json())
       .then(data => {
-        const actifs = data.filter(s => s.actif !== false);
-        const grid   = document.getElementById('spectacles-grid');
-        const label  = document.getElementById('count-label');
-        grid.innerHTML = actifs.map(renderCard).join('') || '<p style="padding:40px;color:var(--gris)">Aucun spectacle pour l\'instant.</p>';
-        if (label) label.textContent = `${actifs.length} recommandation${actifs.length > 1 ? 's' : ''}`;
+        const grid  = document.getElementById('spectacles-grid');
+        const label = document.getElementById('count-label');
+        grid.innerHTML = data.map(renderCard).join('') || '<p style="padding:40px;color:var(--gris)">Aucun spectacle pour l\'instant.</p>';
+        if (label) label.textContent = `${data.length} recommandation${data.length > 1 ? 's' : ''}`;
         document.dispatchEvent(new CustomEvent('spectaclesLoaded'));
       })
       .catch(() => {

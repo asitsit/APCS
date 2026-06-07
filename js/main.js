@@ -168,7 +168,7 @@ document.addEventListener('spectaclesLoaded', () => {
 
   const id = pathname.split('/spectacles/')[1].replace('.html', '');
 
-  fetch('/data/spectacles.json')
+  fetch(`${SUPA_URL}/rest/v1/spectacles?actif=eq.true`, { headers: SUPA_HEADERS })
     .then(r => r.json())
     .then(spectacles => {
       const s = spectacles.find(x => x.id === id);
