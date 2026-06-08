@@ -77,9 +77,11 @@ const PERIODE_LABELS = {
 
 let activePeriode = 'toutes';
 let activeNote    = 'toutes';
+let activeLiked   = false;
 
 const periodeBtns = document.querySelectorAll('.filtre-btn--periode');
 const noteBtns    = document.querySelectorAll('.filtre-btn--note');
+const likedBtn    = document.getElementById('filtre-liked');
 const activeBar   = document.getElementById('active-filters');
 const chipsWrap   = document.getElementById('filter-chips');
 const resetBtn    = document.getElementById('reset-filters');
@@ -110,6 +112,11 @@ function applyFilters() {
       show = show && note === parseInt(activeNote, 10);
     }
 
+    if (activeLiked) {
+      const sid = card.dataset.sid;
+      show = show && typeof window.apcsIsLiked === 'function' && window.apcsIsLiked(sid);
+    }
+
     if (show) { card.removeAttribute('data-hidden'); visible++; }
     else       { card.setAttribute('data-hidden', 'true'); }
   });
@@ -138,6 +145,19 @@ function updateChips() {
     chipsWrap.appendChild(chip);
   }
 
+  if (activeLiked) {
+    has = true;
+    const chip = document.createElement('button');
+    chip.className = 'filter-chip';
+    chip.innerHTML = `♥ Mes coups de cœur <span class="filter-chip__x">×</span>`;
+    chip.addEventListener('click', () => {
+      activeLiked = false;
+      if (likedBtn) likedBtn.classList.remove('active');
+      applyFilters();
+    });
+    chipsWrap.appendChild(chip);
+  }
+
   if (activeNote !== 'toutes') {
     has = true;
     const noteLabel = { '3': 'HHH — Coups de cœur', '2': 'HH — Très recommandés', '1': 'H — Recommandés' }[activeNote] || activeNote;
@@ -159,8 +179,10 @@ function updateChips() {
 function resetFilters() {
   activePeriode = 'toutes';
   activeNote    = 'toutes';
+  activeLiked   = false;
   periodeBtns.forEach(b => b.classList.remove('active'));
   noteBtns.forEach(b => b.classList.remove('active'));
+  if (likedBtn) likedBtn.classList.remove('active');
   applyFilters();
 }
 
@@ -195,6 +217,18 @@ noteBtns.forEach(btn => {
 });
 
 if (resetBtn) resetBtn.addEventListener('click', resetFilters);
+
+if (likedBtn) {
+  likedBtn.addEventListener('click', () => {
+    activeLiked = !activeLiked;
+    likedBtn.classList.toggle('active', activeLiked);
+    applyFilters();
+  });
+}
+
+document.addEventListener('likesReady', () => {
+  if (activeLiked) applyFilters();
+});
 
 document.addEventListener('spectaclesLoaded', () => {
   applyFilters();

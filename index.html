@@ -13,6 +13,22 @@
   <meta property="og:description" content="Des recommandations sincères pour vos prochaines sorties.">
   <meta property="og:locale" content="fr_FR">
   <link rel="stylesheet" href="css/style.css">
+  <style>
+    .like-btn {
+      display: inline-flex; align-items: center; gap: 5px;
+      background: none; border: none; cursor: pointer;
+      padding: 4px 10px; border-radius: 20px;
+      font-size: 0.8rem; font-weight: 700; color: var(--gris);
+      transition: background 0.15s, color 0.15s;
+      flex-shrink: 0;
+    }
+    .like-btn:hover { background: rgba(232,40,40,0.08); color: #C0392B; }
+    .like-btn.liked { color: #C0392B; }
+    .like-btn .lk-icon { font-size: 1.05rem; line-height: 1; transition: transform 0.18s; display: inline-block; }
+    .like-btn.liked .lk-icon { transform: scale(1.25); }
+    .like-btn .lk-count { font-size: 0.75rem; font-variant-numeric: tabular-nums; }
+    .spectacle-card__footer { display: flex; justify-content: space-between; align-items: center; }
+  </style>
 </head>
 <body>
 
@@ -90,6 +106,7 @@
             </div>
             <div class="spectacle-card__footer">
               <a href="spectacles/menopause.html" class="spectacle-card__link">Lire la reco →</a>
+              <button class="like-btn" data-sid="menopause" aria-pressed="false" aria-label="Coup de cœur"><span class="lk-icon">♡</span><span class="lk-count">…</span></button>
             </div>
           </div>
         </article>
@@ -111,6 +128,7 @@
             </div>
             <div class="spectacle-card__footer">
               <a href="spectacles/le-roi-lion.html" class="spectacle-card__link">Lire la reco →</a>
+              <button class="like-btn" data-sid="le-roi-lion" aria-pressed="false" aria-label="Coup de cœur"><span class="lk-icon">♡</span><span class="lk-count">…</span></button>
             </div>
           </div>
         </article>
@@ -132,6 +150,7 @@
             </div>
             <div class="spectacle-card__footer">
               <a href="spectacles/akim-omiri-dans-contexte.html" class="spectacle-card__link">Lire la reco →</a>
+              <button class="like-btn" data-sid="akim-omiri-dans-contexte" aria-pressed="false" aria-label="Coup de cœur"><span class="lk-icon">♡</span><span class="lk-count">…</span></button>
             </div>
           </div>
         </article>
@@ -197,6 +216,8 @@
     </div>
   </footer>
 
+  <script src="js/supabase-config.js"></script>
   <script src="js/main.js"></script>
+  <script src="js/likes.js"></script>
 </body>
 </html>

@@ -31,6 +31,22 @@
   </script>
 
   <link rel="stylesheet" href="css/style.css">
+  <style>
+    .like-btn {
+      display: inline-flex; align-items: center; gap: 5px;
+      background: none; border: none; cursor: pointer;
+      padding: 4px 10px; border-radius: 20px;
+      font-size: 0.8rem; font-weight: 700; color: var(--gris);
+      transition: background 0.15s, color 0.15s, transform 0.1s;
+      flex-shrink: 0;
+    }
+    .like-btn:hover { background: rgba(232,40,40,0.08); color: #C0392B; }
+    .like-btn.liked { color: #C0392B; }
+    .like-btn .lk-icon { font-size: 1.05rem; line-height: 1; transition: transform 0.18s; display: inline-block; }
+    .like-btn.liked .lk-icon { transform: scale(1.25); }
+    .like-btn .lk-count { font-size: 0.75rem; font-variant-numeric: tabular-nums; }
+    .spectacle-card__footer { display: flex; justify-content: space-between; align-items: center; }
+  </style>
 </head>
 <body>
 
@@ -105,6 +121,9 @@
           <button class="filtre-btn filtre-btn--note" data-filtre-note="3" role="listitem" style="font-family:var(--font-titre);letter-spacing:2px;">HHH</button>
           <button class="filtre-btn filtre-btn--note" data-filtre-note="2" role="listitem" style="font-family:var(--font-titre);letter-spacing:2px;">HH</button>
           <button class="filtre-btn filtre-btn--note" data-filtre-note="1" role="listitem" style="font-family:var(--font-titre);letter-spacing:2px;">H</button>
+        </div>
+        <div style="display:flex;gap:4px;align-items:center;">
+          <button class="filtre-btn filtre-btn--liked" id="filtre-liked" role="listitem" style="gap:6px;">♥ Mes coups de cœur</button>
         </div>
       </div>
 
@@ -181,7 +200,7 @@
         s.duree   ? `<span>⏱ ${s.duree}</span>` : '',
       ].filter(Boolean).join('');
       return `
-        <article class="spectacle-card" data-period="${period}" data-note="${s.note||2}" role="listitem">
+        <article class="spectacle-card" data-period="${period}" data-note="${s.note||2}" data-sid="${s.id}" role="listitem">
           <div class="spectacle-card__img">${photo}</div>
           <div class="spectacle-card__body">
             ${hRating(s.note)}
@@ -190,6 +209,9 @@
             <div class="spectacle-card__meta">${meta}</div>
             <div class="spectacle-card__footer">
               <a href="${s.lien || ('spectacle.html?id=' + s.id)}" class="spectacle-card__link">Lire la reco →</a>
+              <button class="like-btn" data-sid="${s.id}" aria-pressed="false" aria-label="Coup de cœur">
+                <span class="lk-icon">♡</span><span class="lk-count">…</span>
+              </button>
             </div>
           </div>
         </article>`;
@@ -240,5 +262,6 @@
   </footer>
 
   <script src="js/main.js"></script>
+  <script src="js/likes.js"></script>
 </body>
 </html>
