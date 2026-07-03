@@ -3,136 +3,44 @@
 
   <url>
     <loc>https://aupestaclecesoir.fr/</loc>
-    <lastmod>2026-06-03</lastmod>
+    <lastmod>2026-07-02</lastmod>
     <changefreq>weekly</changefreq>
     <priority>1.0</priority>
   </url>
 
   <url>
     <loc>https://aupestaclecesoir.fr/recommandations.html</loc>
-    <lastmod>2026-06-03</lastmod>
+    <lastmod>2026-07-02</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.9</priority>
   </url>
 
   <url>
     <loc>https://aupestaclecesoir.fr/a-propos.html</loc>
-    <lastmod>2025-01-15</lastmod>
+    <lastmod>2026-07-02</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.7</priority>
   </url>
 
-  <!-- Fiches spectacles -->
   <url>
-    <loc>https://aupestaclecesoir.fr/spectacles/la-derniere-repetition.html</loc>
-    <lastmod>2025-01-15</lastmod>
+    <loc>https://aupestaclecesoir.fr/avignon-2025.html</loc>
+    <lastmod>2026-07-02</lastmod>
     <changefreq>monthly</changefreq>
-    <priority>0.8</priority>
+    <priority>0.7</priority>
   </url>
 
   <url>
-    <loc>https://aupestaclecesoir.fr/spectacles/menopause.html</loc>
-    <lastmod>2026-06-03</lastmod>
-    <changefreq>monthly</changefreq>
-    <priority>0.8</priority>
+    <loc>https://aupestaclecesoir.fr/avignon-2026.html</loc>
+    <lastmod>2026-07-02</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.9</priority>
   </url>
 
   <url>
-    <loc>https://aupestaclecesoir.fr/spectacles/akim-omiri-dans-contexte.html</loc>
-    <lastmod>2026-06-03</lastmod>
-    <changefreq>monthly</changefreq>
-    <priority>0.8</priority>
-  </url>
-
-  <url>
-    <loc>https://aupestaclecesoir.fr/spectacles/le-roi-lion.html</loc>
-    <lastmod>2026-06-03</lastmod>
-    <changefreq>monthly</changefreq>
-    <priority>0.8</priority>
-  </url>
-
-  <url>
-    <loc>https://aupestaclecesoir.fr/spectacles/le-cercle-des-poetes-disparus.html</loc>
-    <lastmod>2026-06-03</lastmod>
-    <changefreq>monthly</changefreq>
-    <priority>0.8</priority>
-  </url>
-
-  <url>
-    <loc>https://aupestaclecesoir.fr/spectacles/sacree-soiree.html</loc>
-    <lastmod>2026-06-03</lastmod>
-    <changefreq>monthly</changefreq>
-    <priority>0.8</priority>
-  </url>
-
-  <url>
-    <loc>https://aupestaclecesoir.fr/spectacles/adn.html</loc>
-    <lastmod>2026-06-03</lastmod>
-    <changefreq>monthly</changefreq>
-    <priority>0.8</priority>
-  </url>
-
-  <url>
-    <loc>https://aupestaclecesoir.fr/spectacles/jules-verne-le-voyage-extraordinaire.html</loc>
-    <lastmod>2026-06-03</lastmod>
-    <changefreq>monthly</changefreq>
-    <priority>0.8</priority>
-  </url>
-
-  <url>
-    <loc>https://aupestaclecesoir.fr/spectacles/aladin.html</loc>
-    <lastmod>2026-06-03</lastmod>
-    <changefreq>monthly</changefreq>
-    <priority>0.8</priority>
-  </url>
-
-  <url>
-    <loc>https://aupestaclecesoir.fr/spectacles/arsene-lupin-gentleman-illusionniste.html</loc>
-    <lastmod>2026-06-03</lastmod>
-    <changefreq>monthly</changefreq>
-    <priority>0.8</priority>
-  </url>
-
-  <url>
-    <loc>https://aupestaclecesoir.fr/spectacles/chicago-le-musical.html</loc>
-    <lastmod>2026-06-03</lastmod>
-    <changefreq>monthly</changefreq>
-    <priority>0.8</priority>
-  </url>
-
-  <url>
-    <loc>https://aupestaclecesoir.fr/spectacles/josephine-baker-le-musical.html</loc>
-    <lastmod>2026-06-03</lastmod>
-    <changefreq>monthly</changefreq>
-    <priority>0.8</priority>
-  </url>
-
-  <url>
-    <loc>https://aupestaclecesoir.fr/spectacles/the-world-of-banksy.html</loc>
-    <lastmod>2026-06-03</lastmod>
-    <changefreq>monthly</changefreq>
-    <priority>0.8</priority>
-  </url>
-
-  <url>
-    <loc>https://aupestaclecesoir.fr/spectacles/redouane-bougheraba.html</loc>
-    <lastmod>2026-06-03</lastmod>
-    <changefreq>monthly</changefreq>
-    <priority>0.8</priority>
-  </url>
-
-  <url>
-    <loc>https://aupestaclecesoir.fr/spectacles/muriel-robin-infiniment-robin.html</loc>
-    <lastmod>2026-06-03</lastmod>
-    <changefreq>monthly</changefreq>
-    <priority>0.8</priority>
-  </url>
-
-  <url>
-    <loc>https://aupestaclecesoir.fr/spectacles/garou-solo.html</loc>
-    <lastmod>2026-06-03</lastmod>
-    <changefreq>monthly</changefreq>
-    <priority>0.8</priority>
+    <loc>https://aupestaclecesoir.fr/contact.html</loc>
+    <lastmod>2026-07-02</lastmod>
+    <changefreq>yearly</changefreq>
+    <priority>0.4</priority>
   </url>
 
 </urlset>

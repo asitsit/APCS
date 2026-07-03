@@ -1,17 +1,19 @@
-﻿<!DOCTYPE html>
+<!DOCTYPE html>
 <html lang="fr">
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Au Pestacle ce soir — Recommandations de spectacles par Hélène Micheau</title>
-  <meta name="description" content="Des recommandations sincères pour vos prochaines sorties. Théâtre, danse, cirque, humour — Hélène Micheau vous aide à choisir le spectacle qui vous correspond.">
-  <meta name="author" content="Hélène Micheau">
+  <title>Au Pestacle Ce Soir — Recommandations de spectacles par Hélène</title>
+  <meta name="description" content="Des recommandations théâtre & danse pour vos prochaines sorties, essentiellement sur Paris et au festival d'Avignon. Par une fan de théâtre depuis plus de 25 ans.">
+  <meta name="author" content="Hélène">
   <meta name="robots" content="index, follow">
   <link rel="canonical" href="https://aupestaclecesoir.fr/">
   <meta property="og:type" content="website">
-  <meta property="og:title" content="Au Pestacle ce soir — Recommandations de spectacles">
+  <meta property="og:title" content="Au Pestacle Ce Soir — Recommandations de spectacles">
   <meta property="og:description" content="Des recommandations sincères pour vos prochaines sorties.">
   <meta property="og:locale" content="fr_FR">
+  <meta property="og:image" content="https://aupestaclecesoir.fr/assets/Favicon_apcs_white.png">
+  <link rel="icon" href="assets/Favicon_apcs_white.png" type="image/png">
   <link rel="stylesheet" href="css/style.css">
   <style>
     .like-btn {
@@ -25,9 +27,17 @@
     .like-btn:hover { background: rgba(232,40,40,0.08); color: #C0392B; }
     .like-btn.liked { color: #C0392B; }
     .like-btn .lk-icon { font-size: 1.05rem; line-height: 1; transition: transform 0.18s; display: inline-block; }
-    .like-btn.liked .lk-icon { transform: scale(1.25); }
+    .like-btn.liked .lk-icon { transform: scale(1.15); }
     .like-btn .lk-count { font-size: 0.75rem; font-variant-numeric: tabular-nums; }
     .spectacle-card__footer { display: flex; justify-content: space-between; align-items: center; }
+    .type-badge {
+      display: inline-block; font-size: 0.65rem; font-weight: 700;
+      text-transform: uppercase; letter-spacing: 0.08em;
+      padding: 3px 9px; border-radius: 20px; margin-bottom: 8px;
+    }
+    .type-badge--spectacle      { background: rgba(181,212,75,0.18); color: var(--pistache-dark, #6a8f1e); }
+    .type-badge--recommandation { background: rgba(255,107,107,0.14); color: var(--corail, #E84040); }
+    .type-badge--communaute     { background: rgba(120,120,144,0.14); color: var(--gris); }
   </style>
 </head>
 <body>
@@ -35,7 +45,10 @@
   <!-- ═══ NAVIGATION ═══ -->
   <nav class="nav" role="navigation" aria-label="Navigation principale">
     <div class="container nav__inner">
-      <a href="index.html" class="nav__logo">au <strong>pestacle</strong><span> ce soir</span></a>
+      <a href="index.html" class="nav__logo" style="display:flex;align-items:center;gap:8px;">
+        <img src="assets/Favicon_apcs_white.png" alt="" width="28" height="28" style="border-radius:6px;display:block;">
+        Au <strong>Pestacle</strong><span> Ce Soir</span>
+      </a>
       <ul class="nav__links" role="list">
         <li><a href="recommandations.html">Les spectacles</a></li>
         <li class="nav__dropdown" id="dropdown-avignon">
@@ -44,7 +57,7 @@
           </button>
           <ul class="nav__dropdown-menu" role="menu">
             <li role="none"><a href="avignon-2025.html" role="menuitem">Avignon 2025</a></li>
-            <li role="none"><a href="avignon-2026.html" role="menuitem">Avignon 2026 <span class="nav__dropdown-soon">Bientôt</span></a></li>
+            <li role="none"><a href="avignon-2026.html" role="menuitem">Avignon 2026</a></li>
           </ul>
         </li>
         <li><a href="a-propos.html">À propos</a></li>
@@ -59,102 +72,39 @@
   <!-- ═══ HERO ═══ -->
   <header class="hero" role="banner">
     <div class="container">
-      <p class="hero__pretitle">Recommandations culturelles — Théâtre · Danse · Cirque</p>
+      <p class="hero__pretitle">Recommandations culturelles — Théâtre · Danse</p>
       <h1 class="hero__title">
         La sélection<br>
         <em>d'Hélène→</em>
       </h1>
       <p class="hero__sub">
-        Des recommandations sincères pour vos prochaines sorties. Sans jargon de critique — juste ce qui vaut vraiment le déplacement.
+        Des recommandations théâtre &amp; danse pour vos prochaines sorties, essentiellement sur Paris et au festival d'Avignon. Par une fan de théâtre depuis plus de 25 ans. Sans jargon de critique — juste ce qui vaut vraiment le déplacement.
       </p>
       <div class="hero__ctas">
         <a href="recommandations.html" class="btn btn--primary">Voir les recommandations →</a>
       </div>
       <div class="hero__proof">
-        <div class="hero__stat"><strong>100+</strong><span>spectateurs dans la communauté</span></div>
-        <div class="hero__stat"><strong>+100</strong><span>spectacles par saison</span></div>
+        <div class="hero__stat"><strong>+130</strong><span>spectacles vus par an</span></div>
+        <div class="hero__stat"><strong>+100</strong><span>spectateurs dans la communauté qui s'échangent des bons plans</span></div>
       </div>
     </div>
   </header>
 
-  <!-- ═══ SÉLECTION DU MOMENT ═══ -->
+  <!-- ═══ FEED ═══ -->
   <section class="section" aria-labelledby="selection-titre">
     <div class="container">
       <div class="section__header reveal" style="display:flex;justify-content:space-between;align-items:flex-end;flex-wrap:wrap;gap:16px;">
         <div>
-          <p class="section__eyebrow">La sélection du moment</p>
-          <h2 class="section__title" id="selection-titre">Des spectacles qui valent le déplacement</h2>
+          <p class="section__eyebrow">Le fil</p>
+          <h2 class="section__title" id="selection-titre">Recommandations, spectacles &amp; vie de la communauté</h2>
         </div>
         <a href="recommandations.html" class="btn btn--outline" style="flex-shrink:0;">Tout voir →</a>
       </div>
 
-      <div class="cards-grid cards-grid--featured">
+      <p style="font-size:0.85rem; color:var(--gris); margin-bottom:24px;" aria-live="polite" id="count-label">Chargement…</p>
 
-        <!-- Ménopause -->
-        <article class="spectacle-card reveal reveal-delay-1" role="listitem">
-          <div class="spectacle-card__img">
-            <img src="assets/spectacles/menopause.jpg" alt="Ménopause le Musical" loading="lazy" style="width:100%;height:100%;object-fit:cover;">
-            <a href="spectacles/menopause.html" class="spectacle-card__voir">Voir →</a>
-          </div>
-          <div class="spectacle-card__body">
-            <span class="h-rating"><span class="h-on">H</span><span class="h-on">H</span><span class="h-on">H</span></span>
-            <p class="spectacle-card__company-name">Apollo Théâtre, Paris 11e</p>
-            <p class="spectacle-card__show-title">Ménopause, le Musical</p>
-            <p class="spectacle-card__excerpt">Quatre femmes piégées aux soldes. Du malaise, des rires, de l'émotion. Ne vous fiez pas au titre — c'est pour tout le monde.</p>
-            <div class="spectacle-card__meta">
-              <span>🗓 Jusqu'au 31 déc. 2026</span>
-            </div>
-            <div class="spectacle-card__footer">
-              <a href="spectacles/menopause.html" class="spectacle-card__link">Lire la reco →</a>
-              <button class="like-btn" data-sid="menopause" aria-pressed="false" aria-label="Coup de cœur"><span class="lk-icon">♡</span><span class="lk-count">…</span></button>
-            </div>
-          </div>
-        </article>
-
-        <!-- Le Roi Lion -->
-        <article class="spectacle-card reveal reveal-delay-2" role="listitem">
-          <div class="spectacle-card__img">
-            <img src="assets/spectacles/le-roi-lion.jpg" alt="Le Roi Lion" loading="lazy" style="width:100%;height:100%;object-fit:cover;">
-            <a href="spectacles/le-roi-lion.html" class="spectacle-card__voir">Voir →</a>
-          </div>
-          <div class="spectacle-card__body">
-            <span class="h-rating"><span class="h-on">H</span><span class="h-on">H</span><span class="h-off">H</span></span>
-            <p class="spectacle-card__company-name">Théâtre Mogador, Paris 9e</p>
-            <p class="spectacle-card__show-title">Le Roi Lion</p>
-            <p class="spectacle-card__excerpt">La comédie musicale la plus magique de Paris. Costumes époustouflants, voix exceptionnelles. Un incontournable en famille.</p>
-            <div class="spectacle-card__meta">
-              <span>🗓 3 juin → 9 août 2026</span>
-              <span>⏱ 2h35 avec entracte</span>
-            </div>
-            <div class="spectacle-card__footer">
-              <a href="spectacles/le-roi-lion.html" class="spectacle-card__link">Lire la reco →</a>
-              <button class="like-btn" data-sid="le-roi-lion" aria-pressed="false" aria-label="Coup de cœur"><span class="lk-icon">♡</span><span class="lk-count">…</span></button>
-            </div>
-          </div>
-        </article>
-
-        <!-- Akim Omiri -->
-        <article class="spectacle-card reveal reveal-delay-3" role="listitem">
-          <div class="spectacle-card__img">
-            <img src="assets/spectacles/akim-omiri-dans-contexte.jpg" alt="Akim Omiri dans Contexte" loading="lazy" style="width:100%;height:100%;object-fit:cover;">
-            <a href="spectacles/akim-omiri-dans-contexte.html" class="spectacle-card__voir">Voir →</a>
-          </div>
-          <div class="spectacle-card__body">
-            <span class="h-rating"><span class="h-on">H</span><span class="h-on">H</span><span class="h-on">H</span></span>
-            <p class="spectacle-card__company-name">Gaîté Rive Gauche, Paris 14e</p>
-            <p class="spectacle-card__show-title">Akim Omiri dans Contexte</p>
-            <p class="spectacle-card__excerpt">Cancel culture, théories du complot — il prend les sujets qui fâchent et en fait de l'or comique. Le stand-up français à son meilleur.</p>
-            <div class="spectacle-card__meta">
-              <span>🗓 4 juin 2026</span>
-              <span>⏱ 1h15</span>
-            </div>
-            <div class="spectacle-card__footer">
-              <a href="spectacles/akim-omiri-dans-contexte.html" class="spectacle-card__link">Lire la reco →</a>
-              <button class="like-btn" data-sid="akim-omiri-dans-contexte" aria-pressed="false" aria-label="Coup de cœur"><span class="lk-icon">♡</span><span class="lk-count">…</span></button>
-            </div>
-          </div>
-        </article>
-
+      <div class="cards-grid cards-grid--featured" id="feed-grid" role="list" aria-label="Fil des articles">
+        <div style="grid-column:1/-1;padding:40px;text-align:center;color:var(--gris);">Chargement…</div>
       </div>
     </div>
   </section>
@@ -164,36 +114,35 @@
     <div class="container">
       <div class="apropos-mini">
         <div class="apropos-mini__img reveal">
-          <img src="assets/helene-micheau.png"
-               alt="Hélène Micheau, curatrice culturelle"
+          <img src="assets/helene-micheau.jpeg"
+               onerror="this.onerror=null;this.src='assets/helene-micheau.png';"
+               alt="Hélène"
                class="apropos-mini__photo"
                style="width:100%;aspect-ratio:4/5;object-fit:cover;object-position:center top;">
           <div class="apropos-mini__badge">
-            <strong>~100</strong>
+            <strong>+100</strong>
             <span>spectateurs<br>dans ma communauté</span>
           </div>
         </div>
         <div class="apropos-mini__text reveal reveal-delay-2">
           <p class="section__eyebrow">À propos</p>
           <h2 id="helene-titre">Je vous aide à ne jamais rater le bon spectacle</h2>
-          <p>Je m'appelle Hélène Micheau. Depuis des années, j'anime un groupe où je partage mes découvertes de spectacles à une centaine de passionnés comme moi.</p>
-          <p>Ce site, c'est la version publique de mes recommandations. Pas de jargon de critique — juste une vraie spectatrice qui dit franchement si ça vaut le déplacement, pour qui, et pourquoi.</p>
+          <p>Spectatrice passionnée depuis plus de 25 ans, je pratique aussi le spectacle d'improvisation et j'ai mis en scène des comédies musicales. Fidèle du Festival d'Avignon depuis plus de 30 ans, j'aime avant tout partager avec les gens — ma conviction, c'est qu'on irait mieux si on vibrait tous ensemble.</p>
+          <p>Tout a démarré par un fil WhatsApp, devenu une véritable communauté pour sortir à plusieurs. Ce site, c'est pour que ça ne soit pas réservé qu'aux membres du groupe : le meilleur des bons plans de la commu, partagé avec vous.</p>
           <a href="a-propos.html" class="btn btn--outline" style="margin-top:16px;">En savoir plus →</a>
         </div>
       </div>
     </div>
   </section>
 
-  <!-- ═══ NEWSLETTER ═══ -->
-
   <!-- ═══ FOOTER ═══ -->
   <footer class="footer" role="contentinfo">
     <div class="container">
       <div class="footer__grid">
         <div>
-          <p class="footer__logo">au <em>pestacle</em> ce soir</p>
-          <p class="footer__tagline">Des recommandations sincères pour vos prochaines sorties — théâtre, danse, cirque, humour.</p>
-          <p style="font-size:0.78rem;">Par Hélène Micheau, curatrice culturelle</p>
+          <p class="footer__logo">Au <em>Pestacle</em> Ce Soir</p>
+          <p class="footer__tagline">Des recommandations sincères pour vos prochaines sorties — théâtre, danse.</p>
+          <p style="font-size:0.78rem;">Par Hélène</p>
         </div>
         <div class="footer__col">
           <h4>Le site</h4>
@@ -210,7 +159,7 @@
         </div>
       </div>
       <div class="footer__bottom">
-        <span>© 2026 Au Pestacle ce soir — Hélène Micheau</span>
+        <span>© 2026 Au Pestacle Ce Soir</span>
         <a href="mentions-legales.html">Mentions légales</a>
       </div>
     </div>
@@ -219,5 +168,53 @@
   <script src="js/supabase-config.js"></script>
   <script src="js/main.js"></script>
   <script src="js/likes.js"></script>
+  <script>
+  (function() {
+    const TYPE_LABELS = { spectacle: 'Spectacle', recommandation: 'Recommandation', communaute: 'Communauté' };
+
+    function hRating(n) {
+      if (!n) return '';
+      const spots = Array.from({length:3}, (_,i) => `<span class="${i < n ? 'h-on' : 'h-off'}">H</span>`).join('');
+      return `<span class="h-rating">${spots}</span>`;
+    }
+
+    function renderCard(s) {
+      const type = s.type || 'spectacle';
+      const photo = s.photo
+        ? `<img src="${s.photo}" alt="${s.titre}" loading="lazy" style="width:100%;height:100%;object-fit:cover;">`
+        : `<div class="spectacle-card__img-placeholder" style="background:${s.couleur||'#E8E8E8'};" aria-hidden="true"></div>`;
+      return `
+        <article class="spectacle-card" data-sid="${s.id}" role="listitem">
+          <div class="spectacle-card__img">${photo}</div>
+          <div class="spectacle-card__body">
+            <span class="type-badge type-badge--${type}">${TYPE_LABELS[type] || type}</span><br>
+            ${hRating(s.note)}
+            ${s.lieu ? `<p class="spectacle-card__company-name">${s.lieu}</p>` : ''}
+            <p class="spectacle-card__show-title">${s.titre}</p>
+            <p class="spectacle-card__excerpt">${s.description||''}</p>
+            <div class="spectacle-card__footer">
+              <a href="${s.lien || ('spectacle.html?id=' + s.id)}" class="spectacle-card__link">Lire →</a>
+              <button class="like-btn" data-sid="${s.id}" aria-pressed="false" aria-label="Sauvegarder">
+                <span class="lk-icon">🔖</span><span class="lk-count">…</span>
+              </button>
+            </div>
+          </div>
+        </article>`;
+    }
+
+    fetch(`${SUPA_URL}/rest/v1/spectacles?actif=eq.true&order=created_at.desc`, { headers: SUPA_HEADERS })
+      .then(r => r.json())
+      .then(data => {
+        const grid  = document.getElementById('feed-grid');
+        const label = document.getElementById('count-label');
+        grid.innerHTML = data.map(renderCard).join('') || '<p style="padding:40px;color:var(--gris)">Rien pour l\'instant.</p>';
+        if (label) label.textContent = `${data.length} article${data.length > 1 ? 's' : ''}`;
+        document.dispatchEvent(new CustomEvent('spectaclesLoaded'));
+      })
+      .catch(() => {
+        document.getElementById('feed-grid').innerHTML = '<p style="padding:40px;color:var(--gris)">Erreur de chargement.</p>';
+      });
+  })();
+  </script>
 </body>
 </html>

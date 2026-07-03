@@ -149,7 +149,7 @@ function updateChips() {
     has = true;
     const chip = document.createElement('button');
     chip.className = 'filter-chip';
-    chip.innerHTML = `♥ Mes coups de cœur <span class="filter-chip__x">×</span>`;
+    chip.innerHTML = `🔖 Mes spectacles sauvegardés <span class="filter-chip__x">×</span>`;
     chip.addEventListener('click', () => {
       activeLiked = false;
       if (likedBtn) likedBtn.classList.remove('active');
@@ -160,7 +160,7 @@ function updateChips() {
 
   if (activeNote !== 'toutes') {
     has = true;
-    const noteLabel = { '3': 'HHH — Coups de cœur', '2': 'HH — Très recommandés', '1': 'H — Recommandés' }[activeNote] || activeNote;
+    const noteLabel = { '3': 'HHH — Une seule fois.', '2': 'HH — Très recommandés', '1': 'H — Recommandés' }[activeNote] || activeNote;
     const chip = document.createElement('button');
     chip.className = 'filter-chip filter-chip--note';
     chip.style.fontFamily = 'var(--font-titre)';
@@ -233,60 +233,6 @@ document.addEventListener('likesReady', () => {
 document.addEventListener('spectaclesLoaded', () => {
   applyFilters();
 });
-
-/* ══════════════════════════════════════════════
-   PAGES DÉTAIL SPECTACLE
-   Inject poster image + H rating on /spectacles/*.html
-══════════════════════════════════════════════ */
-(function() {
-  const pathname = window.location.pathname;
-  if (!pathname.includes('/spectacles/')) return;
-
-  const id = pathname.split('/spectacles/')[1].replace('.html', '');
-
-  fetch(`${SUPA_URL}/rest/v1/spectacles?actif=eq.true`, { headers: SUPA_HEADERS })
-    .then(r => r.json())
-    .then(spectacles => {
-      const s = spectacles.find(x => x.id === id);
-
-      /* 1 ── Affiche dans la sidebar ── */
-      if (s && s.photo) {
-        const aside = document.querySelector('.article-aside');
-        if (aside) {
-          const posterCard = document.createElement('div');
-          posterCard.className = 'aside-card';
-          posterCard.style.cssText = 'padding:0;overflow:hidden;';
-          posterCard.innerHTML = `<img src="${s.photo}" alt="Affiche — ${s.titre}" style="width:100%;display:block;height:280px;object-fit:cover;object-position:center top;">`;
-          aside.insertBefore(posterCard, aside.firstChild);
-        }
-      }
-
-      /* 2 ── Notation H (remplace les étoiles) ── */
-      const n = s ? s.note : 2;
-      function hSpans(size) {
-        return Array.from({length:3}, (_,i) =>
-          `<span style="color:${i<n?'var(--accent)':'#D8D8D8'};font-family:var(--font-titre);font-weight:700;font-size:${size};letter-spacing:4px;">H</span>`
-        ).join('');
-      }
-
-      const headerStars = document.querySelector('.article-note__stars');
-      if (headerStars) {
-        headerStars.innerHTML = hSpans('1.5rem');
-        const label = headerStars.nextElementSibling;
-        if (label) {
-          const txt = n >= 3 ? 'HHH — Coup de cœur absolu' : n >= 2 ? 'HH — Très recommandé' : 'H — Recommandé';
-          label.textContent = `Note d'Hélène — ${txt}`;
-        }
-      }
-
-      const asideRating = document.querySelector('.aside-card [aria-label*="toile"]');
-      if (asideRating) {
-        asideRating.innerHTML = hSpans('2rem');
-        asideRating.removeAttribute('aria-label');
-      }
-    })
-    .catch(() => {}); // silent fail, le reste de la page fonctionne
-})();
 
 /* ── Newsletter form ────────────────────────── */
 const newsletterForm = document.querySelector('.newsletter__form');

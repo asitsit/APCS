@@ -5,31 +5,33 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
   <!-- SEO -->
-  <title>Toutes les recommandations — Au Pestacle ce soir</title>
-  <meta name="description" content="Retrouvez toutes les recommandations de spectacles d'Hélène Micheau : théâtre, danse, cirque, humour. À voir maintenant ou souvenirs de saisons passées.">
-  <meta name="author" content="Hélène Micheau">
+  <title>Toutes les recommandations — Au Pestacle Ce Soir</title>
+  <meta name="description" content="Retrouvez tous les spectacles vus et choisis par Hélène : théâtre, danse. À voir maintenant ou souvenirs de saisons passées.">
+  <meta name="author" content="Hélène">
   <meta name="robots" content="index, follow">
   <link rel="canonical" href="https://aupestaclecesoir.fr/recommandations.html">
 
   <meta property="og:type" content="website">
   <meta property="og:url" content="https://aupestaclecesoir.fr/recommandations.html">
-  <meta property="og:title" content="Toutes les recommandations — Au Pestacle ce soir">
-  <meta property="og:description" content="Théâtre, danse, cirque, humour — trouvez votre prochaine sortie par humeur.">
+  <meta property="og:title" content="Toutes les recommandations — Au Pestacle Ce Soir">
+  <meta property="og:description" content="Théâtre, danse — trouvez votre prochaine sortie.">
+  <meta property="og:image" content="https://aupestaclecesoir.fr/assets/Favicon_apcs_white.png">
 
   <script type="application/ld+json">
   {
     "@context": "https://schema.org",
     "@type": "CollectionPage",
-    "name": "Recommandations de spectacles — Au Pestacle ce soir",
+    "name": "Recommandations de spectacles — Au Pestacle Ce Soir",
     "url": "https://aupestaclecesoir.fr/recommandations.html",
-    "description": "Sélection de spectacles recommandés par Hélène Micheau, curatrice culturelle",
+    "description": "Sélection de spectacles vus et choisis par Hélène",
     "author": {
       "@type": "Person",
-      "name": "Hélène Micheau"
+      "name": "Hélène"
     }
   }
   </script>
 
+  <link rel="icon" href="assets/Favicon_apcs_white.png" type="image/png">
   <link rel="stylesheet" href="css/style.css">
   <style>
     .like-btn {
@@ -53,7 +55,10 @@
   <!-- ═══════════════ NAVIGATION ═══════════════ -->
   <nav class="nav" role="navigation" aria-label="Navigation principale">
     <div class="container nav__inner">
-      <a href="index.html" class="nav__logo">au <strong>pestacle</strong><span> ce soir</span></a>
+      <a href="index.html" class="nav__logo" style="display:flex;align-items:center;gap:8px;">
+        <img src="assets/Favicon_apcs_white.png" alt="" width="28" height="28" style="border-radius:6px;display:block;">
+        Au <strong>Pestacle</strong><span> Ce Soir</span>
+      </a>
       <ul class="nav__links" role="list">
         <li><a href="recommandations.html" class="active">Les spectacles</a></li>
         <li class="nav__dropdown" id="dropdown-avignon">
@@ -62,7 +67,7 @@
           </button>
           <ul class="nav__dropdown-menu" role="menu">
             <li role="none"><a href="avignon-2025.html" role="menuitem">Avignon 2025</a></li>
-            <li role="none"><a href="avignon-2026.html" role="menuitem">Avignon 2026 <span class="nav__dropdown-soon">Bientôt</span></a></li>
+            <li role="none"><a href="avignon-2026.html" role="menuitem">Avignon 2026</a></li>
           </ul>
         </li>
         <li><a href="a-propos.html">À propos</a></li>
@@ -80,7 +85,7 @@
       <p class="page-header__kicker">Spectacle vivant</p>
       <h1 class="page-header__title">Toutes les recommandations</h1>
       <p class="page-header__lead">
-        Chaque spectacle a été vu et choisi par Hélène. Filtrez par période pour trouver exactement ce dont vous avez besoin ce soir.
+        Chaque spectacle a été vu et choisi par Hélène. Filtrez par période.
       </p>
     </div>
   </header>
@@ -92,7 +97,7 @@
         <span style="font-size:0.68rem;font-weight:700;text-transform:uppercase;letter-spacing:0.1em;color:var(--gris);">Note d'Hélène</span>
         <div style="display:flex;align-items:center;gap:8px;font-size:0.82rem;font-weight:600;">
           <span style="font-family:var(--font-titre);font-weight:700;color:var(--accent);letter-spacing:3px;font-size:0.9rem;">HHH</span>
-          Coup de cœur absolu
+          Une seule fois.
         </div>
         <div style="display:flex;align-items:center;gap:8px;font-size:0.82rem;font-weight:600;">
           <span style="font-family:var(--font-titre);font-weight:700;color:var(--accent);letter-spacing:3px;font-size:0.9rem;">HH</span>
@@ -111,10 +116,11 @@
     <div class="container">
 
       <div class="filtres__row" style="display:flex;flex-wrap:wrap;gap:16px;align-items:center;">
+        <span style="font-size:0.68rem;font-weight:700;text-transform:uppercase;letter-spacing:0.08em;color:var(--gris);">Filtre</span>
         <div style="display:flex;gap:4px;align-items:center;">
           <span style="font-size:0.68rem;font-weight:700;text-transform:uppercase;letter-spacing:0.08em;color:var(--gris);margin-right:6px;">Période</span>
-          <button class="filtre-btn filtre-btn--periode" data-filtre-periode="avoir"    role="listitem">À voir</button>
-          <button class="filtre-btn filtre-btn--periode" data-filtre-periode="souvenir" role="listitem">On s'en souvient</button>
+          <button class="filtre-btn filtre-btn--periode" data-filtre-periode="avoir"    role="listitem">À voir en ce moment</button>
+          <button class="filtre-btn filtre-btn--periode" data-filtre-periode="souvenir" role="listitem">C'est passé mais on s'en souvient</button>
         </div>
         <div style="display:flex;gap:4px;align-items:center;">
           <span style="font-size:0.68rem;font-weight:700;text-transform:uppercase;letter-spacing:0.08em;color:var(--gris);margin-right:6px;">Note</span>
@@ -123,7 +129,7 @@
           <button class="filtre-btn filtre-btn--note" data-filtre-note="1" role="listitem" style="font-family:var(--font-titre);letter-spacing:2px;">H</button>
         </div>
         <div style="display:flex;gap:4px;align-items:center;">
-          <button class="filtre-btn filtre-btn--liked" id="filtre-liked" role="listitem" style="gap:6px;">♥ Mes coups de cœur</button>
+          <button class="filtre-btn filtre-btn--liked" id="filtre-liked" role="listitem" style="gap:6px;">🔖 Mes spectacles sauvegardés</button>
         </div>
       </div>
 
@@ -216,7 +222,7 @@
           </div>
         </article>`;
     }
-    fetch(`${SUPA_URL}/rest/v1/spectacles?actif=eq.true&order=created_at.asc`, { headers: SUPA_HEADERS })
+    fetch(`${SUPA_URL}/rest/v1/spectacles?actif=eq.true&type=eq.spectacle&order=created_at.asc`, { headers: SUPA_HEADERS })
       .then(r => r.json())
       .then(data => {
         const grid  = document.getElementById('spectacles-grid');
@@ -236,9 +242,9 @@
     <div class="container">
       <div class="footer__grid">
         <div>
-          <p class="footer__logo">Au <em>Pestacle</em> ce soir</p>
+          <p class="footer__logo">Au <em>Pestacle</em> Ce Soir</p>
           <p class="footer__tagline">Des recommandations sincères pour vos prochaines sorties.</p>
-          <p style="font-size:0.82rem;">Par Hélène Micheau, curatrice culturelle</p>
+          <p style="font-size:0.82rem;">Par Hélène</p>
         </div>
         <div class="footer__col">
           <h4>Le site</h4>
@@ -255,7 +261,7 @@
         </div>
       </div>
       <div class="footer__bottom">
-        <span>© 2026 Au Pestacle ce soir — Hélène Micheau</span>
+        <span>© 2026 Au Pestacle Ce Soir</span>
         <a href="mentions-legales.html">Mentions légales</a>
       </div>
     </div>

@@ -3,9 +3,10 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Chargement… — Au Pestacle ce soir</title>
+  <title>Chargement… — Au Pestacle Ce Soir</title>
   <meta name="description" content="">
-  <meta name="author" content="Hélène Micheau">
+  <meta name="author" content="Hélène">
+  <link rel="icon" href="assets/Favicon_apcs_white.png" type="image/png">
   <link rel="stylesheet" href="css/style.css">
 </head>
 <body>
@@ -13,7 +14,10 @@
   <!-- ═══════════════ NAVIGATION ═══════════════ -->
   <nav class="nav" role="navigation" aria-label="Navigation principale">
     <div class="container nav__inner">
-      <a href="index.html" class="nav__logo">au <strong>pestacle</strong><span> ce soir</span></a>
+      <a href="index.html" class="nav__logo" style="display:flex;align-items:center;gap:8px;">
+        <img src="assets/Favicon_apcs_white.png" alt="" width="28" height="28" style="border-radius:6px;display:block;">
+        Au <strong>Pestacle</strong><span> Ce Soir</span>
+      </a>
       <ul class="nav__links" role="list">
         <li><a href="recommandations.html">Les spectacles</a></li>
         <li class="nav__dropdown" id="dropdown-avignon">
@@ -22,7 +26,7 @@
           </button>
           <ul class="nav__dropdown-menu" role="menu">
             <li role="none"><a href="avignon-2025.html" role="menuitem">Avignon 2025</a></li>
-            <li role="none"><a href="avignon-2026.html" role="menuitem">Avignon 2026 <span class="nav__dropdown-soon">Bientôt</span></a></li>
+            <li role="none"><a href="avignon-2026.html" role="menuitem">Avignon 2026</a></li>
           </ul>
         </li>
         <li><a href="a-propos.html">À propos</a></li>
@@ -81,7 +85,7 @@
   <div class="container" id="s-content" style="display:none;">
     <div class="article-layout">
 
-      <article class="article-corps" aria-label="Recommandation d'Hélène Micheau" id="s-body">
+      <article class="article-corps" aria-label="Recommandation d'Hélène" id="s-body">
       </article>
 
       <aside class="article-aside" aria-label="Informations pratiques et réservation" id="s-aside">
@@ -95,9 +99,9 @@
     <div class="container">
       <div class="footer__grid">
         <div>
-          <p class="footer__logo">au <em>pestacle</em> ce soir</p>
+          <p class="footer__logo">Au <em>Pestacle</em> Ce Soir</p>
           <p class="footer__tagline">Des recommandations sincères pour vos prochaines sorties.</p>
-          <p style="font-size:0.78rem;">Par Hélène Micheau, curatrice culturelle</p>
+          <p style="font-size:0.78rem;">Par Hélène</p>
         </div>
         <div class="footer__col">
           <h4>Le site</h4>
@@ -114,7 +118,7 @@
         </div>
       </div>
       <div class="footer__bottom">
-        <span>© 2026 Au Pestacle ce soir — Hélène Micheau</span>
+        <span>© 2026 Au Pestacle Ce Soir</span>
         <a href="mentions-legales.html">Mentions légales</a>
       </div>
     </div>
@@ -163,7 +167,7 @@
 
       /* ── Titre de page ── */
       const titleParts = [s.titre, s.lieu].filter(Boolean);
-      document.title = titleParts.join(' — ') + ' — Au Pestacle ce soir';
+      document.title = titleParts.join(' — ') + ' — Au Pestacle Ce Soir';
       const metaDesc = document.querySelector('meta[name="description"]');
       const metaText = s.description || s.intro || '';
       if (metaDesc && metaText) metaDesc.content = metaText.substring(0, 160);
@@ -185,6 +189,7 @@
       const dateStr = buildDateStr(s.date_debut, s.date_fin);
       if (dateStr)        metaItems.push(`<div class="article-meta__item" role="listitem"><span>🗓</span><div><span>Dates</span><strong>${dateStr}</strong></div></div>`);
       if (s.duree)        metaItems.push(`<div class="article-meta__item" role="listitem"><span>⏱</span><div><span>Durée</span><strong>${s.duree}</strong></div></div>`);
+      if (s.realisateur)  metaItems.push(`<div class="article-meta__item" role="listitem"><span>🎬</span><div><span>Mise en scène</span><strong>${s.realisateur}</strong></div></div>`);
       if (s.public_cible) metaItems.push(`<div class="article-meta__item" role="listitem"><span>👥</span><div><span>Public</span><strong>${s.public_cible}</strong></div></div>`);
       document.getElementById('s-meta').innerHTML = metaItems.join('');
 
@@ -212,16 +217,15 @@
       }
 
       const infos = [];
-      if (s.lieu)  infos.push(`<div class="aside-card__item"><span>Lieu</span><strong>${s.lieu}</strong></div>`);
-      if (dateStr) infos.push(`<div class="aside-card__item"><span>Dates</span><strong>${dateStr}</strong></div>`);
-      if (s.duree) infos.push(`<div class="aside-card__item"><span>Durée</span><strong>${s.duree}</strong></div>`);
-      if (s.tarif) infos.push(`<div class="aside-card__item"><span>Tarif</span><strong>${s.tarif}</strong></div>`);
-      if (s.acces) infos.push(`<div class="aside-card__item"><span>Accès</span><strong>${s.acces}</strong></div>`);
+      if (s.lieu)        infos.push(`<div class="aside-card__item"><span>Lieu</span><strong>${s.lieu}</strong></div>`);
+      if (dateStr)       infos.push(`<div class="aside-card__item"><span>Dates</span><strong>${dateStr}</strong></div>`);
+      if (s.duree)       infos.push(`<div class="aside-card__item"><span>Durée</span><strong>${s.duree}</strong></div>`);
+      if (s.realisateur) infos.push(`<div class="aside-card__item"><span>Mise en scène</span><strong>${s.realisateur}</strong></div>`);
 
-      if (infos.length || s.lien_resa) {
+      if (infos.length || s.lien_officiel) {
         asideHTML += `<div class="aside-card"><h3>Infos pratiques</h3><div class="aside-card__list">${infos.join('')}</div>`;
-        if (s.lien_resa) {
-          asideHTML += `<a href="${s.lien_resa}" class="btn btn--primary" target="_blank" rel="noopener noreferrer" style="margin-top:16px;">Réserver →</a>`;
+        if (s.lien_officiel) {
+          asideHTML += `<a href="${s.lien_officiel}" class="btn btn--primary" target="_blank" rel="noopener noreferrer" style="margin-top:16px;">Site du théâtre →</a>`;
         }
         asideHTML += `</div>`;
       }

@@ -3,8 +3,9 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Administration — Au Pestacle ce soir</title>
+  <title>Administration — Au Pestacle Ce Soir</title>
   <meta name="robots" content="noindex, nofollow">
+  <link rel="icon" href="assets/Favicon_apcs_white.png" type="image/png">
   <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2/dist/umd/supabase.js"></script>
   <style>
     :root {
@@ -212,7 +213,7 @@
 <!-- ══════════════ LOGIN ══════════════ -->
 <div id="screen-login">
   <div class="login-card">
-    <p class="login-logo">au <em>pestacle</em> ce soir</p>
+    <p class="login-logo">Au <em>Pestacle</em> Ce Soir</p>
     <p class="login-sub">Espace d'administration</p>
     <form id="login-form">
       <div class="field">
@@ -233,7 +234,7 @@
 <div id="screen-dashboard">
 
   <nav class="admin-nav">
-    <span class="admin-nav-logo">au <em>pestacle</em> ce soir</span>
+    <span class="admin-nav-logo">Au <em>Pestacle</em> Ce Soir</span>
     <div class="admin-nav-right">
       <span class="admin-nav-user" id="nav-email"></span>
       <button class="btn btn-ghost btn-sm" id="btn-logout">Déconnexion</button>
@@ -268,8 +269,20 @@
       <input type="text" id="f-titre" placeholder="Nom du spectacle" required>
     </div>
     <div class="field">
+      <label for="f-type">Type *</label>
+      <select id="f-type" required>
+        <option value="spectacle">Spectacle</option>
+        <option value="recommandation">Recommandation</option>
+        <option value="communaute">Communauté</option>
+      </select>
+    </div>
+    <div class="field">
       <label for="f-lieu">Lieu</label>
       <input type="text" id="f-lieu" placeholder="Théâtre, Paris Xe">
+    </div>
+    <div class="field">
+      <label for="f-realisateur">Réalisateur / Mise en scène / Troupe</label>
+      <input type="text" id="f-realisateur" placeholder="Nom du metteur en scène ou de la troupe">
     </div>
     <div class="field-row">
       <div class="field">
@@ -333,23 +346,13 @@
       <input type="text" id="f-public" placeholder="Toute la famille, dès 6 ans…">
     </div>
 
-    <!-- ── Réservation ── -->
+    <!-- ── Lien officiel ── -->
     <div class="form-section">
-      <p class="form-section-title">Réservation</p>
-    </div>
-    <div class="field-row">
-      <div class="field">
-        <label for="f-tarif">Tarif</label>
-        <input type="text" id="f-tarif" placeholder="À partir de 25 €">
-      </div>
-      <div class="field">
-        <label for="f-acces">Accès</label>
-        <input type="text" id="f-acces" placeholder="Métro Opéra">
-      </div>
+      <p class="form-section-title">Lien officiel</p>
     </div>
     <div class="field">
-      <label for="f-lien-resa">Lien de réservation</label>
-      <input type="url" id="f-lien-resa" placeholder="https://www.billetreduc.com/…">
+      <label for="f-lien-officiel">Site du théâtre</label>
+      <input type="url" id="f-lien-officiel" placeholder="https://www.theatre-xyz.fr/…">
     </div>
 
     <!-- ── URL (auto) ── -->
@@ -461,12 +464,14 @@ function render() {
     <div class="s-table-wrap">
       <table>
         <thead><tr>
-          <th></th><th>Spectacle</th><th>Dates</th><th>Note</th><th>Statut</th><th></th>
+          <th></th><th>Spectacle</th><th>Type</th><th>Dates</th><th>Note</th><th>Statut</th><th></th>
         </tr></thead>
         <tbody>${rows.map(rowHTML).join('')}</tbody>
       </table>
     </div>`;
 }
+
+const TYPE_LABELS = { spectacle: 'Spectacle', recommandation: 'Recommandation', communaute: 'Communauté' };
 
 function rowHTML(s) {
   const thumb = s.photo
@@ -479,6 +484,7 @@ function rowHTML(s) {
   return `<tr>
     <td>${thumb}</td>
     <td><div class="t-titre">${esc(s.titre)}</div><div class="t-lieu">${esc(s.lieu||'')}</div></td>
+    <td>${esc(TYPE_LABELS[s.type] || s.type || '')}</td>
     <td class="t-dates">${dates}</td>
     <td><span class="h-badge">${'H'.repeat(s.note||1)}</span></td>
     <td>${badge}</td>
@@ -520,6 +526,7 @@ function closePanel() {
   setNote(2);
   document.getElementById('f-actif').checked = true;
   document.getElementById('f-id').value = '';
+  document.getElementById('f-type').value = 'spectacle';
   document.getElementById('f-lien').value = '';
   if (typeof resetUpload === 'function') resetUpload();
 }
@@ -534,6 +541,7 @@ btnNew.addEventListener('click', () => {
   setNote(2);
   document.getElementById('f-actif').checked = true;
   document.getElementById('f-id').value = '';
+  document.getElementById('f-type').value = 'spectacle';
   document.getElementById('f-lien').value = '';
   openPanel('Nouveau spectacle');
 });
@@ -549,8 +557,10 @@ function openEdit(id) {
   if (!s) return;
   editId = id;
   document.getElementById('f-id').value    = s.id;
+  document.getElementById('f-type').value  = s.type  || 'spectacle';
   document.getElementById('f-titre').value = s.titre || '';
   document.getElementById('f-lieu').value  = s.lieu  || '';
+  document.getElementById('f-realisateur').value = s.realisateur || '';
   document.getElementById('f-debut').value = s.date_debut || '';
   document.getElementById('f-fin').value   = s.date_fin   || '';
   document.getElementById('f-duree').value = s.duree       || '';
@@ -558,12 +568,10 @@ function openEdit(id) {
   document.getElementById('f-intro').value    = s.intro        || '';
   document.getElementById('f-contenu').value  = s.contenu      || '';
   document.getElementById('f-public').value   = s.public_cible || '';
-  document.getElementById('f-tarif').value    = s.tarif        || '';
-  document.getElementById('f-acces').value    = s.acces        || '';
   document.getElementById('f-photo').value    = s.photo        || '';
   if (typeof setPreview === 'function') setPreview(s.photo || '');
   document.getElementById('f-lien').value     = s.lien         || '';
-  document.getElementById('f-lien-resa').value = s.lien_resa   || '';
+  document.getElementById('f-lien-officiel').value = s.lien_officiel || '';
   document.getElementById('f-actif').checked  = s.actif !== false;
   setNote(s.note || 2);
   openPanel('Modifier le spectacle');
@@ -587,7 +595,9 @@ spectacleForm.addEventListener('submit', async e => {
 
   const payload = {
     titre,
+    type:         document.getElementById('f-type').value             || 'spectacle',
     lieu:         document.getElementById('f-lieu').value.trim()      || null,
+    realisateur:  document.getElementById('f-realisateur').value.trim() || null,
     date_debut:   document.getElementById('f-debut').value            || null,
     date_fin:     document.getElementById('f-fin').value              || null,
     duree:        document.getElementById('f-duree').value.trim()     || null,
@@ -595,12 +605,10 @@ spectacleForm.addEventListener('submit', async e => {
     intro:        document.getElementById('f-intro').value.trim()    || null,
     contenu:      document.getElementById('f-contenu').value.trim()  || null,
     public_cible: document.getElementById('f-public').value.trim()  || null,
-    tarif:        document.getElementById('f-tarif').value.trim()    || null,
-    acces:        document.getElementById('f-acces').value.trim()    || null,
     note:         noteVal,
     photo:        document.getElementById('f-photo').value.trim()    || null,
     lien:         document.getElementById('f-lien').value.trim()     || null,
-    lien_resa:    document.getElementById('f-lien-resa').value.trim() || null,
+    lien_officiel: document.getElementById('f-lien-officiel').value.trim() || null,
     actif:        document.getElementById('f-actif').checked,
   };
 

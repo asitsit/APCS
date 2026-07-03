@@ -132,7 +132,6 @@ ul { list-style: none; }
   font-size: 1.05rem;
   font-weight: 700;
   color: var(--blanc);
-  text-transform: lowercase;
   letter-spacing: -0.01em;
 }
 .nav__logo span, .nav__logo strong {
@@ -840,7 +839,6 @@ ul { list-style: none; }
   font-weight: 700;
   color: var(--blanc);
   margin-bottom: 12px;
-  text-transform: lowercase;
 }
 .footer__logo em { color: var(--accent); font-style: normal; }
 .footer__tagline { font-size: 0.85rem; line-height: 1.6; margin-bottom: 20px; }

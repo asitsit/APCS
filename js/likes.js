@@ -68,11 +68,11 @@
     btn.classList.toggle('liked', liked);
     const iconEl  = btn.querySelector('.lk-icon');
     const countEl = btn.querySelector('.lk-count');
-    if (iconEl)  iconEl.textContent  = liked ? '♥' : '♡';
+    if (iconEl)  iconEl.textContent  = '🔖';
     if (countEl) countEl.textContent = ready ? total(id) : '…';
     btn.setAttribute('aria-pressed', liked ? 'true' : 'false');
     btn.setAttribute('aria-label',
-      (liked ? 'Retirer le coup de cœur' : 'Ajouter un coup de cœur') +
+      (liked ? 'Retirer des spectacles sauvegardés' : 'Sauvegarder ce spectacle') +
       ` — ${ready ? total(id) : '…'} personnes`);
   }
 

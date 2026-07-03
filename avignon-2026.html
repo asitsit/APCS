@@ -1,18 +1,310 @@
-﻿<!DOCTYPE html>
+<!DOCTYPE html>
 <html lang="fr">
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Avignon OFF 2026 — Bientôt — Au Pestacle ce soir</title>
-  <meta name="description" content="La sélection d'Hélène pour Avignon OFF 2026 — bientôt disponible.">
-  <meta name="robots" content="noindex, follow">
+  <title>Avignon OFF 2026 — La sélection d'Hélène — Au Pestacle Ce Soir</title>
+  <meta name="description" content="La sélection d'Hélène pour le Festival OFF d'Avignon 2026 : 119 spectacles repérés dans le programme, triés par niveau de recommandation (H, HH, HHH).">
+  <meta name="robots" content="index, follow">
+  <link rel="canonical" href="https://aupestaclecesoir.fr/avignon-2026.html">
+  <link rel="icon" href="assets/Favicon_apcs_white.png" type="image/png">
   <link rel="stylesheet" href="css/style.css">
+  <style>
+    /* ── BREADCRUMB ── */
+    .breadcrumb {
+      font-size: 0.78rem;
+      font-weight: 600;
+      color: var(--gris);
+      padding: 14px 0;
+      border-bottom: 1px solid var(--gris-border);
+    }
+    .breadcrumb a { color: var(--gris); }
+    .breadcrumb a:hover { color: var(--accent); }
+
+    /* ── HERO ── */
+    .avignon-hero {
+      padding: clamp(40px, 6vw, 72px) 0 clamp(32px, 4vw, 52px);
+      background: var(--blanc);
+      border-bottom: 1px solid var(--gris-border);
+    }
+    .avignon-hero__title {
+      font-family: var(--font-titre);
+      font-size: clamp(3rem, 9vw, 7rem);
+      font-weight: 700;
+      line-height: 0.92;
+      color: var(--noir);
+      margin-bottom: 20px;
+    }
+    .avignon-hero__title em { color: var(--accent); font-style: normal; }
+    .avignon-hero__sub {
+      font-size: 1rem;
+      color: var(--gris);
+      max-width: 480px;
+      line-height: 1.65;
+    }
+    .avignon-hero__meta {
+      margin-top: 28px;
+      display: flex;
+      gap: 1px;
+      background: var(--gris-border);
+      border: 1px solid var(--gris-border);
+      width: fit-content;
+    }
+    .avignon-hero__meta-item {
+      background: var(--blanc);
+      padding: 12px 24px;
+      font-size: 0.72rem;
+      font-weight: 700;
+      color: var(--gris);
+      text-transform: uppercase;
+      letter-spacing: 0.08em;
+    }
+    .avignon-hero__meta-item span {
+      display: block;
+      font-size: 1.5rem;
+      font-family: var(--font-titre);
+      font-weight: 700;
+      color: var(--accent);
+      line-height: 1;
+      margin-bottom: 2px;
+    }
+
+    /* ── LÉGENDE ── */
+    .legende {
+      border-bottom: 1px solid var(--gris-border);
+      padding: 14px 0;
+    }
+    .legende__inner {
+      display: flex;
+      gap: 24px;
+      align-items: center;
+      flex-wrap: wrap;
+    }
+    .legende__label {
+      font-size: 0.7rem;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 0.1em;
+      color: var(--gris);
+    }
+    .legende__item {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      font-size: 0.82rem;
+      font-weight: 600;
+      color: var(--noir-soft);
+    }
+    .legende__h { font-family: var(--font-titre); font-weight: 700; color: var(--accent); letter-spacing: 2px; font-size: 0.88rem; }
+
+    /* ── SECTION ── */
+    .avignon-section { padding: clamp(36px, 5vw, 56px) 0 clamp(20px, 3vw, 32px); }
+    .avignon-section__header {
+      display: flex;
+      align-items: center;
+      gap: 16px;
+      margin-bottom: 24px;
+      padding-bottom: 14px;
+      border-bottom: 2px solid var(--noir);
+    }
+    .avignon-section__h {
+      font-family: var(--font-titre);
+      font-weight: 700;
+      font-size: 1.2rem;
+      color: var(--accent);
+      letter-spacing: 3px;
+      line-height: 1;
+    }
+    .avignon-section__title {
+      font-family: var(--font-titre);
+      font-size: clamp(1.2rem, 2.5vw, 1.7rem);
+      font-weight: 700;
+      color: var(--noir);
+    }
+    .avignon-section__count {
+      margin-left: auto;
+      font-size: 0.72rem;
+      font-weight: 700;
+      color: var(--gris);
+      text-transform: uppercase;
+      letter-spacing: 0.06em;
+    }
+
+    /* ── GRILLE ── */
+    .avignon-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(210px, 1fr));
+      gap: 1px;
+      background: var(--gris-border);
+      border: 1px solid var(--gris-border);
+    }
+
+    /* ── CARD ── */
+    .avi-card {
+      background: var(--blanc);
+      overflow: hidden;
+      display: flex;
+      flex-direction: column;
+      transition: background var(--transition);
+    }
+    .avi-card:hover { background: #FAFAFA; }
+    .avi-card--sold-out { opacity: 0.68; }
+
+    /* Barre top : note H + genre */
+    .avi-card__topbar {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 10px 14px;
+      border-bottom: 1px solid var(--gris-border);
+    }
+    .avi-card__h {
+      font-family: var(--font-titre);
+      font-weight: 700;
+      font-size: 0.88rem;
+      color: var(--accent);
+      letter-spacing: 3px;
+      line-height: 1;
+    }
+    .avi-card__right { display: flex; align-items: center; gap: 6px; }
+    .avi-card__genre {
+      font-size: 0.62rem;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 0.06em;
+      padding: 3px 8px;
+      border: 1.5px solid currentColor;
+    }
+    .avi-card__genre--theatre { color: var(--accent); }
+    .avi-card__genre--danse   { color: #0A7A4A; }
+    .avi-card__genre--cirque  { color: #C06000; }
+    .avi-card__genre--vivant  { color: #1D5080; }
+    .avi-card__badge-sold {
+      font-size: 0.58rem;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 0.04em;
+      color: var(--corail);
+      border: 1.5px solid var(--corail);
+      padding: 3px 7px;
+    }
+    .avi-card__badge-deja {
+      font-size: 0.58rem;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 0.04em;
+      color: var(--gris);
+      border: 1.5px solid var(--gris);
+      padding: 3px 7px;
+    }
+
+    /* Photo */
+    .avi-card__photo {
+      height: 130px;
+      overflow: hidden;
+      position: relative;
+    }
+    .avi-card__photo img {
+      width: 100%; height: 100%;
+      object-fit: cover;
+      transition: transform 0.4s ease;
+    }
+    .avi-card:hover .avi-card__photo img { transform: scale(1.04); }
+    .avi-card__photo-placeholder {
+      width: 100%; height: 100%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 2.8rem;
+    }
+    .avi-card__photo--theatre { background: linear-gradient(135deg, rgba(110,70,255,0.1), rgba(110,70,255,0.03)); }
+
+    /* Body */
+    .avi-card__body {
+      padding: 12px 14px;
+      flex: 1;
+      display: flex;
+      flex-direction: column;
+      gap: 3px;
+    }
+    .avi-card__title {
+      font-family: var(--font-titre);
+      font-size: 0.92rem;
+      font-weight: 700;
+      line-height: 1.25;
+      color: var(--noir);
+    }
+    .avi-card__company { font-size: 0.72rem; color: var(--gris); font-style: italic; line-height: 1.45; }
+    .avi-card__venue {
+      font-size: 0.7rem;
+      color: var(--noir-soft);
+      margin-top: 6px;
+      padding-top: 7px;
+      border-top: 1px solid var(--gris-border);
+      line-height: 1.5;
+    }
+
+    /* Footer */
+    .avi-card__footer {
+      padding: 9px 14px;
+      border-top: 1px solid var(--gris-border);
+    }
+    .avi-card__link {
+      font-family: var(--font-titre);
+      font-size: 0.72rem;
+      font-weight: 700;
+      color: var(--accent);
+      text-transform: uppercase;
+      letter-spacing: 0.04em;
+      display: inline-flex;
+      align-items: center;
+      gap: 4px;
+      transition: gap var(--transition);
+    }
+    .avi-card:hover .avi-card__link { gap: 8px; }
+
+    /* Carte entièrement cliquable via stretched link */
+    .avi-card { position: relative; }
+    .avi-card__link::after {
+      content: '';
+      position: absolute;
+      inset: 0;
+    }
+    .avi-card__topbar,
+    .avi-card__badge-sold,
+    .avi-card__badge-deja {
+      position: relative;
+      z-index: 1;
+    }
+
+    /* Intro */
+    .avignon-intro {
+      border-left: 3px solid var(--accent);
+      padding: 14px 18px;
+      background: var(--creme-dark);
+      font-size: 0.9rem;
+      color: var(--noir-soft);
+      line-height: 1.65;
+      margin-bottom: 36px;
+    }
+
+    @media (max-width: 700px) {
+      .avignon-grid { grid-template-columns: repeat(2, 1fr); }
+      .avignon-hero__meta { flex-wrap: wrap; }
+    }
+    @media (max-width: 420px) {
+      .avignon-grid { grid-template-columns: 1fr; }
+    }
+  </style>
 </head>
 <body>
 
   <nav class="nav" role="navigation" aria-label="Navigation principale">
     <div class="container nav__inner">
-      <a href="index.html" class="nav__logo">au <strong>pestacle</strong><span> ce soir</span></a>
+      <a href="index.html" class="nav__logo" style="display:flex;align-items:center;gap:8px;">
+        <img src="assets/Favicon_apcs_white.png" alt="" width="28" height="28" style="border-radius:6px;display:block;">
+        Au <strong>Pestacle</strong><span> Ce Soir</span>
+      </a>
       <ul class="nav__links" role="list">
         <li><a href="recommandations.html">Les spectacles</a></li>
         <li class="nav__dropdown" id="dropdown-avignon">
@@ -21,7 +313,7 @@
           </button>
           <ul class="nav__dropdown-menu" role="menu">
             <li role="none"><a href="avignon-2025.html" role="menuitem">Avignon 2025</a></li>
-            <li role="none"><a href="avignon-2026.html" class="active" role="menuitem">Avignon 2026 <span class="nav__dropdown-soon">Bientôt</span></a></li>
+            <li role="none"><a href="avignon-2026.html" class="active" role="menuitem">Avignon 2026</a></li>
           </ul>
         </li>
         <li><a href="a-propos.html">À propos</a></li>
@@ -31,26 +323,2000 @@
     </div>
   </nav>
 
-  <div style="border-bottom:1px solid var(--gris-border);padding:14px 0;">
-    <div class="container" style="font-size:0.78rem;font-weight:600;color:var(--gris);">
-      <a href="index.html" style="color:var(--gris);">Accueil</a> / Avignon OFF 2026
+  <!-- Breadcrumb -->
+  <div class="breadcrumb">
+    <div class="container"><a href="index.html">Accueil</a> / Avignon OFF 2026</div>
+  </div>
+
+  <!-- Hero -->
+  <header class="avignon-hero">
+    <div class="container">
+      <h1 class="avignon-hero__title">Avignon<br><em>OFF 2026→</em></h1>
+      <p class="avignon-hero__sub">La sélection personnelle d'Hélène — les spectacles repérés dans le programme du OFF 2026, classés H, HH ou HHH selon son coup de cœur.</p>
+      <div class="avignon-hero__meta">
+        <div class="avignon-hero__meta-item" style="margin-right:1px;"><span>119</span>spectacles</div>
+        <div class="avignon-hero__meta-item" style="margin-right:1px;"><span>Juil.</span>2026</div>
+        <div class="avignon-hero__meta-item"><span>OFF</span>Festival</div>
+      </div>
+    </div>
+  </header>
+
+  <!-- Légende -->
+  <div class="legende">
+    <div class="container">
+      <div class="legende__inner">
+        <span class="legende__label">Note d'Hélène</span>
+        <div class="legende__item"><span class="legende__h">HHH</span> Coup de cœur absolu</div>
+        <div class="legende__item"><span class="legende__h">HH</span> Très recommandé</div>
+        <div class="legende__item"><span class="legende__h">H</span> Recommandé</div>
+      </div>
     </div>
   </div>
 
-  <main style="min-height:60vh;display:flex;align-items:center;">
+  <main id="main-content">
     <div class="container">
-      <div style="max-width:560px;padding:clamp(48px,8vw,96px) 0;">
-        <p style="font-size:0.75rem;font-weight:700;text-transform:uppercase;letter-spacing:0.14em;color:var(--accent);margin-bottom:20px;">Festival OFF · Juillet 2026</p>
-        <h1 style="font-family:var(--font-titre);font-size:clamp(2.8rem,7vw,5.5rem);font-weight:700;line-height:0.95;color:var(--noir);margin-bottom:24px;">
-          Avignon<br><span style="color:var(--accent);">2026→</span>
-        </h1>
-        <p style="font-size:1.05rem;color:var(--gris);line-height:1.7;margin-bottom:36px;">
-          La sélection d'Hélène pour Avignon OFF 2026 sera disponible en juin 2026.
-        </p>
-        <div style="display:flex;gap:12px;flex-wrap:wrap;">
-          <a href="avignon-2025.html" class="btn btn--outline">Voir Avignon 2025</a>
-        </div>
+
+      <div class="avignon-intro reveal">
+        Ces spectacles sont ceux qu'Hélène a repérés dans le programme du Festival OFF d'Avignon 2026. Les notes (H, HH, HHH), les horaires et les recommandations viennent de ses annotations personnelles ; certaines informations restent à confirmer d'ici le festival.
       </div>
+
+      <!-- ══ HHH ══ -->
+      <section class="avignon-section" aria-labelledby="section-hhh">
+        <div class="avignon-section__header">
+          <span class="avignon-section__h">HHH</span>
+          <h2 class="avignon-section__title" id="section-hhh">Coup de cœur absolu</h2>
+          <span class="avignon-section__count">18 spectacles</span>
+        </div>
+        <div class="avignon-grid">
+
+          <article class="avi-card reveal">
+            <div class="avi-card__topbar">
+              <span class="avi-card__h">HHH</span>
+              <div class="avi-card__right"><span class="avi-card__genre avi-card__genre--theatre">Seul en scène</span></div>
+            </div>
+            <div class="avi-card__photo"><img src="assets/spectacles/avignon-2026/a-lombre-du-reverbere.jpg" alt="À l'ombre du réverbère" loading="lazy"></div>
+            <div class="avi-card__body">
+              <h3 class="avi-card__title">À l'ombre du réverbère</h3>
+              <p class="avi-card__company">Hélène n'a pas encore réussi à le voir</p>
+              <p class="avi-card__venue">📍 Théâtre des Carmes · 10h · 1h20</p>
+            </div>
+            <div class="avi-card__footer">
+              <a href="https://www.festivaloffavignon.com/spectacles/8615-a-l-ombre-du-reverbere" class="avi-card__link" target="_blank" rel="noopener">Voir →</a>
+            </div>
+          </article>
+
+          <article class="avi-card reveal">
+            <div class="avi-card__topbar">
+              <span class="avi-card__h">HHH</span>
+              <div class="avi-card__right"><span class="avi-card__genre avi-card__genre--vivant">Humour</span></div>
+            </div>
+            <div class="avi-card__photo"><img src="assets/spectacles/avignon-2026/michael-hirsch.jpg" alt="Michaël Hirsch — Y'a de la joie" loading="lazy"></div>
+            <div class="avi-card__body">
+              <h3 class="avi-card__title">Michaël Hirsch — Y'a de la joie</h3>
+              
+              <p class="avi-card__venue">📍 Théâtre des Lucioles · 10h · 1h20</p>
+            </div>
+            <div class="avi-card__footer">
+              <a href="https://www.theatredeslucioles.com/michaelhirsch" class="avi-card__link" target="_blank" rel="noopener">Voir →</a>
+            </div>
+          </article>
+
+          <article class="avi-card reveal">
+            <div class="avi-card__topbar">
+              <span class="avi-card__h">HHH</span>
+              <div class="avi-card__right"><span class="avi-card__genre avi-card__genre--theatre">Théâtre</span></div>
+            </div>
+            <div class="avi-card__photo"><img src="assets/spectacles/avignon-2026/panique.jpg" alt="Panique" loading="lazy"></div>
+            <div class="avi-card__body">
+              <h3 class="avi-card__title">Panique</h3>
+              <p class="avi-card__company">Pour décortiquer la mécanique de la rumeur, une fable au cœur d'une communauté de rats où l'inspecteur enquête sur une mort mystérieuse. Une passionnante leçon de vie !</p>
+              <p class="avi-card__venue">📍 Théâtre des Halles · Sud-Est · 11h · 45 min</p>
+            </div>
+            <div class="avi-card__footer">
+              <a href="https://www.festivaloffavignon.com/spectacles/9440-panique" class="avi-card__link" target="_blank" rel="noopener">Voir →</a>
+            </div>
+          </article>
+
+          <article class="avi-card reveal">
+            <div class="avi-card__topbar">
+              <span class="avi-card__h">HHH</span>
+              <div class="avi-card__right"><span class="avi-card__genre avi-card__genre--theatre">Théâtre</span></div>
+            </div>
+            <div class="avi-card__photo"><img src="assets/spectacles/avignon-2026/danemark.png" alt="Danemark" loading="lazy"></div>
+            <div class="avi-card__body">
+              <h3 class="avi-card__title">Danemark</h3>
+              
+              <p class="avi-card__venue">📍 Théâtre du 3S · 11h40 · 1h20</p>
+            </div>
+            <div class="avi-card__footer">
+              <a href="https://www.11avignon.com/programmation/danemark" class="avi-card__link" target="_blank" rel="noopener">Voir →</a>
+            </div>
+          </article>
+
+          <article class="avi-card reveal">
+            <div class="avi-card__topbar">
+              <span class="avi-card__h">HHH</span>
+              <div class="avi-card__right"><span class="avi-card__genre avi-card__genre--theatre">Théâtre</span></div>
+            </div>
+            <div class="avi-card__photo"><img src="assets/spectacles/avignon-2026/la-metamorphose.jpeg" alt="La métamorphose" loading="lazy"></div>
+            <div class="avi-card__body">
+              <h3 class="avi-card__title">La métamorphose</h3>
+              
+              <p class="avi-card__venue">📍 Théâtre Le 11 · Sud-Ouest · 11h40 · 1h</p>
+            </div>
+            <div class="avi-card__footer">
+              <a href="https://www.la-factory.org/la-metamorphose/" class="avi-card__link" target="_blank" rel="noopener">Voir →</a>
+            </div>
+          </article>
+
+          <article class="avi-card reveal">
+            <div class="avi-card__topbar">
+              <span class="avi-card__h">HHH</span>
+              <div class="avi-card__right"><span class="avi-card__genre avi-card__genre--theatre">Théâtre</span></div>
+            </div>
+            <div class="avi-card__photo"><img src="assets/spectacles/avignon-2026/letrangere.jpg" alt="L'étrangère" loading="lazy"></div>
+            <div class="avi-card__body">
+              <h3 class="avi-card__title">L'étrangère</h3>
+              <p class="avi-card__company">Librement inspiré de L'Étranger de Camus. Très bonnes critiques.</p>
+              <p class="avi-card__venue">📍 Théâtre du Balcon · 13h30 · 1h15</p>
+            </div>
+            <div class="avi-card__footer">
+              <a href="https://www.festivaloffavignon.com/spectacles/9880-l-trangre" class="avi-card__link" target="_blank" rel="noopener">Voir →</a>
+            </div>
+          </article>
+
+          <article class="avi-card reveal">
+            <div class="avi-card__topbar">
+              <span class="avi-card__h">HHH</span>
+              <div class="avi-card__right"><span class="avi-card__genre avi-card__genre--theatre">Théâtre ados</span></div>
+            </div>
+            <div class="avi-card__photo avi-card__photo--theatre"><div class="avi-card__photo-placeholder" aria-hidden="true">🎭</div></div>
+            <div class="avi-card__body">
+              <h3 class="avi-card__title">La Vie et la mort de J. Chirac, roi des Français</h3>
+              
+              <p class="avi-card__venue">📍 La Scierie · Nord-Est (ext. remparts) · 16h05 · 1h30</p>
+            </div>
+            <div class="avi-card__footer">
+              <a href="https://theatredutrainbleu.fr/festival-2026/la-vie-et-la-mort-de-j-chirac-roi-des-francais/" class="avi-card__link" target="_blank" rel="noopener">Voir →</a>
+            </div>
+          </article>
+
+          <article class="avi-card reveal">
+            <div class="avi-card__topbar">
+              <span class="avi-card__h">HHH</span>
+              <div class="avi-card__right"><span class="avi-card__badge-deja">Déjà vu</span><span class="avi-card__genre avi-card__genre--danse">Danse · Magie</span></div>
+            </div>
+            <div class="avi-card__photo avi-card__photo--theatre"><div class="avi-card__photo-placeholder" aria-hidden="true">🎭</div></div>
+            <div class="avi-card__body">
+              <h3 class="avi-card__title">Zai Zai Zai Zai</h3>
+              <p class="avi-card__company">Succès Paris et succès Off 2025.</p><p class="avi-card__company" style="font-style:normal;color:var(--accent);font-weight:600;">Déjà vu, et elle y retourne !</p>
+              <p class="avi-card__venue">📍 Les Hivernales · 17h30 · 1h10</p>
+            </div>
+            <div class="avi-card__footer">
+              <a href="https://lascierie.coop/festival-avignon-off/programmation/zaizaiOFF2026" class="avi-card__link" target="_blank" rel="noopener">Voir →</a>
+            </div>
+          </article>
+
+          <article class="avi-card reveal">
+            <div class="avi-card__topbar">
+              <span class="avi-card__h">HHH</span>
+              <div class="avi-card__right"><span class="avi-card__genre avi-card__genre--theatre">Seul en scène</span></div>
+            </div>
+            <div class="avi-card__photo"><img src="assets/spectacles/avignon-2026/le-chant-des-lions.jpg" alt="Le chant des lions" loading="lazy"></div>
+            <div class="avi-card__body">
+              <h3 class="avi-card__title">Le chant des lions</h3>
+              
+              <p class="avi-card__venue">📍 La Manufacture · 18h · 1h30</p>
+            </div>
+            <div class="avi-card__footer">
+              <a href="https://www.theatredesgemeaux.com/le-chant-des-lions" class="avi-card__link" target="_blank" rel="noopener">Voir →</a>
+            </div>
+          </article>
+
+          <article class="avi-card reveal">
+            <div class="avi-card__topbar">
+              <span class="avi-card__h">HHH</span>
+              <div class="avi-card__right"><span class="avi-card__genre avi-card__genre--theatre">Théâtre</span></div>
+            </div>
+            <div class="avi-card__photo avi-card__photo--theatre"><div class="avi-card__photo-placeholder" aria-hidden="true">🎭</div></div>
+            <div class="avi-card__body">
+              <h3 class="avi-card__title">Antigone des supermarchés</h3>
+              
+              <p class="avi-card__venue">📍 Théâtre des Gémeaux · 18h40 · 1h10</p>
+            </div>
+            <div class="avi-card__footer">
+              <a href="https://www.11avignon.com/fr/antigone-des-supermarches" class="avi-card__link" target="_blank" rel="noopener">Voir →</a>
+            </div>
+          </article>
+
+          <article class="avi-card reveal">
+            <div class="avi-card__topbar">
+              <span class="avi-card__h">HHH</span>
+              <div class="avi-card__right"><span class="avi-card__genre avi-card__genre--vivant">Humour</span></div>
+            </div>
+            <div class="avi-card__photo avi-card__photo--theatre"><div class="avi-card__photo-placeholder" aria-hidden="true">🎭</div></div>
+            <div class="avi-card__body">
+              <h3 class="avi-card__title">Noémie de Lattre — l'harmonie des genres</h3>
+              <p class="avi-card__company">Comment trouver le chemin vers une masculinité — et une féminité — heureuses et bienveillantes ?</p><p class="avi-card__company" style="font-style:normal;color:var(--accent);font-weight:600;">Peu de places restantes</p>
+              <p class="avi-card__venue">📍 Chêne Noir · 20h · 1h20</p>
+            </div>
+            <div class="avi-card__footer">
+              <a href="https://www.chenenoir.fr/event/lharmonie-des-genres-de-noemie-de-lattre/" class="avi-card__link" target="_blank" rel="noopener">Voir →</a>
+            </div>
+          </article>
+
+          <article class="avi-card reveal">
+            <div class="avi-card__topbar">
+              <span class="avi-card__h">HHH</span>
+              <div class="avi-card__right"><span class="avi-card__genre avi-card__genre--theatre">Théâtre</span></div>
+            </div>
+            <div class="avi-card__photo avi-card__photo--theatre"><div class="avi-card__photo-placeholder" aria-hidden="true">🎭</div></div>
+            <div class="avi-card__body">
+              <h3 class="avi-card__title">Conseil aux spectateurs</h3>
+              <p class="avi-card__company">Au théâtre, les spectateurs ont peu conscience de l'influence qu'ils ont sur la représentation. Et pourtant…</p>
+              <p class="avi-card__venue">📍 La Manufacture — l'extra · Sud-Est (hors remparts) · 20h10 · 1h25</p>
+            </div>
+            <div class="avi-card__footer">
+              <a href="https://www.11avignon.com/programmation/conseils-aux-spectateurs" class="avi-card__link" target="_blank" rel="noopener">Voir →</a>
+            </div>
+          </article>
+
+          <article class="avi-card reveal">
+            <div class="avi-card__topbar">
+              <span class="avi-card__h">HHH</span>
+              <div class="avi-card__right"><span class="avi-card__genre avi-card__genre--theatre">Théâtre</span></div>
+            </div>
+            <div class="avi-card__photo avi-card__photo--theatre"><div class="avi-card__photo-placeholder" aria-hidden="true">🎭</div></div>
+            <div class="avi-card__body">
+              <h3 class="avi-card__title">Barbara (par Barbara)</h3>
+              
+              <p class="avi-card__venue">📍 Théâtre Le 11 · Sud-Ouest · 20h50 · 1h15</p>
+            </div>
+            <div class="avi-card__footer">
+              <a href="https://www.11avignon.com/programmation/barbara-par-barbara" class="avi-card__link" target="_blank" rel="noopener">Voir →</a>
+            </div>
+          </article>
+
+          <article class="avi-card reveal">
+            <div class="avi-card__topbar">
+              <span class="avi-card__h">HHH</span>
+              <div class="avi-card__right"><span class="avi-card__genre avi-card__genre--danse">Danse · Musique</span></div>
+            </div>
+            <div class="avi-card__photo avi-card__photo--theatre"><div class="avi-card__photo-placeholder" aria-hidden="true">🎭</div></div>
+            <div class="avi-card__body">
+              <h3 class="avi-card__title">Bal chorégraphique</h3>
+              
+              <p class="avi-card__venue">📍 Villeneuve lez Avignon · 21h30 · 1h30</p>
+            </div>
+            <div class="avi-card__footer">
+              <a href="https://lascierie.coop/festival-avignon-off/programmation/balchoregraphique2026" class="avi-card__link" target="_blank" rel="noopener">Voir →</a>
+            </div>
+          </article>
+
+          <article class="avi-card reveal avi-card--sold-out">
+            <div class="avi-card__topbar">
+              <span class="avi-card__h">HHH</span>
+              <div class="avi-card__right"><span class="avi-card__badge-sold">Complet</span><span class="avi-card__genre avi-card__genre--cirque">Cirque</span></div>
+            </div>
+            <div class="avi-card__photo"><img src="assets/spectacles/avignon-2026/fin-fin-et-fin.jpg" alt="Fin, fin et fin" loading="lazy"></div>
+            <div class="avi-card__body">
+              <h3 class="avi-card__title">Fin, fin et fin</h3>
+              <p class="avi-card__company">Complet — peut-on tenter ?</p>
+              <p class="avi-card__venue">📍 Cour d'Honneur du Palais des Papes · 22h45 · 1h20</p>
+            </div>
+            <div class="avi-card__footer">
+              <a href="https://theatredesbeliers.com/spectacle/fin-fin-et-fin/" class="avi-card__link" target="_blank" rel="noopener">Voir →</a>
+            </div>
+          </article>
+
+          <article class="avi-card reveal avi-card--sold-out">
+            <div class="avi-card__topbar">
+              <span class="avi-card__h">HHH</span>
+              <div class="avi-card__right"><span class="avi-card__badge-sold">Complet</span><span class="avi-card__genre avi-card__genre--vivant">Comédie</span></div>
+            </div>
+            <div class="avi-card__photo"><img src="assets/spectacles/avignon-2026/le-dernier-cedre-du-liban.jpg" alt="Le dernier cèdre du Liban" loading="lazy"></div>
+            <div class="avi-card__body">
+              <h3 class="avi-card__title">Le dernier cèdre du Liban</h3>
+              <p class="avi-card__company">Complet — peut-on tenter ?</p>
+              <p class="avi-card__venue">📍 Théâtre des Béliers · 10h et 15h15 · 1h25</p>
+            </div>
+            <div class="avi-card__footer">
+              <a href="https://theatredesbeliers.com/spectacle/le-dernier-cedre-du-liban/" class="avi-card__link" target="_blank" rel="noopener">Voir →</a>
+            </div>
+          </article>
+
+          <article class="avi-card reveal avi-card--sold-out">
+            <div class="avi-card__topbar">
+              <span class="avi-card__h">HHH</span>
+              <div class="avi-card__right"><span class="avi-card__badge-sold">Complet</span><span class="avi-card__genre avi-card__genre--theatre">Expérience immersive</span></div>
+            </div>
+            <div class="avi-card__photo"><img src="assets/spectacles/avignon-2026/la-zone-indigo.jpg" alt="La zone indigo" loading="lazy"></div>
+            <div class="avi-card__body">
+              <h3 class="avi-card__title">La zone indigo</h3>
+              <p class="avi-card__company">Complet — plusieurs horaires</p>
+              <p class="avi-card__venue">📍 Théâtre des Béliers · 17h10 et 20h50 · 1h30</p>
+            </div>
+            <div class="avi-card__footer">
+              <a href="https://theatredesbeliers.com/spectacle/la-zone-indigo/" class="avi-card__link" target="_blank" rel="noopener">Voir →</a>
+            </div>
+          </article>
+
+          <article class="avi-card reveal avi-card--sold-out">
+            <div class="avi-card__topbar">
+              <span class="avi-card__h">HHH</span>
+              <div class="avi-card__right"><span class="avi-card__badge-sold">Complet</span><span class="avi-card__genre avi-card__genre--vivant">Humour</span></div>
+            </div>
+            <div class="avi-card__photo avi-card__photo--theatre"><div class="avi-card__photo-placeholder" aria-hidden="true">🎭</div></div>
+            <div class="avi-card__body">
+              <h3 class="avi-card__title">Alex Vizorek</h3>
+              <p class="avi-card__company">Déjà complet</p>
+              <p class="avi-card__venue">📍 Train Bleu — Jardins du Carmel (4 au 19 juillet) · 18:30 ou 20:30 · 1h10</p>
+            </div>
+            <div class="avi-card__footer">
+              <span style="font-size:0.7rem;color:var(--gris);">Lien à venir</span>
+            </div>
+          </article>
+
+        </div>
+      </section>
+
+      <!-- ══ HH ══ -->
+      <section class="avignon-section" aria-labelledby="section-hh">
+        <div class="avignon-section__header">
+          <span class="avignon-section__h">HH</span>
+          <h2 class="avignon-section__title" id="section-hh">Très recommandé</h2>
+          <span class="avignon-section__count">33 spectacles</span>
+        </div>
+        <div class="avignon-grid">
+
+          <article class="avi-card reveal">
+            <div class="avi-card__topbar">
+              <span class="avi-card__h">HH</span>
+              <div class="avi-card__right"><span class="avi-card__genre avi-card__genre--theatre">Théâtre</span></div>
+            </div>
+            <div class="avi-card__photo avi-card__photo--theatre"><div class="avi-card__photo-placeholder" aria-hidden="true">🎭</div></div>
+            <div class="avi-card__body">
+              <h3 class="avi-card__title">Requins velours</h3>
+              
+              <p class="avi-card__venue">📍 Théâtre du Train Bleu — espace MAIF (bus) · Est · 10h · 2h10</p>
+            </div>
+            <div class="avi-card__footer">
+              <a href="https://theatredutrainbleu.fr/festival2026/requin-velours/" class="avi-card__link" target="_blank" rel="noopener">Voir →</a>
+            </div>
+          </article>
+
+          <article class="avi-card reveal">
+            <div class="avi-card__topbar">
+              <span class="avi-card__h">HH</span>
+              <div class="avi-card__right"><span class="avi-card__genre avi-card__genre--theatre">Théâtre</span></div>
+            </div>
+            <div class="avi-card__photo avi-card__photo--theatre"><div class="avi-card__photo-placeholder" aria-hidden="true">🎭</div></div>
+            <div class="avi-card__body">
+              <h3 class="avi-card__title">Sarkhollande (comédie identitaire)</h3>
+              
+              <p class="avi-card__venue">📍 Théâtre du Train Bleu — Le Parvis · Est · 10h · 1h30</p>
+            </div>
+            <div class="avi-card__footer">
+              <a href="https://theatredutrainbleu.fr/festival2026/sarkhollande-comedie-identitaire/" class="avi-card__link" target="_blank" rel="noopener">Voir →</a>
+            </div>
+          </article>
+
+          <article class="avi-card reveal">
+            <div class="avi-card__topbar">
+              <span class="avi-card__h">HH</span>
+              <div class="avi-card__right"><span class="avi-card__genre avi-card__genre--theatre">Théâtre</span></div>
+            </div>
+            <div class="avi-card__photo avi-card__photo--theatre"><div class="avi-card__photo-placeholder" aria-hidden="true">🎭</div></div>
+            <div class="avi-card__body">
+              <h3 class="avi-card__title">Forcenés</h3>
+              <p class="avi-card__company">Histoire vraie d'une Résistante qui a demandé grâce à son bourreau. Succès Off 2025, excellentes critiques.</p>
+              <p class="avi-card__venue">📍 Théâtre Le 11 · Sud-Ouest · 10h15 · 1h15</p>
+            </div>
+            <div class="avi-card__footer">
+              <a href="https://www.11avignon.com/programmation/forcenes" class="avi-card__link" target="_blank" rel="noopener">Voir →</a>
+            </div>
+          </article>
+
+          <article class="avi-card reveal">
+            <div class="avi-card__topbar">
+              <span class="avi-card__h">HH</span>
+              <div class="avi-card__right"><span class="avi-card__genre avi-card__genre--theatre">Jeune public</span></div>
+            </div>
+            <div class="avi-card__photo avi-card__photo--theatre"><div class="avi-card__photo-placeholder" aria-hidden="true">🎭</div></div>
+            <div class="avi-card__body">
+              <h3 class="avi-card__title">Chifumi</h3>
+              
+              <p class="avi-card__venue">📍 Présence Pasteur · Est · 10h20 · 30 min</p>
+            </div>
+            <div class="avi-card__footer">
+              <a href="https://presence-pasteur.fr/chifumi-2026/" class="avi-card__link" target="_blank" rel="noopener">Voir →</a>
+            </div>
+          </article>
+
+          <article class="avi-card reveal">
+            <div class="avi-card__topbar">
+              <span class="avi-card__h">HH</span>
+              <div class="avi-card__right"><span class="avi-card__genre avi-card__genre--theatre">Théâtre</span></div>
+            </div>
+            <div class="avi-card__photo"><img src="assets/spectacles/avignon-2026/une-vie-de-pianiste.jpg" alt="Une vie de pianiste" loading="lazy"></div>
+            <div class="avi-card__body">
+              <h3 class="avi-card__title">Une vie de pianiste</h3>
+              <p class="avi-card__company">Il y a 30 ans, le mur de Berlin s'écroule. Pianiste virtuose, Paul s'enfuit de sa Roumanie natale et part jouer son destin à l'Ouest.</p>
+              <p class="avi-card__venue">📍 La Factory — Salle Tomasi · 11h45 · 1h15</p>
+            </div>
+            <div class="avi-card__footer">
+              <a href="https://www.theatredesbrunes.fr/uneviedepianisteavignon2023" class="avi-card__link" target="_blank" rel="noopener">Voir →</a>
+            </div>
+          </article>
+
+          <article class="avi-card reveal">
+            <div class="avi-card__topbar">
+              <span class="avi-card__h">HH</span>
+              <div class="avi-card__right"><span class="avi-card__genre avi-card__genre--vivant">Musique</span></div>
+            </div>
+            <div class="avi-card__photo"><img src="assets/spectacles/avignon-2026/leducation-de-rita.jpg" alt="L'éducation de Rita" loading="lazy"></div>
+            <div class="avi-card__body">
+              <h3 class="avi-card__title">L'éducation de Rita</h3>
+              <p class="avi-card__company">Succès 2025.</p>
+              <p class="avi-card__venue">📍 Théâtre des Brunes · 11h45 · 1h30</p>
+            </div>
+            <div class="avi-card__footer">
+              <a href="https://www.festivaloffavignon.com/spectacles/8404-l-ducation-de-rita" class="avi-card__link" target="_blank" rel="noopener">Voir →</a>
+            </div>
+          </article>
+
+          <article class="avi-card reveal">
+            <div class="avi-card__topbar">
+              <span class="avi-card__h">HH</span>
+              <div class="avi-card__right"><span class="avi-card__genre avi-card__genre--theatre">Théâtre</span></div>
+            </div>
+            <div class="avi-card__photo avi-card__photo--theatre"><div class="avi-card__photo-placeholder" aria-hidden="true">🎭</div></div>
+            <div class="avi-card__body">
+              <h3 class="avi-card__title">Le voyage d'Alice en Suisse</h3>
+              
+              <p class="avi-card__venue">📍 Théâtre Le 11 · Sud-Ouest · 12h05 · 1h35</p>
+            </div>
+            <div class="avi-card__footer">
+              <a href="https://www.theatredeslucioles.com/le-voyage-dalice-en-suisse" class="avi-card__link" target="_blank" rel="noopener">Voir →</a>
+            </div>
+          </article>
+
+          <article class="avi-card reveal">
+            <div class="avi-card__topbar">
+              <span class="avi-card__h">HH</span>
+              <div class="avi-card__right"><span class="avi-card__genre avi-card__genre--theatre">Théâtre</span></div>
+            </div>
+            <div class="avi-card__photo avi-card__photo--theatre"><div class="avi-card__photo-placeholder" aria-hidden="true">🎭</div></div>
+            <div class="avi-card__body">
+              <h3 class="avi-card__title">Nos assemblées</h3>
+              <p class="avi-card__company">À la rencontre d'initiatives citoyennes, politiques et associatives, de Châteauroux à Sevran, de Grenoble à Peyrat-le-Château.</p>
+              <p class="avi-card__venue">📍 Théâtre du Train Bleu · Est · 12h35 · 1h20</p>
+            </div>
+            <div class="avi-card__footer">
+              <a href="https://theatredutrainbleu.fr/festival-2026/nos-assemblees" class="avi-card__link" target="_blank" rel="noopener">Voir →</a>
+            </div>
+          </article>
+
+          <article class="avi-card reveal">
+            <div class="avi-card__topbar">
+              <span class="avi-card__h">HH</span>
+              <div class="avi-card__right"><span class="avi-card__genre avi-card__genre--theatre">Théâtre</span></div>
+            </div>
+            <div class="avi-card__photo avi-card__photo--theatre"><div class="avi-card__photo-placeholder" aria-hidden="true">🎭</div></div>
+            <div class="avi-card__body">
+              <h3 class="avi-card__title">5 secondes</h3>
+              
+              <p class="avi-card__venue">📍 La Manufacture — hors les murs (rdv Centre Sud) · Est (bus) · 12h40 · 1h05</p>
+            </div>
+            <div class="avi-card__footer">
+              <span style="font-size:0.7rem;color:var(--gris);">Lien à venir</span>
+            </div>
+          </article>
+
+          <article class="avi-card reveal">
+            <div class="avi-card__topbar">
+              <span class="avi-card__h">HH</span>
+              <div class="avi-card__right"><span class="avi-card__genre avi-card__genre--theatre">Théâtre</span></div>
+            </div>
+            <div class="avi-card__photo avi-card__photo--theatre"><div class="avi-card__photo-placeholder" aria-hidden="true">🎭</div></div>
+            <div class="avi-card__body">
+              <h3 class="avi-card__title">Si une histoire frappe à ta porte</h3>
+              
+              <p class="avi-card__venue">📍 Théâtre Luna — Coin de la Lune · Est · 13h · 1h10</p>
+            </div>
+            <div class="avi-card__footer">
+              <a href="https://www.luna-theatres.fr/spectacle/si-une-histoire-frappe-a-ta-porte-811" class="avi-card__link" target="_blank" rel="noopener">Voir →</a>
+            </div>
+          </article>
+
+          <article class="avi-card reveal">
+            <div class="avi-card__topbar">
+              <span class="avi-card__h">HH</span>
+              <div class="avi-card__right"><span class="avi-card__genre avi-card__genre--theatre">Théâtre</span></div>
+            </div>
+            <div class="avi-card__photo avi-card__photo--theatre"><div class="avi-card__photo-placeholder" aria-hidden="true">🎭</div></div>
+            <div class="avi-card__body">
+              <h3 class="avi-card__title">Un Picasso</h3>
+              <p class="avi-card__company">Jeffrey Hatcher (The Mentalist, Columbo) signe un thriller théâtral : un face-à-face intense avec Pablo Picasso.</p>
+              <p class="avi-card__venue">📍 Théâtre du 3S · 13h15 · 1h20</p>
+            </div>
+            <div class="avi-card__footer">
+              <span style="font-size:0.7rem;color:var(--gris);">Lien à venir</span>
+            </div>
+          </article>
+
+          <article class="avi-card reveal">
+            <div class="avi-card__topbar">
+              <span class="avi-card__h">HH</span>
+              <div class="avi-card__right"><span class="avi-card__genre avi-card__genre--vivant">Mentalisme</span></div>
+            </div>
+            <div class="avi-card__photo"><img src="assets/spectacles/avignon-2026/lecture-de-pensees.png" alt="Lecture de pensées — entre illusion et réalité" loading="lazy"></div>
+            <div class="avi-card__body">
+              <h3 class="avi-card__title">Lecture de pensées — entre illusion et réalité</h3>
+              <p class="avi-card__company">Mentalisme moderne, interactif et ludique.</p>
+              <p class="avi-card__venue">📍 Théâtre de l'Ange · Sud-Est · 13h30 · 55 min</p>
+            </div>
+            <div class="avi-card__footer">
+              <a href="https://www.festivaloffavignon.com/spectacles/7953-lecture-de-penses-entre-illusion-et-ralit" class="avi-card__link" target="_blank" rel="noopener">Voir →</a>
+            </div>
+          </article>
+
+          <article class="avi-card reveal">
+            <div class="avi-card__topbar">
+              <span class="avi-card__h">HH</span>
+              <div class="avi-card__right"><span class="avi-card__genre avi-card__genre--theatre">Théâtre</span></div>
+            </div>
+            <div class="avi-card__photo"><img src="assets/spectacles/avignon-2026/alif.jpg" alt="Alif" loading="lazy"></div>
+            <div class="avi-card__body">
+              <h3 class="avi-card__title">Alif</h3>
+              
+              <p class="avi-card__venue">📍 Théâtre Le 11 · Sud-Ouest · 14h · 1h20</p>
+            </div>
+            <div class="avi-card__footer">
+              <a href="https://www.11avignon.com/programmation/alif" class="avi-card__link" target="_blank" rel="noopener">Voir →</a>
+            </div>
+          </article>
+
+          <article class="avi-card reveal">
+            <div class="avi-card__topbar">
+              <span class="avi-card__h">HH</span>
+              <div class="avi-card__right"><span class="avi-card__genre avi-card__genre--theatre">Théâtre</span></div>
+            </div>
+            <div class="avi-card__photo"><img src="assets/spectacles/avignon-2026/mon-pere-avait-3-vaches.jpg" alt="Mon père avait 3 vaches" loading="lazy"></div>
+            <div class="avi-card__body">
+              <h3 class="avi-card__title">Mon père avait 3 vaches</h3>
+              
+              <p class="avi-card__venue">📍 Théâtre des Béliers · 14h15 · 1h15</p>
+            </div>
+            <div class="avi-card__footer">
+              <a href="https://theatredesbeliers.com/spectacle/mon-pere-avait-3-vaches/" class="avi-card__link" target="_blank" rel="noopener">Voir →</a>
+            </div>
+          </article>
+
+          <article class="avi-card reveal">
+            <div class="avi-card__topbar">
+              <span class="avi-card__h">HH</span>
+              <div class="avi-card__right"><span class="avi-card__genre avi-card__genre--theatre">Théâtre</span></div>
+            </div>
+            <div class="avi-card__photo"><img src="assets/spectacles/avignon-2026/mon-cote-wertheimer.png" alt="Mon côté Wertheimer (les mères poules ne font pas des mouettes)" loading="lazy"></div>
+            <div class="avi-card__body">
+              <h3 class="avi-card__title">Mon côté Wertheimer (les mères poules ne font pas des mouettes)</h3>
+              <p class="avi-card__company">Chloé Oliveres explore son matrimoine et son héritage psychique : l'histoire de la psychiatrie et la résilience des femmes.</p>
+              <p class="avi-card__venue">📍 Train Bleu — Salle 1 · 14h20 · 1h10</p>
+            </div>
+            <div class="avi-card__footer">
+              <a href="https://www.festivaloffavignon.com/spectacles/8497-mon-cote-wertheimer-les-meres-poules-ne-font-pas-des-mouettes" class="avi-card__link" target="_blank" rel="noopener">Voir →</a>
+            </div>
+          </article>
+
+          <article class="avi-card reveal">
+            <div class="avi-card__topbar">
+              <span class="avi-card__h">HH</span>
+              <div class="avi-card__right"><span class="avi-card__genre avi-card__genre--theatre">Théâtre</span></div>
+            </div>
+            <div class="avi-card__photo"><img src="assets/spectacles/avignon-2026/je-suis.jpg" alt="Je suis" loading="lazy"></div>
+            <div class="avi-card__body">
+              <h3 class="avi-card__title">Je suis</h3>
+              <p class="avi-card__company">Un homme persuadé d'être Dieu.</p>
+              <p class="avi-card__venue">📍 Présence Pasteur · 14h50 · 1h</p>
+            </div>
+            <div class="avi-card__footer">
+              <a href="https://www.theatre-du-rempart.com/je-suis/" class="avi-card__link" target="_blank" rel="noopener">Voir →</a>
+            </div>
+          </article>
+
+          <article class="avi-card reveal">
+            <div class="avi-card__topbar">
+              <span class="avi-card__h">HH</span>
+              <div class="avi-card__right"><span class="avi-card__genre avi-card__genre--cirque">Danse · Cirque</span></div>
+            </div>
+            <div class="avi-card__photo avi-card__photo--theatre"><div class="avi-card__photo-placeholder" aria-hidden="true">🎭</div></div>
+            <div class="avi-card__body">
+              <h3 class="avi-card__title">Ligne ouverte</h3>
+              <p class="avi-card__company">Cette nuit encore, ils seront des dizaines à appeler : ouvrier solitaire, adolescente curieuse, prisonnier en permission, religieux en doute…</p>
+              <p class="avi-card__venue">📍 La Scierie · Nord-Est (ext. remparts) · 15h55 · 1h15</p>
+            </div>
+            <div class="avi-card__footer">
+              <a href="https://www.11avignon.com/programmation/ligne-ouverte" class="avi-card__link" target="_blank" rel="noopener">Voir →</a>
+            </div>
+          </article>
+
+          <article class="avi-card reveal">
+            <div class="avi-card__topbar">
+              <span class="avi-card__h">HH</span>
+              <div class="avi-card__right"><span class="avi-card__genre avi-card__genre--theatre">Seul en scène</span></div>
+            </div>
+            <div class="avi-card__photo"><img src="assets/spectacles/avignon-2026/sillages.jpg" alt="Sillages" loading="lazy"></div>
+            <div class="avi-card__body">
+              <h3 class="avi-card__title">Sillages</h3>
+              
+              <p class="avi-card__venue">📍 Chêne Noir · Nord (6 et 13 juillet ?) · 16h50 · 35 min</p>
+            </div>
+            <div class="avi-card__footer">
+              <a href="https://theatredutrainbleu.fr/festival-2026/sillages" class="avi-card__link" target="_blank" rel="noopener">Voir →</a>
+            </div>
+          </article>
+
+          <article class="avi-card reveal">
+            <div class="avi-card__topbar">
+              <span class="avi-card__h">HH</span>
+              <div class="avi-card__right"><span class="avi-card__genre avi-card__genre--danse">Danse</span></div>
+            </div>
+            <div class="avi-card__photo"><img src="assets/spectacles/avignon-2026/laugmentation.png" alt="L'Augmentation" loading="lazy"></div>
+            <div class="avi-card__body">
+              <h3 class="avi-card__title">L'Augmentation</h3>
+              <p class="avi-card__company">Comment demander une augmentation à son chef de service ? D'après Georges Perec.</p>
+              <p class="avi-card__venue">📍 Théâtre de l'Atelier · Est · 17h · 1h</p>
+            </div>
+            <div class="avi-card__footer">
+              <a href="https://www.festivaloffavignon.com/spectacles/8699-l-augmentation" class="avi-card__link" target="_blank" rel="noopener">Voir →</a>
+            </div>
+          </article>
+
+          <article class="avi-card reveal">
+            <div class="avi-card__topbar">
+              <span class="avi-card__h">HH</span>
+              <div class="avi-card__right"><span class="avi-card__genre avi-card__genre--theatre">Théâtre</span></div>
+            </div>
+            <div class="avi-card__photo avi-card__photo--theatre"><div class="avi-card__photo-placeholder" aria-hidden="true">🎭</div></div>
+            <div class="avi-card__body">
+              <h3 class="avi-card__title">Choisis la vie et tu vivras</h3>
+              
+              <p class="avi-card__venue">📍 La Factory — Roseau Teinturiers · 17h40 · 1h15</p>
+            </div>
+            <div class="avi-card__footer">
+              <span style="font-size:0.7rem;color:var(--gris);">Lien à venir</span>
+            </div>
+          </article>
+
+          <article class="avi-card reveal">
+            <div class="avi-card__topbar">
+              <span class="avi-card__h">HH</span>
+              <div class="avi-card__right"><span class="avi-card__genre avi-card__genre--theatre">Théâtre</span></div>
+            </div>
+            <div class="avi-card__photo"><img src="assets/spectacles/avignon-2026/the-abortion-ship.jpg" alt="The Abortion Ship" loading="lazy"></div>
+            <div class="avi-card__body">
+              <h3 class="avi-card__title">The Abortion Ship</h3>
+              <p class="avi-card__company">Sur le ton du documentaire, le quotidien d'une gynécologue à l'hôpital : patientes, collègues, colère face au recul du droit.</p>
+              <p class="avi-card__venue">📍 La Manufacture — Musée Agladon · Sud · 19h05 · 55 min</p>
+            </div>
+            <div class="avi-card__footer">
+              <a href="https://theatredutrainbleu.fr/festival-2026/the-aborrrtion-ship/" class="avi-card__link" target="_blank" rel="noopener">Voir →</a>
+            </div>
+          </article>
+
+          <article class="avi-card reveal">
+            <div class="avi-card__topbar">
+              <span class="avi-card__h">HH</span>
+              <div class="avi-card__right"><span class="avi-card__genre avi-card__genre--theatre">Seul en scène</span></div>
+            </div>
+            <div class="avi-card__photo avi-card__photo--theatre"><div class="avi-card__photo-placeholder" aria-hidden="true">🎭</div></div>
+            <div class="avi-card__body">
+              <h3 class="avi-card__title">Ce qui reste d'un amour</h3>
+              
+              <p class="avi-card__venue">📍 Train Bleu — Salle 2 · 19h15 · 1h25</p>
+            </div>
+            <div class="avi-card__footer">
+              <a href="https://www.theatredeslucioles.com/ce-qui-reste-d-un-amour" class="avi-card__link" target="_blank" rel="noopener">Voir →</a>
+            </div>
+          </article>
+
+          <article class="avi-card reveal">
+            <div class="avi-card__topbar">
+              <span class="avi-card__h">HH</span>
+              <div class="avi-card__right"><span class="avi-card__genre avi-card__genre--theatre">Théâtre</span></div>
+            </div>
+            <div class="avi-card__photo"><img src="assets/spectacles/avignon-2026/tonight.jpg" alt="Tonight" loading="lazy"></div>
+            <div class="avi-card__body">
+              <h3 class="avi-card__title">Tonight</h3>
+              <p class="avi-card__company">Ça a l'air bien barré</p>
+              <p class="avi-card__venue">📍 Théâtre des Lucioles · 20h · 1h05</p>
+            </div>
+            <div class="avi-card__footer">
+              <a href="https://lamanufacture.org/programmation/tonight/" class="avi-card__link" target="_blank" rel="noopener">Voir →</a>
+            </div>
+          </article>
+
+          <article class="avi-card reveal">
+            <div class="avi-card__topbar">
+              <span class="avi-card__h">HH</span>
+              <div class="avi-card__right"><span class="avi-card__genre avi-card__genre--theatre">Seul en scène</span></div>
+            </div>
+            <div class="avi-card__photo"><img src="assets/spectacles/avignon-2026/les-chanteurs-doiseaux.png" alt="Les chanteurs d'oiseaux — Sur les ailes de Darwin" loading="lazy"></div>
+            <div class="avi-card__body">
+              <h3 class="avi-card__title">Les chanteurs d'oiseaux — Sur les ailes de Darwin</h3>
+              
+              <p class="avi-card__venue">📍 Chêne Noir · 20h15 · 1h</p>
+            </div>
+            <div class="avi-card__footer">
+              <a href="https://presence-pasteur.fr/leschanteursdoiseaux/" class="avi-card__link" target="_blank" rel="noopener">Voir →</a>
+            </div>
+          </article>
+
+          <article class="avi-card reveal">
+            <div class="avi-card__topbar">
+              <span class="avi-card__h">HH</span>
+              <div class="avi-card__right"><span class="avi-card__genre avi-card__genre--vivant">Musique · Chant</span></div>
+            </div>
+            <div class="avi-card__photo avi-card__photo--theatre"><div class="avi-card__photo-placeholder" aria-hidden="true">🎭</div></div>
+            <div class="avi-card__body">
+              <h3 class="avi-card__title">Climax</h3>
+              <p class="avi-card__company">À l'intersection du théâtre, de la danse, du chant et du mime : l'humour comme arme de réflexion massive.</p>
+              <p class="avi-card__venue">📍 Présence Pasteur · 20h50 · 1h10</p>
+            </div>
+            <div class="avi-card__footer">
+              <span style="font-size:0.7rem;color:var(--gris);">Lien à venir</span>
+            </div>
+          </article>
+
+          <article class="avi-card reveal">
+            <div class="avi-card__topbar">
+              <span class="avi-card__h">HH</span>
+              <div class="avi-card__right"><span class="avi-card__genre avi-card__genre--theatre">Théâtre</span></div>
+            </div>
+            <div class="avi-card__photo"><img src="assets/spectacles/avignon-2026/intra-muros.jpg" alt="Intra muros" loading="lazy"></div>
+            <div class="avi-card__body">
+              <h3 class="avi-card__title">Intra muros</h3>
+              
+              <p class="avi-card__venue">📍 Théâtre du Girasole · 21h15 · 1h40</p>
+            </div>
+            <div class="avi-card__footer">
+              <a href="https://theatredugirasole.fr/2026-7/" class="avi-card__link" target="_blank" rel="noopener">Voir →</a>
+            </div>
+          </article>
+
+          <article class="avi-card reveal">
+            <div class="avi-card__topbar">
+              <span class="avi-card__h">HH</span>
+              <div class="avi-card__right"><span class="avi-card__genre avi-card__genre--theatre">Théâtre</span></div>
+            </div>
+            <div class="avi-card__photo avi-card__photo--theatre"><div class="avi-card__photo-placeholder" aria-hidden="true">🎭</div></div>
+            <div class="avi-card__body">
+              <h3 class="avi-card__title">Écorces</h3>
+              <p class="avi-card__company">À la mort de son père, Alba hérite de parcelles de forêt en Haute-Loire et découvre une carte forestière aux mystérieux symboles.</p>
+              <p class="avi-card__venue">📍 La Manufacture — Château St Chamand · 22h05 · 1h45</p>
+            </div>
+            <div class="avi-card__footer">
+              <a href="https://www.11avignon.com/fr/ecorces" class="avi-card__link" target="_blank" rel="noopener">Voir →</a>
+            </div>
+          </article>
+
+          <article class="avi-card reveal">
+            <div class="avi-card__topbar">
+              <span class="avi-card__h">HH</span>
+              <div class="avi-card__right"><span class="avi-card__genre avi-card__genre--theatre">Théâtre citoyen</span></div>
+            </div>
+            <div class="avi-card__photo"><img src="assets/spectacles/avignon-2026/nos-seins.jpg" alt="Nos seins" loading="lazy"></div>
+            <div class="avi-card__body">
+              <h3 class="avi-card__title">Nos seins</h3>
+              <p class="avi-card__company">Sur le cancer du sein. TTT Télérama.</p>
+              <p class="avi-card__venue">📍 La Factory — Théâtre de l'Oulle · 11h · 1h10</p>
+            </div>
+            <div class="avi-card__footer">
+              <a href="https://www.festivaloffavignon.com/spectacles/9084-nos-seins" class="avi-card__link" target="_blank" rel="noopener">Voir →</a>
+            </div>
+          </article>
+
+          <article class="avi-card reveal">
+            <div class="avi-card__topbar">
+              <span class="avi-card__h">HH</span>
+              <div class="avi-card__right"><span class="avi-card__genre avi-card__genre--theatre">Théâtre</span></div>
+            </div>
+            <div class="avi-card__photo"><img src="assets/spectacles/avignon-2026/les-aveugles.jpg" alt="Les aveugles" loading="lazy"></div>
+            <div class="avi-card__body">
+              <h3 class="avi-card__title">Les aveugles</h3>
+              <p class="avi-card__company">À réserver très vite, jauge réduite (10h30, 11h30, 14h30, 15h30)</p>
+              <p class="avi-card__venue">📍 Théâtre Le 11 · Sud-Ouest · 50 min</p>
+            </div>
+            <div class="avi-card__footer">
+              <a href="https://lamanufacture.org/programmation/les-aveugles/" class="avi-card__link" target="_blank" rel="noopener">Voir →</a>
+            </div>
+          </article>
+
+          <article class="avi-card reveal">
+            <div class="avi-card__topbar">
+              <span class="avi-card__h">HH</span>
+              <div class="avi-card__right"><span class="avi-card__genre avi-card__genre--theatre">Théâtre (boîte de nuit)</span></div>
+            </div>
+            <div class="avi-card__photo"><img src="assets/spectacles/avignon-2026/un-soupcon.jpg" alt="Un soupçon" loading="lazy"></div>
+            <div class="avi-card__body">
+              <h3 class="avi-card__title">Un soupçon — dégustation cinématographique à l'aveugle</h3>
+              <p class="avi-card__company">Expérience culinaire singulière réunissant un petit groupe de spectateurs autour d'un acteur seul.</p>
+              <p class="avi-card__venue">📍 La Manufacture / hors les murs — la Reine Blanche · Est · 12h10 et 13h30</p>
+            </div>
+            <div class="avi-card__footer">
+              <a href="https://theatredutrainbleu.fr/festival-2026/un-soupcon-degustation-cinematographique-a-l-aveugle/" class="avi-card__link" target="_blank" rel="noopener">Voir →</a>
+            </div>
+          </article>
+
+          <article class="avi-card reveal">
+            <div class="avi-card__topbar">
+              <span class="avi-card__h">HH</span>
+              <div class="avi-card__right"><span class="avi-card__genre avi-card__genre--theatre">Théâtre immersif</span></div>
+            </div>
+            <div class="avi-card__photo"><img src="assets/spectacles/avignon-2026/au-coin-de-ma-rue.png" alt="Au coin de ma rue" loading="lazy"></div>
+            <div class="avi-card__body">
+              <h3 class="avi-card__title">Au coin de ma rue</h3>
+              <p class="avi-card__company">Un spectacle choc sur la trace insidieuse que laissent en nous nos films préférés.</p><p class="avi-card__company" style="font-style:normal;color:var(--accent);font-weight:600;">Spectacle immersif</p>
+              <p class="avi-card__venue">📍 La Manufacture — hors les murs (rdv Centre Sud) · Est (bus) · 18h, 19h, 20h · 1h</p>
+            </div>
+            <div class="avi-card__footer">
+              <a href="https://lesdoms.eu/spectacle/au-coin-de-ma-rue/" class="avi-card__link" target="_blank" rel="noopener">Voir →</a>
+            </div>
+          </article>
+
+          <article class="avi-card reveal">
+            <div class="avi-card__topbar">
+              <span class="avi-card__h">HH</span>
+              <div class="avi-card__right"><span class="avi-card__genre avi-card__genre--theatre">Théâtre immersif</span></div>
+            </div>
+            <div class="avi-card__photo"><img src="assets/spectacles/avignon-2026/par-les-bouches.jpg" alt="Par les bouches" loading="lazy"></div>
+            <div class="avi-card__body">
+              <h3 class="avi-card__title">Par les bouches</h3>
+              <p class="avi-card__company">Thriller d'anticipation qui suit un petit groupe de chercheurs. Très bonnes critiques.</p><p class="avi-card__company" style="font-style:normal;color:var(--accent);font-weight:600;">À réserver très vite, petite jauge</p>
+              <p class="avi-card__venue">📍 Théâtre des Doms — place Jean Jaurès · 18h ou 20h · 1h</p>
+            </div>
+            <div class="avi-card__footer">
+              <a href="https://lamanufacture.org/programmation/par-les-bouches/" class="avi-card__link" target="_blank" rel="noopener">Voir →</a>
+            </div>
+          </article>
+
+          <article class="avi-card reveal">
+            <div class="avi-card__topbar">
+              <span class="avi-card__h">HH</span>
+              <div class="avi-card__right"><span class="avi-card__genre avi-card__genre--vivant">Comique</span></div>
+            </div>
+            <div class="avi-card__photo"><img src="assets/spectacles/avignon-2026/heureux-soient-les-feles.jpg" alt="Heureux soient les fêlés" loading="lazy"></div>
+            <div class="avi-card__body">
+              <h3 class="avi-card__title">Heureux soient les fêlés</h3>
+              <p class="avi-card__company">Très peu de dates, vite vite</p>
+              <p class="avi-card__venue">📍 La Scala Provence · Centre Sud-Ouest</p>
+            </div>
+            <div class="avi-card__footer">
+              <a href="https://www.theatredesbrunes.fr/heureux-soient-les-fêlés" class="avi-card__link" target="_blank" rel="noopener">Voir →</a>
+            </div>
+          </article>
+
+        </div>
+      </section>
+
+      <!-- ══ H ══ -->
+      <section class="avignon-section" aria-labelledby="section-h">
+        <div class="avignon-section__header">
+          <span class="avignon-section__h">H</span>
+          <h2 class="avignon-section__title" id="section-h">Recommandé</h2>
+          <span class="avignon-section__count">21 spectacles</span>
+        </div>
+        <div class="avignon-grid">
+
+          <article class="avi-card reveal">
+            <div class="avi-card__topbar">
+              <span class="avi-card__h">H</span>
+              <div class="avi-card__right"><span class="avi-card__genre avi-card__genre--theatre">Théâtre</span></div>
+            </div>
+            <div class="avi-card__photo avi-card__photo--theatre"><div class="avi-card__photo-placeholder" aria-hidden="true">🎭</div></div>
+            <div class="avi-card__body">
+              <h3 class="avi-card__title">L'art d'être mon père</h3>
+              
+              <p class="avi-card__venue">📍 Théâtre Le 11 · Sud-Ouest · 10h15 · 1h15</p>
+            </div>
+            <div class="avi-card__footer">
+              <a href="https://www.11avignon.com/programmation/l-art-d-etre-mon-père" class="avi-card__link" target="_blank" rel="noopener">Voir →</a>
+            </div>
+          </article>
+
+          <article class="avi-card reveal">
+            <div class="avi-card__topbar">
+              <span class="avi-card__h">H</span>
+              <div class="avi-card__right"><span class="avi-card__genre avi-card__genre--theatre">Théâtre</span></div>
+            </div>
+            <div class="avi-card__photo"><img src="assets/spectacles/avignon-2026/qu-aurions-nous-fait.jpg" alt="Qu'aurions-nous fait à sa place ?" loading="lazy"></div>
+            <div class="avi-card__body">
+              <h3 class="avi-card__title">Qu'aurions-nous fait à sa place ?</h3>
+              
+              <p class="avi-card__venue">📍 Théâtre La Barretta · 10h25 · 1h15</p>
+            </div>
+            <div class="avi-card__footer">
+              <a href="https://www.festivaloffavignon.com/spectacles/9193-qu-aurions-nous-fait-sa-place" class="avi-card__link" target="_blank" rel="noopener">Voir →</a>
+            </div>
+          </article>
+
+          <article class="avi-card reveal">
+            <div class="avi-card__topbar">
+              <span class="avi-card__h">H</span>
+              <div class="avi-card__right"><span class="avi-card__genre avi-card__genre--theatre">Théâtre</span></div>
+            </div>
+            <div class="avi-card__photo"><img src="assets/spectacles/avignon-2026/la-chute.jpg" alt="La chute" loading="lazy"></div>
+            <div class="avi-card__body">
+              <h3 class="avi-card__title">La chute</h3>
+              <p class="avi-card__company">Au Mexico-City, un bar à matelots d'Amsterdam, Jean-Baptiste Clamence, se proclamant juge-pénitent, lève le voile sur sa vie. D'après Camus.</p>
+              <p class="avi-card__venue">📍 Théâtre du Train Bleu · Est · 11h10 · 1h15</p>
+            </div>
+            <div class="avi-card__footer">
+              <a href="https://www.festivaloffavignon.com/spectacles/8788-la-chute" class="avi-card__link" target="_blank" rel="noopener">Voir →</a>
+            </div>
+          </article>
+
+          <article class="avi-card reveal">
+            <div class="avi-card__topbar">
+              <span class="avi-card__h">H</span>
+              <div class="avi-card__right"><span class="avi-card__genre avi-card__genre--theatre">Théâtre</span></div>
+            </div>
+            <div class="avi-card__photo avi-card__photo--theatre"><div class="avi-card__photo-placeholder" aria-hidden="true">🎭</div></div>
+            <div class="avi-card__body">
+              <h3 class="avi-card__title">Le mardi à Monoprix</h3>
+              
+              <p class="avi-card__venue">📍 La Scala Provence · Centre Sud-Ouest · 13h45 · 1h</p>
+            </div>
+            <div class="avi-card__footer">
+              <a href="https://lascala-provence.fr/programmation/le-mardi-a-monoprix/" class="avi-card__link" target="_blank" rel="noopener">Voir →</a>
+            </div>
+          </article>
+
+          <article class="avi-card reveal">
+            <div class="avi-card__topbar">
+              <span class="avi-card__h">H</span>
+              <div class="avi-card__right"><span class="avi-card__genre avi-card__genre--theatre">Théâtre</span></div>
+            </div>
+            <div class="avi-card__photo"><img src="assets/spectacles/avignon-2026/chimere.jpg" alt="Chimère" loading="lazy"></div>
+            <div class="avi-card__body">
+              <h3 class="avi-card__title">Chimère</h3>
+              
+              <p class="avi-card__venue">📍 Théâtre des Halles · 14h · 1h30</p>
+            </div>
+            <div class="avi-card__footer">
+              <a href="https://www.theatredeshalles.com/spectacles/chimere/" class="avi-card__link" target="_blank" rel="noopener">Voir →</a>
+            </div>
+          </article>
+
+          <article class="avi-card reveal">
+            <div class="avi-card__topbar">
+              <span class="avi-card__h">H</span>
+              <div class="avi-card__right"><span class="avi-card__genre avi-card__genre--theatre">Théâtre</span></div>
+            </div>
+            <div class="avi-card__photo"><img src="assets/spectacles/avignon-2026/le-proces-dune-vie.jpg" alt="Le procès d'une vie" loading="lazy"></div>
+            <div class="avi-card__body">
+              <h3 class="avi-card__title">Le procès d'une vie</h3>
+              <p class="avi-card__company">Sur Gisèle Halimi. 4 nominations aux Molières 2026.</p>
+              <p class="avi-card__venue">📍 Théâtre des Gémeaux · 14h40 · 1h20</p>
+            </div>
+            <div class="avi-card__footer">
+              <a href="https://www.theatredesgemeaux.com/le-proces-d-une-vie" class="avi-card__link" target="_blank" rel="noopener">Voir →</a>
+            </div>
+          </article>
+
+          <article class="avi-card reveal">
+            <div class="avi-card__topbar">
+              <span class="avi-card__h">H</span>
+              <div class="avi-card__right"><span class="avi-card__genre avi-card__genre--danse">Danse</span></div>
+            </div>
+            <div class="avi-card__photo"><img src="assets/spectacles/avignon-2026/le-choeur-des-femmes.jpg" alt="Le chœur des femmes" loading="lazy"></div>
+            <div class="avi-card__body">
+              <h3 class="avi-card__title">Le chœur des femmes</h3>
+              
+              <p class="avi-card__venue">📍 Les Hivernales · 15h35 · 1h20</p>
+            </div>
+            <div class="avi-card__footer">
+              <a href="https://www.festivaloffavignon.com/spectacles/9270-le-choeur-des-femmes" class="avi-card__link" target="_blank" rel="noopener">Voir →</a>
+            </div>
+          </article>
+
+          <article class="avi-card reveal">
+            <div class="avi-card__topbar">
+              <span class="avi-card__h">H</span>
+              <div class="avi-card__right"><span class="avi-card__genre avi-card__genre--theatre">Théâtre</span></div>
+            </div>
+            <div class="avi-card__photo avi-card__photo--theatre"><div class="avi-card__photo-placeholder" aria-hidden="true">🎭</div></div>
+            <div class="avi-card__body">
+              <h3 class="avi-card__title">Une pédagogie du conflit</h3>
+              
+              <p class="avi-card__venue">📍 Artéphile (à partir du 15 juillet) · 15h50 · 1h</p>
+            </div>
+            <div class="avi-card__footer">
+              <a href="https://lascierie.coop/festival-avignon-off/programmation/unepedagogieduconflitouco" class="avi-card__link" target="_blank" rel="noopener">Voir →</a>
+            </div>
+          </article>
+
+          <article class="avi-card reveal">
+            <div class="avi-card__topbar">
+              <span class="avi-card__h">H</span>
+              <div class="avi-card__right"><span class="avi-card__genre avi-card__genre--theatre">Théâtre</span></div>
+            </div>
+            <div class="avi-card__photo avi-card__photo--theatre"><div class="avi-card__photo-placeholder" aria-hidden="true">🎭</div></div>
+            <div class="avi-card__body">
+              <h3 class="avi-card__title">Le complexe du homard</h3>
+              
+              <p class="avi-card__venue">📍 Théâtre Le 11 · Sud-Ouest · 16h · 50 min</p>
+            </div>
+            <div class="avi-card__footer">
+              <a href="https://www.lascierie.coop/festival-avignon-off/programmation/lecomplexedeshomardsof" class="avi-card__link" target="_blank" rel="noopener">Voir →</a>
+            </div>
+          </article>
+
+          <article class="avi-card reveal">
+            <div class="avi-card__topbar">
+              <span class="avi-card__h">H</span>
+              <div class="avi-card__right"><span class="avi-card__genre avi-card__genre--theatre">Théâtre</span></div>
+            </div>
+            <div class="avi-card__photo avi-card__photo--theatre"><div class="avi-card__photo-placeholder" aria-hidden="true">🎭</div></div>
+            <div class="avi-card__body">
+              <h3 class="avi-card__title">Le portrait de Dorian Gray</h3>
+              
+              <p class="avi-card__venue">📍 Théâtre du Train Bleu — Le Parvis · Est (jours impairs) · 16h10 · 1h45</p>
+            </div>
+            <div class="avi-card__footer">
+              <a href="https://www.theatredeslucioles.com/dorian-gray" class="avi-card__link" target="_blank" rel="noopener">Voir →</a>
+            </div>
+          </article>
+
+          <article class="avi-card reveal">
+            <div class="avi-card__topbar">
+              <span class="avi-card__h">H</span>
+              <div class="avi-card__right"><span class="avi-card__genre avi-card__genre--vivant">Musique</span></div>
+            </div>
+            <div class="avi-card__photo"><img src="assets/spectacles/avignon-2026/le-barbier-de-seville.png" alt="Le barbier de Séville" loading="lazy"></div>
+            <div class="avi-card__body">
+              <h3 class="avi-card__title">Le barbier de Séville</h3>
+              
+              <p class="avi-card__venue">📍 La Scierie · Nord-Est (ext. remparts) · 17h30 · 1h20</p>
+            </div>
+            <div class="avi-card__footer">
+              <a href="https://theatre-petit-louvre.fr/avignon/pl26-le-barbier-de-seville/" class="avi-card__link" target="_blank" rel="noopener">Voir →</a>
+            </div>
+          </article>
+
+          <article class="avi-card reveal">
+            <div class="avi-card__topbar">
+              <span class="avi-card__h">H</span>
+              <div class="avi-card__right"><span class="avi-card__genre avi-card__genre--theatre">Théâtre</span></div>
+            </div>
+            <div class="avi-card__photo avi-card__photo--theatre"><div class="avi-card__photo-placeholder" aria-hidden="true">🎭</div></div>
+            <div class="avi-card__body">
+              <h3 class="avi-card__title">Gauguin — Van Gogh</h3>
+              <p class="avi-card__company">L'histoire d'une cohabitation entre deux génies, jusqu'à l'oreille coupée de Van Gogh.</p>
+              <p class="avi-card__venue">📍 Gymnase du Lycée Aubanel · 18h05 · 1h15</p>
+            </div>
+            <div class="avi-card__footer">
+              <a href="https://www.theatredesgemeaux.com/gauguin-van-gogh" class="avi-card__link" target="_blank" rel="noopener">Voir →</a>
+            </div>
+          </article>
+
+          <article class="avi-card reveal">
+            <div class="avi-card__topbar">
+              <span class="avi-card__h">H</span>
+              <div class="avi-card__right"><span class="avi-card__genre avi-card__genre--theatre">Théâtre</span></div>
+            </div>
+            <div class="avi-card__photo"><img src="assets/spectacles/avignon-2026/une-minute-de-silence.jpg" alt="Une minute de silence (à peu près)" loading="lazy"></div>
+            <div class="avi-card__body">
+              <h3 class="avi-card__title">Une minute de silence (à peu près)</h3>
+              
+              <p class="avi-card__venue">📍 La Scala Provence · Centre Sud-Ouest · 19h10 · 1h15</p>
+            </div>
+            <div class="avi-card__footer">
+              <a href="https://theatredesbeliers.com/spectacle/une-minute-de-silence-a-peu-pres/" class="avi-card__link" target="_blank" rel="noopener">Voir →</a>
+            </div>
+          </article>
+
+          <article class="avi-card reveal">
+            <div class="avi-card__topbar">
+              <span class="avi-card__h">H</span>
+              <div class="avi-card__right"><span class="avi-card__genre avi-card__genre--theatre">Théâtre</span></div>
+            </div>
+            <div class="avi-card__photo"><img src="assets/spectacles/avignon-2026/moliere-et-ses-masques.jpg" alt="Molière et ses masques" loading="lazy"></div>
+            <div class="avi-card__body">
+              <h3 class="avi-card__title">Molière et ses masques</h3>
+              <p class="avi-card__company">6 interprètes, un tréteau de bois, des masques et de la musique pour raconter la vie et la mort de Molière.</p>
+              <p class="avi-card__venue">📍 Théâtre des Béliers · 19h40 · 1h25</p>
+            </div>
+            <div class="avi-card__footer">
+              <a href="https://theatredutrainbleu.fr/festival-2026/moliere-et-ses-masques/" class="avi-card__link" target="_blank" rel="noopener">Voir →</a>
+            </div>
+          </article>
+
+          <article class="avi-card reveal">
+            <div class="avi-card__topbar">
+              <span class="avi-card__h">H</span>
+              <div class="avi-card__right"><span class="avi-card__genre avi-card__genre--theatre">Théâtre</span></div>
+            </div>
+            <div class="avi-card__photo avi-card__photo--theatre"><div class="avi-card__photo-placeholder" aria-hidden="true">🎭</div></div>
+            <div class="avi-card__body">
+              <h3 class="avi-card__title">La femme qui n'aimait pas Rabbi Jacob</h3>
+              <p class="avi-card__company">18 octobre 1973 : l'équipe des Aventures de Rabbi Jacob attend la sortie du film. Le succès sera planétaire.</p><p class="avi-card__company" style="font-style:normal;color:var(--accent);font-weight:600;">Hélène adore le pitch !</p>
+              <p class="avi-card__venue">📍 Le Chien qui fume · 20h05 · 1h30</p>
+            </div>
+            <div class="avi-card__footer">
+              <a href="https://www.chienquifume.com/octobre20142/juillet-theatre-le-chien-qui-fume/20h05-la-femme-qui-n-aimait-pas-rabbi-jacob" class="avi-card__link" target="_blank" rel="noopener">Voir →</a>
+            </div>
+          </article>
+
+          <article class="avi-card reveal">
+            <div class="avi-card__topbar">
+              <span class="avi-card__h">H</span>
+              <div class="avi-card__right"><span class="avi-card__genre avi-card__genre--theatre">Seul en scène</span></div>
+            </div>
+            <div class="avi-card__photo"><img src="assets/spectacles/avignon-2026/notre-histoire-se-repete.jpg" alt="Notre histoire (se répète)" loading="lazy"></div>
+            <div class="avi-card__body">
+              <h3 class="avi-card__title">Notre histoire (se répète)</h3>
+              <p class="avi-card__company">Une Allemande et un Juif séfarade rejouent leur rencontre, mais les fracas de l'actualité font vaciller leur couple. Une farce amoureuse.</p>
+              <p class="avi-card__venue">📍 Chêne Noir · 20h25</p>
+            </div>
+            <div class="avi-card__footer">
+              <a href="https://theatredutrainbleu.fr/festival-2026/notre-histoire-se-repete/" class="avi-card__link" target="_blank" rel="noopener">Voir →</a>
+            </div>
+          </article>
+
+          <article class="avi-card reveal">
+            <div class="avi-card__topbar">
+              <span class="avi-card__h">H</span>
+              <div class="avi-card__right"><span class="avi-card__genre avi-card__genre--theatre">Théâtre</span></div>
+            </div>
+            <div class="avi-card__photo avi-card__photo--theatre"><div class="avi-card__photo-placeholder" aria-hidden="true">🎭</div></div>
+            <div class="avi-card__body">
+              <h3 class="avi-card__title">Ostinato</h3>
+              
+              <p class="avi-card__venue">📍 Le Chien qui fume · Centre Sud-Ouest · 20h30 · 1h10</p>
+            </div>
+            <div class="avi-card__footer">
+              <a href="https://www.festivalvilleneuveenscene.com/programmation/ostinato/" class="avi-card__link" target="_blank" rel="noopener">Voir →</a>
+            </div>
+          </article>
+
+          <article class="avi-card reveal">
+            <div class="avi-card__topbar">
+              <span class="avi-card__h">H</span>
+              <div class="avi-card__right"><span class="avi-card__genre avi-card__genre--theatre">Théâtre musical</span></div>
+            </div>
+            <div class="avi-card__photo"><img src="assets/spectacles/avignon-2026/paella.jpg" alt="Paella" loading="lazy"></div>
+            <div class="avi-card__body">
+              <h3 class="avi-card__title">Paella</h3>
+              
+              <p class="avi-card__venue">📍 Théâtre Le 11 · Sud-Ouest · 21h15 · 1h20</p>
+            </div>
+            <div class="avi-card__footer">
+              <a href="https://lamanufacture.org/programmation/paella/" class="avi-card__link" target="_blank" rel="noopener">Voir →</a>
+            </div>
+          </article>
+
+          <article class="avi-card reveal">
+            <div class="avi-card__topbar">
+              <span class="avi-card__h">H</span>
+              <div class="avi-card__right"><span class="avi-card__genre avi-card__genre--theatre">Théâtre</span></div>
+            </div>
+            <div class="avi-card__photo"><img src="assets/spectacles/avignon-2026/bal-magnetique.jpg" alt="Bal magnétique" loading="lazy"></div>
+            <div class="avi-card__body">
+              <h3 class="avi-card__title">Bal magnétique</h3>
+              <p class="avi-card__company">Spectacle participatif</p>
+              <p class="avi-card__venue">📍 La Scala Provence · Centre Sud-Ouest · 21h30 · 1h15</p>
+            </div>
+            <div class="avi-card__footer">
+              <a href="https://www.festivaloffavignon.com/spectacles/9253-bal-magnetique" class="avi-card__link" target="_blank" rel="noopener">Voir →</a>
+            </div>
+          </article>
+
+          <article class="avi-card reveal">
+            <div class="avi-card__topbar">
+              <span class="avi-card__h">H</span>
+              <div class="avi-card__right"><span class="avi-card__genre avi-card__genre--theatre">Théâtre</span></div>
+            </div>
+            <div class="avi-card__photo"><img src="assets/spectacles/avignon-2026/consolo.jpg" alt="Consolo" loading="lazy"></div>
+            <div class="avi-card__body">
+              <h3 class="avi-card__title">Consolo</h3>
+              
+              <p class="avi-card__venue">📍 La Manufacture · Est · 21h35 · 1h50</p>
+            </div>
+            <div class="avi-card__footer">
+              <a href="https://lamanufacture.org/programmation/consolo/" class="avi-card__link" target="_blank" rel="noopener">Voir →</a>
+            </div>
+          </article>
+
+          <article class="avi-card reveal">
+            <div class="avi-card__topbar">
+              <span class="avi-card__h">H</span>
+              <div class="avi-card__right"><span class="avi-card__genre avi-card__genre--danse">Théâtre · Danse</span></div>
+            </div>
+            <div class="avi-card__photo avi-card__photo--theatre"><div class="avi-card__photo-placeholder" aria-hidden="true">🎭</div></div>
+            <div class="avi-card__body">
+              <h3 class="avi-card__title">Les glaces</h3>
+              
+              <p class="avi-card__venue">📍 Cloître des Célestins · 22h30 · 1h45</p>
+            </div>
+            <div class="avi-card__footer">
+              <a href="https://www.11avignon.com/fr/les-glaces" class="avi-card__link" target="_blank" rel="noopener">Voir →</a>
+            </div>
+          </article>
+
+        </div>
+      </section>
+
+      <!-- ══ X ══ -->
+      <section class="avignon-section" aria-labelledby="section-x">
+        <div class="avignon-section__header">
+          <span class="avignon-section__h">·</span>
+          <h2 class="avignon-section__title" id="section-x">À explorer — non notés & « why not »</h2>
+          <span class="avignon-section__count">47 spectacles</span>
+        </div>
+        <div class="avignon-grid">
+
+          <article class="avi-card reveal">
+            <div class="avi-card__topbar">
+              <span class="avi-card__h" style="color:var(--gris);letter-spacing:0;">·</span>
+              <div class="avi-card__right"><span class="avi-card__genre avi-card__genre--theatre">Théâtre</span></div>
+            </div>
+            <div class="avi-card__photo avi-card__photo--theatre"><div class="avi-card__photo-placeholder" aria-hidden="true">🎭</div></div>
+            <div class="avi-card__body">
+              <h3 class="avi-card__title">« Cessez d'être gentil, soyez vrai ! » … dans le couple</h3>
+              <p class="avi-card__company">Hélène connaît le pitch et les comédiens</p>
+              <p class="avi-card__venue">9h55</p>
+            </div>
+            <div class="avi-card__footer">
+              <a href="https://www.theatredesgemeaux.com/cessez-detre-gentil-soyez-vrai" class="avi-card__link" target="_blank" rel="noopener">Voir →</a>
+            </div>
+          </article>
+
+          <article class="avi-card reveal">
+            <div class="avi-card__topbar">
+              <span class="avi-card__h" style="color:var(--gris);letter-spacing:0;">·</span>
+              <div class="avi-card__right"><span class="avi-card__genre avi-card__genre--theatre">Théâtre</span></div>
+            </div>
+            <div class="avi-card__photo avi-card__photo--theatre"><div class="avi-card__photo-placeholder" aria-hidden="true">🎭</div></div>
+            <div class="avi-card__body">
+              <h3 class="avi-card__title">Quand la ville se lève</h3>
+              
+              <p class="avi-card__venue">📍 Théâtre Le 11 · Sud-Ouest · 10h · 1h35</p>
+            </div>
+            <div class="avi-card__footer">
+              <a href="https://www.11avignon.com/programmation/quand-la-ville-se-leve" class="avi-card__link" target="_blank" rel="noopener">Voir →</a>
+            </div>
+          </article>
+
+          <article class="avi-card reveal">
+            <div class="avi-card__topbar">
+              <span class="avi-card__h" style="color:var(--gris);letter-spacing:0;">·</span>
+              <div class="avi-card__right"><span class="avi-card__genre avi-card__genre--danse">Danse</span></div>
+            </div>
+            <div class="avi-card__photo avi-card__photo--theatre"><div class="avi-card__photo-placeholder" aria-hidden="true">🎭</div></div>
+            <div class="avi-card__body">
+              <h3 class="avi-card__title">Growing Piece</h3>
+              
+              <p class="avi-card__venue">📍 Les Hivernales · 10h · 1h</p>
+            </div>
+            <div class="avi-card__footer">
+              <a href="https://www.hivernalesavignon.com/spectacle/growing-piece" class="avi-card__link" target="_blank" rel="noopener">Voir →</a>
+            </div>
+          </article>
+
+          <article class="avi-card reveal">
+            <div class="avi-card__topbar">
+              <span class="avi-card__h" style="color:var(--gris);letter-spacing:0;">·</span>
+              <div class="avi-card__right"><span class="avi-card__genre avi-card__genre--theatre">Théâtre</span></div>
+            </div>
+            <div class="avi-card__photo avi-card__photo--theatre"><div class="avi-card__photo-placeholder" aria-hidden="true">🎭</div></div>
+            <div class="avi-card__body">
+              <h3 class="avi-card__title">Ceux qui restent</h3>
+              <p class="avi-card__company">Why not</p>
+              <p class="avi-card__venue">📍 La Scala Provence · Centre Sud-Ouest · 10h10 · 1h25</p>
+            </div>
+            <div class="avi-card__footer">
+              <a href="https://lascalaprovence.fr/programmation/ceux-qui-restent/" class="avi-card__link" target="_blank" rel="noopener">Voir →</a>
+            </div>
+          </article>
+
+          <article class="avi-card reveal">
+            <div class="avi-card__topbar">
+              <span class="avi-card__h" style="color:var(--gris);letter-spacing:0;">·</span>
+              <div class="avi-card__right"><span class="avi-card__genre avi-card__genre--theatre">Théâtre</span></div>
+            </div>
+            <div class="avi-card__photo avi-card__photo--theatre"><div class="avi-card__photo-placeholder" aria-hidden="true">🎭</div></div>
+            <div class="avi-card__body">
+              <h3 class="avi-card__title">Les filles aux mains jaunes</h3>
+              <p class="avi-card__company">En pleine Première Guerre mondiale, quatre destins de femmes qui s'épuisent à fabriquer des obus pendant que les hommes sont au front.</p><p class="avi-card__company" style="font-style:normal;color:var(--accent);font-weight:600;">À vérifier</p>
+              <p class="avi-card__venue">📍 Au Verbe Fou · 10h45 · 1h25</p>
+            </div>
+            <div class="avi-card__footer">
+              <span style="font-size:0.7rem;color:var(--gris);">Lien à venir</span>
+            </div>
+          </article>
+
+          <article class="avi-card reveal">
+            <div class="avi-card__topbar">
+              <span class="avi-card__h" style="color:var(--gris);letter-spacing:0;">·</span>
+              <div class="avi-card__right"><span class="avi-card__genre avi-card__genre--theatre">Théâtre</span></div>
+            </div>
+            <div class="avi-card__photo avi-card__photo--theatre"><div class="avi-card__photo-placeholder" aria-hidden="true">🎭</div></div>
+            <div class="avi-card__body">
+              <h3 class="avi-card__title">J'ai besoin d'air, c'est pour ça que je fume</h3>
+              
+              <p class="avi-card__venue">10h45 · 1h15</p>
+            </div>
+            <div class="avi-card__footer">
+              <span style="font-size:0.7rem;color:var(--gris);">Lien à venir</span>
+            </div>
+          </article>
+
+          <article class="avi-card reveal">
+            <div class="avi-card__topbar">
+              <span class="avi-card__h" style="color:var(--gris);letter-spacing:0;">·</span>
+              <div class="avi-card__right"><span class="avi-card__genre avi-card__genre--theatre">Seul en scène</span></div>
+            </div>
+            <div class="avi-card__photo"><img src="assets/spectacles/avignon-2026/thelma-louise-et-nous.jpg" alt="Thelma, Louise et nous" loading="lazy"></div>
+            <div class="avi-card__body">
+              <h3 class="avi-card__title">Thelma, Louise et nous</h3>
+              <p class="avi-card__company">Why not !</p>
+              <p class="avi-card__venue">📍 Théâtre Transversal · 11h · 1h20</p>
+            </div>
+            <div class="avi-card__footer">
+              <a href="https://www.theatredeshalles.com/spectacles/thelma-louise-et-nous/" class="avi-card__link" target="_blank" rel="noopener">Voir →</a>
+            </div>
+          </article>
+
+          <article class="avi-card reveal">
+            <div class="avi-card__topbar">
+              <span class="avi-card__h" style="color:var(--gris);letter-spacing:0;">·</span>
+              <div class="avi-card__right"><span class="avi-card__genre avi-card__genre--theatre">Théâtre</span></div>
+            </div>
+            <div class="avi-card__photo"><img src="assets/spectacles/avignon-2026/le-projet-barthes.jpg" alt="Le projet Barthes" loading="lazy"></div>
+            <div class="avi-card__body">
+              <h3 class="avi-card__title">Le projet Barthes</h3>
+              
+              <p class="avi-card__venue">📍 Théâtre des Halles · Sud-Est · 11h05 · 1h15</p>
+            </div>
+            <div class="avi-card__footer">
+              <a href="https://theatredutrainbleu.fr/festival-2026/le-projet-barthes/" class="avi-card__link" target="_blank" rel="noopener">Voir →</a>
+            </div>
+          </article>
+
+          <article class="avi-card reveal">
+            <div class="avi-card__topbar">
+              <span class="avi-card__h" style="color:var(--gris);letter-spacing:0;">·</span>
+              <div class="avi-card__right"><span class="avi-card__genre avi-card__genre--theatre">Seul en scène</span></div>
+            </div>
+            <div class="avi-card__photo"><img src="assets/spectacles/avignon-2026/la-vie-materielle.jpg" alt="La vie matérielle" loading="lazy"></div>
+            <div class="avi-card__body">
+              <h3 class="avi-card__title">La vie matérielle</h3>
+              <p class="avi-card__company">Marguerite Duras nous invite à une confession intime : le bilan de sa vie personnelle et artistique, de l'enfance en Indochine. D'après Duras.</p><p class="avi-card__company" style="font-style:normal;color:var(--accent);font-weight:600;">Why not</p>
+              <p class="avi-card__venue">📍 La Luna · 11h35 · 1h</p>
+            </div>
+            <div class="avi-card__footer">
+              <a href="https://lascala-provence.fr/programmation/la-vie-materielle/" class="avi-card__link" target="_blank" rel="noopener">Voir →</a>
+            </div>
+          </article>
+
+          <article class="avi-card reveal">
+            <div class="avi-card__topbar">
+              <span class="avi-card__h" style="color:var(--gris);letter-spacing:0;">·</span>
+              <div class="avi-card__right"><span class="avi-card__genre avi-card__genre--theatre">Théâtre</span></div>
+            </div>
+            <div class="avi-card__photo avi-card__photo--theatre"><div class="avi-card__photo-placeholder" aria-hidden="true">🎭</div></div>
+            <div class="avi-card__body">
+              <h3 class="avi-card__title">Made in France</h3>
+              <p class="avi-card__company">Déjà vu — Hélène le recommande</p>
+              <p class="avi-card__venue">📍 L'Adresse · 11h55 · 1h40</p>
+            </div>
+            <div class="avi-card__footer">
+              <a href="https://www.11avignon.com/fr/made-in-france" class="avi-card__link" target="_blank" rel="noopener">Voir →</a>
+            </div>
+          </article>
+
+          <article class="avi-card reveal">
+            <div class="avi-card__topbar">
+              <span class="avi-card__h" style="color:var(--gris);letter-spacing:0;">·</span>
+              <div class="avi-card__right"><span class="avi-card__genre avi-card__genre--theatre">Théâtre</span></div>
+            </div>
+            <div class="avi-card__photo avi-card__photo--theatre"><div class="avi-card__photo-placeholder" aria-hidden="true">🎭</div></div>
+            <div class="avi-card__body">
+              <h3 class="avi-card__title">Black Out Songs</h3>
+              <p class="avi-card__company">Why not</p>
+              <p class="avi-card__venue">📍 Théâtre Le 11 · Sud-Ouest · 12h05 · 1h20</p>
+            </div>
+            <div class="avi-card__footer">
+              <a href="https://www.11avignon.com/programmation/blackout-songs" class="avi-card__link" target="_blank" rel="noopener">Voir →</a>
+            </div>
+          </article>
+
+          <article class="avi-card reveal">
+            <div class="avi-card__topbar">
+              <span class="avi-card__h" style="color:var(--gris);letter-spacing:0;">·</span>
+              <div class="avi-card__right"><span class="avi-card__genre avi-card__genre--theatre">Classique</span></div>
+            </div>
+            <div class="avi-card__photo avi-card__photo--theatre"><div class="avi-card__photo-placeholder" aria-hidden="true">🎭</div></div>
+            <div class="avi-card__body">
+              <h3 class="avi-card__title">Le conte d'hiver</h3>
+              
+              <p class="avi-card__venue">📍 Théâtre des Lucioles · 12h30 · 1h50</p>
+            </div>
+            <div class="avi-card__footer">
+              <a href="https://www.chenenoir.fr/event/le-conte-dhiver-de-shakespeare/" class="avi-card__link" target="_blank" rel="noopener">Voir →</a>
+            </div>
+          </article>
+
+          <article class="avi-card reveal">
+            <div class="avi-card__topbar">
+              <span class="avi-card__h" style="color:var(--gris);letter-spacing:0;">·</span>
+              <div class="avi-card__right"><span class="avi-card__genre avi-card__genre--theatre">Théâtre</span></div>
+            </div>
+            <div class="avi-card__photo"><img src="assets/spectacles/avignon-2026/le-silence-de-claire-lagrange.jpg" alt="Le silence de Claire Lagrange" loading="lazy"></div>
+            <div class="avi-card__body">
+              <h3 class="avi-card__title">Le silence de Claire Lagrange</h3>
+              <p class="avi-card__company">?</p>
+              <p class="avi-card__venue">📍 Théâtre des Doms · 12h30 · 1h15</p>
+            </div>
+            <div class="avi-card__footer">
+              <a href="https://lesdoms.eu/spectacle/le-silence-de-claire-lagrange/" class="avi-card__link" target="_blank" rel="noopener">Voir →</a>
+            </div>
+          </article>
+
+          <article class="avi-card reveal">
+            <div class="avi-card__topbar">
+              <span class="avi-card__h" style="color:var(--gris);letter-spacing:0;">·</span>
+              <div class="avi-card__right"><span class="avi-card__genre avi-card__genre--vivant">Humour</span></div>
+            </div>
+            <div class="avi-card__photo"><img src="assets/spectacles/avignon-2026/melodie-fontaine.jpg" alt="Mélodie Fontaine — Nickel Nickel" loading="lazy"></div>
+            <div class="avi-card__body">
+              <h3 class="avi-card__title">Mélodie Fontaine — Nickel Nickel</h3>
+              
+              <p class="avi-card__venue">📍 Théâtre des Béliers · 13h15 · 1h10</p>
+            </div>
+            <div class="avi-card__footer">
+              <a href="https://www.festivaloffavignon.com/spectacles/10388-mlodie-fontaine-nickel-nickel" class="avi-card__link" target="_blank" rel="noopener">Voir →</a>
+            </div>
+          </article>
+
+          <article class="avi-card reveal">
+            <div class="avi-card__topbar">
+              <span class="avi-card__h" style="color:var(--gris);letter-spacing:0;">·</span>
+              <div class="avi-card__right"><span class="avi-card__genre avi-card__genre--danse">Théâtre · Danse</span></div>
+            </div>
+            <div class="avi-card__photo"><img src="assets/spectacles/avignon-2026/24-cite-des-promesses.png" alt="24, Cité des promesses" loading="lazy"></div>
+            <div class="avi-card__body">
+              <h3 class="avi-card__title">24, Cité des promesses</h3>
+              
+              <p class="avi-card__venue">📍 La Factory — Théâtre de l'Oulle · 13h35 · 1h30</p>
+            </div>
+            <div class="avi-card__footer">
+              <a href="https://www.festivaloffavignon.com/spectacles/9988-24-cite-des-promesses" class="avi-card__link" target="_blank" rel="noopener">Voir →</a>
+            </div>
+          </article>
+
+          <article class="avi-card reveal">
+            <div class="avi-card__topbar">
+              <span class="avi-card__h" style="color:var(--gris);letter-spacing:0;">·</span>
+              <div class="avi-card__right"><span class="avi-card__genre avi-card__genre--theatre">Théâtre</span></div>
+            </div>
+            <div class="avi-card__photo"><img src="assets/spectacles/avignon-2026/le-parfait-manuel.jpg" alt="Le Parfait Manuel" loading="lazy"></div>
+            <div class="avi-card__body">
+              <h3 class="avi-card__title">Le Parfait Manuel (à l'usage des futurs dictateurs)</h3>
+              <p class="avi-card__company">Why not</p>
+              <p class="avi-card__venue">📍 Théâtre Le 11 · Sud-Ouest · 13h50</p>
+            </div>
+            <div class="avi-card__footer">
+              <a href="https://www.11avignon.com/programmation/le-parfait-manuel" class="avi-card__link" target="_blank" rel="noopener">Voir →</a>
+            </div>
+          </article>
+
+          <article class="avi-card reveal">
+            <div class="avi-card__topbar">
+              <span class="avi-card__h" style="color:var(--gris);letter-spacing:0;">·</span>
+              <div class="avi-card__right"><span class="avi-card__genre avi-card__genre--theatre">Théâtre</span></div>
+            </div>
+            <div class="avi-card__photo avi-card__photo--theatre"><div class="avi-card__photo-placeholder" aria-hidden="true">🎭</div></div>
+            <div class="avi-card__body">
+              <h3 class="avi-card__title">Peu importe</h3>
+              <p class="avi-card__company">?</p>
+              <p class="avi-card__venue">📍 La Scala Provence · 13h50 · 1h20</p>
+            </div>
+            <div class="avi-card__footer">
+              <a href="https://lascala-provence.fr/programmation/peu-importe/" class="avi-card__link" target="_blank" rel="noopener">Voir →</a>
+            </div>
+          </article>
+
+          <article class="avi-card reveal">
+            <div class="avi-card__topbar">
+              <span class="avi-card__h" style="color:var(--gris);letter-spacing:0;">·</span>
+              <div class="avi-card__right"><span class="avi-card__genre avi-card__genre--danse">Danse</span></div>
+            </div>
+            <div class="avi-card__photo"><img src="assets/spectacles/avignon-2026/maider.jpg" alt="M'aider" loading="lazy"></div>
+            <div class="avi-card__body">
+              <h3 class="avi-card__title">M'aider — témoignage dansé d'un marin sauveteur</h3>
+              
+              <p class="avi-card__venue">📍 La Manufacture — l'Intra · Est · 14h20 · 1h</p>
+            </div>
+            <div class="avi-card__footer">
+              <a href="https://lamanufacture.org/programmation/maider-temoignage-danse-dun-marin-sauveteur/" class="avi-card__link" target="_blank" rel="noopener">Voir →</a>
+            </div>
+          </article>
+
+          <article class="avi-card reveal">
+            <div class="avi-card__topbar">
+              <span class="avi-card__h" style="color:var(--gris);letter-spacing:0;">·</span>
+              <div class="avi-card__right"><span class="avi-card__genre avi-card__genre--theatre">Théâtre</span></div>
+            </div>
+            <div class="avi-card__photo"><img src="assets/spectacles/avignon-2026/de-profundis.jpg" alt="De profundis" loading="lazy"></div>
+            <div class="avi-card__body">
+              <h3 class="avi-card__title">De profundis</h3>
+              <p class="avi-card__company">?</p>
+              <p class="avi-card__venue">📍 Théâtre de l'Albatros · 14h30 · 1h10</p>
+            </div>
+            <div class="avi-card__footer">
+              <a href="https://www.festivaloffavignon.com/spectacles/8349-de-profundis" class="avi-card__link" target="_blank" rel="noopener">Voir →</a>
+            </div>
+          </article>
+
+          <article class="avi-card reveal">
+            <div class="avi-card__topbar">
+              <span class="avi-card__h" style="color:var(--gris);letter-spacing:0;">·</span>
+              <div class="avi-card__right"><span class="avi-card__genre avi-card__genre--theatre">Théâtre</span></div>
+            </div>
+            <div class="avi-card__photo"><img src="assets/spectacles/avignon-2026/le-proces-fouquet.jpg" alt="Le procès Fouquet" loading="lazy"></div>
+            <div class="avi-card__body">
+              <h3 class="avi-card__title">Le procès Fouquet</h3>
+              <p class="avi-card__company">Thriller judiciaire et historique : Colbert et Fouquet, deux intelligences hors du commun, s'affrontent dans un procès fatal.</p><p class="avi-card__company" style="font-style:normal;color:var(--accent);font-weight:600;">?</p>
+              <p class="avi-card__venue">📍 Au Coin de la Lune · 14h30 · 1h10</p>
+            </div>
+            <div class="avi-card__footer">
+              <a href="https://www.festivaloffavignon.com/spectacles/9138-le-procs-fouquet-panache-et-corruption-la-chute-du-surintendant" class="avi-card__link" target="_blank" rel="noopener">Voir →</a>
+            </div>
+          </article>
+
+          <article class="avi-card reveal">
+            <div class="avi-card__topbar">
+              <span class="avi-card__h" style="color:var(--gris);letter-spacing:0;">·</span>
+              <div class="avi-card__right"><span class="avi-card__genre avi-card__genre--theatre">Théâtre</span></div>
+            </div>
+            <div class="avi-card__photo"><img src="assets/spectacles/avignon-2026/tumeur-ou-tutu.png" alt="Tumeur ou Tutu" loading="lazy"></div>
+            <div class="avi-card__body">
+              <h3 class="avi-card__title">Tumeur ou Tutu</h3>
+              <p class="avi-card__company">?</p>
+              <p class="avi-card__venue">14h50</p>
+            </div>
+            <div class="avi-card__footer">
+              <a href="https://www.festivaloffavignon.com/spectacles/8163-tumeur-ou-tutu" class="avi-card__link" target="_blank" rel="noopener">Voir →</a>
+            </div>
+          </article>
+
+          <article class="avi-card reveal">
+            <div class="avi-card__topbar">
+              <span class="avi-card__h" style="color:var(--gris);letter-spacing:0;">·</span>
+              <div class="avi-card__right"><span class="avi-card__genre avi-card__genre--danse">Danse</span></div>
+            </div>
+            <div class="avi-card__photo"><img src="assets/spectacles/avignon-2026/hubris.jpeg" alt="Hubris" loading="lazy"></div>
+            <div class="avi-card__body">
+              <h3 class="avi-card__title">Hubris</h3>
+              
+              <p class="avi-card__venue">📍 Théâtre du Rempart · Nord-Est · 14h55 · 1h20</p>
+            </div>
+            <div class="avi-card__footer">
+              <a href="https://www.la-factory.org/hubris/" class="avi-card__link" target="_blank" rel="noopener">Voir →</a>
+            </div>
+          </article>
+
+          <article class="avi-card reveal">
+            <div class="avi-card__topbar">
+              <span class="avi-card__h" style="color:var(--gris);letter-spacing:0;">·</span>
+              <div class="avi-card__right"><span class="avi-card__genre avi-card__genre--theatre">Seul en scène</span></div>
+            </div>
+            <div class="avi-card__photo avi-card__photo--theatre"><div class="avi-card__photo-placeholder" aria-hidden="true">🎭</div></div>
+            <div class="avi-card__body">
+              <h3 class="avi-card__title">Teen Play</h3>
+              
+              <p class="avi-card__venue">📍 La Factory — Roseau Teinturiers · 15h · 1h</p>
+            </div>
+            <div class="avi-card__footer">
+              <span style="font-size:0.7rem;color:var(--gris);">Lien à venir</span>
+            </div>
+          </article>
+
+          <article class="avi-card reveal">
+            <div class="avi-card__topbar">
+              <span class="avi-card__h" style="color:var(--gris);letter-spacing:0;">·</span>
+              <div class="avi-card__right"><span class="avi-card__genre avi-card__genre--theatre">Théâtre jeunesse</span></div>
+            </div>
+            <div class="avi-card__photo avi-card__photo--theatre"><div class="avi-card__photo-placeholder" aria-hidden="true">🎭</div></div>
+            <div class="avi-card__body">
+              <h3 class="avi-card__title">Malmus</h3>
+              <p class="avi-card__company">Oui (danse)</p>
+              <p class="avi-card__venue">📍 La Chartreuse — Villeneuve lez Avignon · 15h10 · 1h10</p>
+            </div>
+            <div class="avi-card__footer">
+              <a href="https://www.hivernalesavignon.com/spectacle/malmus" class="avi-card__link" target="_blank" rel="noopener">Voir →</a>
+            </div>
+          </article>
+
+          <article class="avi-card reveal">
+            <div class="avi-card__topbar">
+              <span class="avi-card__h" style="color:var(--gris);letter-spacing:0;">·</span>
+              <div class="avi-card__right"><span class="avi-card__genre avi-card__genre--theatre">Théâtre</span></div>
+            </div>
+            <div class="avi-card__photo"><img src="assets/spectacles/avignon-2026/brioches-et-revolution.jpg" alt="Brioches et Révolution !" loading="lazy"></div>
+            <div class="avi-card__body">
+              <h3 class="avi-card__title">Brioches et Révolution !</h3>
+              <p class="avi-card__company">La fabrique des premiers mois de la Révolution de 1789 : deux député·es nous font vivre cette aventure folle.</p><p class="avi-card__company" style="font-style:normal;color:var(--accent);font-weight:600;">Why not !!</p>
+              <p class="avi-card__venue">📍 Théâtre du Train Bleu — Le Parvis · Est · 16h05 · 1h15</p>
+            </div>
+            <div class="avi-card__footer">
+              <a href="https://theatredutrainbleu.fr/festival2026/brioches-et-revolution/" class="avi-card__link" target="_blank" rel="noopener">Voir →</a>
+            </div>
+          </article>
+
+          <article class="avi-card reveal">
+            <div class="avi-card__topbar">
+              <span class="avi-card__h" style="color:var(--gris);letter-spacing:0;">·</span>
+              <div class="avi-card__right"><span class="avi-card__genre avi-card__genre--theatre">Classique</span></div>
+            </div>
+            <div class="avi-card__photo avi-card__photo--theatre"><div class="avi-card__photo-placeholder" aria-hidden="true">🎭</div></div>
+            <div class="avi-card__body">
+              <h3 class="avi-card__title">Les beaux draps</h3>
+              
+              <p class="avi-card__venue">📍 Théâtre des Lucioles · 16h30 · 1h</p>
+            </div>
+            <div class="avi-card__footer">
+              <a href="https://lascierie.coop/festival-avignon-off/programmation/lesbeauxdraps" class="avi-card__link" target="_blank" rel="noopener">Voir →</a>
+            </div>
+          </article>
+
+          <article class="avi-card reveal">
+            <div class="avi-card__topbar">
+              <span class="avi-card__h" style="color:var(--gris);letter-spacing:0;">·</span>
+              <div class="avi-card__right"><span class="avi-card__badge-deja">Déjà vu</span><span class="avi-card__genre avi-card__genre--vivant">Clown</span></div>
+            </div>
+            <div class="avi-card__photo avi-card__photo--theatre"><div class="avi-card__photo-placeholder" aria-hidden="true">🎭</div></div>
+            <div class="avi-card__body">
+              <h3 class="avi-card__title">Les chatouilles ou la danse de la colère</h3>
+              <p class="avi-card__company">Par la danse, l'histoire d'une enfant victime d'un proche de la famille et de sa reconquête d'elle-même.</p><p class="avi-card__company" style="font-style:normal;color:var(--accent);font-weight:600;">Déjà vu +++</p>
+              <p class="avi-card__venue">📍 La Scierie · Nord-Est (ext. remparts) · 16h45 · 1h45</p>
+            </div>
+            <div class="avi-card__footer">
+              <a href="https://lascierie.coop/festival-avignon-off/programmation/leschatouillesoola" class="avi-card__link" target="_blank" rel="noopener">Voir →</a>
+            </div>
+          </article>
+
+          <article class="avi-card reveal">
+            <div class="avi-card__topbar">
+              <span class="avi-card__h" style="color:var(--gris);letter-spacing:0;">·</span>
+              <div class="avi-card__right"><span class="avi-card__genre avi-card__genre--cirque">Cirque</span></div>
+            </div>
+            <div class="avi-card__photo"><img src="assets/spectacles/avignon-2026/terre-1.jpg" alt="Terre 1" loading="lazy"></div>
+            <div class="avi-card__body">
+              <h3 class="avi-card__title">Terre 1</h3>
+              
+              <p class="avi-card__venue">📍 Théâtre du Train Bleu · Est · 17h · 30 min</p>
+            </div>
+            <div class="avi-card__footer">
+              <a href="https://www.festivaloffavignon.com/spectacles/10036-terre-1" class="avi-card__link" target="_blank" rel="noopener">Voir →</a>
+            </div>
+          </article>
+
+          <article class="avi-card reveal">
+            <div class="avi-card__topbar">
+              <span class="avi-card__h" style="color:var(--gris);letter-spacing:0;">·</span>
+              <div class="avi-card__right"><span class="avi-card__genre avi-card__genre--theatre">Théâtre</span></div>
+            </div>
+            <div class="avi-card__photo avi-card__photo--theatre"><div class="avi-card__photo-placeholder" aria-hidden="true">🎭</div></div>
+            <div class="avi-card__body">
+              <h3 class="avi-card__title">Voyage en Ataxie</h3>
+              
+              <p class="avi-card__venue">📍 Théâtre de l'Albatros · Sud-Est · 17h10 · 1h05</p>
+            </div>
+            <div class="avi-card__footer">
+              <a href="https://www.11avignon.com/programmation/voyage-en-ataxie" class="avi-card__link" target="_blank" rel="noopener">Voir →</a>
+            </div>
+          </article>
+
+          <article class="avi-card reveal">
+            <div class="avi-card__topbar">
+              <span class="avi-card__h" style="color:var(--gris);letter-spacing:0;">·</span>
+              <div class="avi-card__right"><span class="avi-card__genre avi-card__genre--theatre">Théâtre</span></div>
+            </div>
+            <div class="avi-card__photo avi-card__photo--theatre"><div class="avi-card__photo-placeholder" aria-hidden="true">🎭</div></div>
+            <div class="avi-card__body">
+              <h3 class="avi-card__title">What Did You Expect</h3>
+              <p class="avi-card__company">Why not, ça a l'air bien barré</p>
+              <p class="avi-card__venue">📍 Les Hivernales · 17h20 · 1h10</p>
+            </div>
+            <div class="avi-card__footer">
+              <a href="https://www.hivernalesavignon.com/spectacle/what-did-you-expect" class="avi-card__link" target="_blank" rel="noopener">Voir →</a>
+            </div>
+          </article>
+
+          <article class="avi-card reveal">
+            <div class="avi-card__topbar">
+              <span class="avi-card__h" style="color:var(--gris);letter-spacing:0;">·</span>
+              <div class="avi-card__right"><span class="avi-card__genre avi-card__genre--theatre">Théâtre</span></div>
+            </div>
+            <div class="avi-card__photo"><img src="assets/spectacles/avignon-2026/orphelins.jpg" alt="Orphelins" loading="lazy"></div>
+            <div class="avi-card__body">
+              <h3 class="avi-card__title">Orphelins</h3>
+              <p class="avi-card__company">?</p>
+              <p class="avi-card__venue">📍 Le Petit Louvre · 17h35 · 1h25</p>
+            </div>
+            <div class="avi-card__footer">
+              <a href="https://www.theatredesbarriques.com/orphelins" class="avi-card__link" target="_blank" rel="noopener">Voir →</a>
+            </div>
+          </article>
+
+          <article class="avi-card reveal">
+            <div class="avi-card__topbar">
+              <span class="avi-card__h" style="color:var(--gris);letter-spacing:0;">·</span>
+              <div class="avi-card__right"><span class="avi-card__genre avi-card__genre--theatre">Conférence</span></div>
+            </div>
+            <div class="avi-card__photo"><img src="assets/spectacles/avignon-2026/quand-on-dort.jpg" alt="Quand on dort on n'a pas faim" loading="lazy"></div>
+            <div class="avi-card__body">
+              <h3 class="avi-card__title">Quand on dort on n'a pas faim</h3>
+              <p class="avi-card__company">Why not !!</p>
+              <p class="avi-card__venue">📍 Au Coin de la Lune · 17h45 · 1h20</p>
+            </div>
+            <div class="avi-card__footer">
+              <a href="https://lamanufacture.org/programmation/quand-on-dort-on-na-pas-faim/" class="avi-card__link" target="_blank" rel="noopener">Voir →</a>
+            </div>
+          </article>
+
+          <article class="avi-card reveal">
+            <div class="avi-card__topbar">
+              <span class="avi-card__h" style="color:var(--gris);letter-spacing:0;">·</span>
+              <div class="avi-card__right"><span class="avi-card__genre avi-card__genre--theatre">Spectacle du IN</span></div>
+            </div>
+            <div class="avi-card__photo avi-card__photo--theatre"><div class="avi-card__photo-placeholder" aria-hidden="true">🎭</div></div>
+            <div class="avi-card__body">
+              <h3 class="avi-card__title">Un procès — après l'ennemi du peuple</h3>
+              
+              <p class="avi-card__venue">18h · 2h15</p>
+            </div>
+            <div class="avi-card__footer">
+              <a href="https://festival-avignon.com/fr/edition-2026/programmation/un-proces-355154" class="avi-card__link" target="_blank" rel="noopener">Voir →</a>
+            </div>
+          </article>
+
+          <article class="avi-card reveal">
+            <div class="avi-card__topbar">
+              <span class="avi-card__h" style="color:var(--gris);letter-spacing:0;">·</span>
+              <div class="avi-card__right"><span class="avi-card__genre avi-card__genre--theatre">Spectacle du IN</span></div>
+            </div>
+            <div class="avi-card__photo avi-card__photo--theatre"><div class="avi-card__photo-placeholder" aria-hidden="true">🎭</div></div>
+            <div class="avi-card__body">
+              <h3 class="avi-card__title">Capra (une chèvre)</h3>
+              
+              <p class="avi-card__venue">18h · 1h45</p>
+            </div>
+            <div class="avi-card__footer">
+              <span style="font-size:0.7rem;color:var(--gris);">Lien à venir</span>
+            </div>
+          </article>
+
+          <article class="avi-card reveal">
+            <div class="avi-card__topbar">
+              <span class="avi-card__h" style="color:var(--gris);letter-spacing:0;">·</span>
+              <div class="avi-card__right"><span class="avi-card__genre avi-card__genre--theatre">Théâtre</span></div>
+            </div>
+            <div class="avi-card__photo"><img src="assets/spectacles/avignon-2026/solo-a-table.jpg" alt="Solo à table" loading="lazy"></div>
+            <div class="avi-card__body">
+              <h3 class="avi-card__title">Solo à table</h3>
+              
+              <p class="avi-card__venue">📍 Gymnase du Lycée Mistral · 18h15 · 1h</p>
+            </div>
+            <div class="avi-card__footer">
+              <a href="https://lamanufacture.org/programmation/solo-a-table/" class="avi-card__link" target="_blank" rel="noopener">Voir →</a>
+            </div>
+          </article>
+
+          <article class="avi-card reveal">
+            <div class="avi-card__topbar">
+              <span class="avi-card__h" style="color:var(--gris);letter-spacing:0;">·</span>
+              <div class="avi-card__right"><span class="avi-card__genre avi-card__genre--theatre">Théâtre</span></div>
+            </div>
+            <div class="avi-card__photo avi-card__photo--theatre"><div class="avi-card__photo-placeholder" aria-hidden="true">🎭</div></div>
+            <div class="avi-card__body">
+              <h3 class="avi-card__title">Les figurants</h3>
+              <p class="avi-card__company">Why not</p>
+              <p class="avi-card__venue">📍 Théâtre des Gémeaux · 19h · 1h</p>
+            </div>
+            <div class="avi-card__footer">
+              <a href="https://lascalaprovence.fr/programmation/les-figurants/" class="avi-card__link" target="_blank" rel="noopener">Voir →</a>
+            </div>
+          </article>
+
+          <article class="avi-card reveal">
+            <div class="avi-card__topbar">
+              <span class="avi-card__h" style="color:var(--gris);letter-spacing:0;">·</span>
+              <div class="avi-card__right"><span class="avi-card__genre avi-card__genre--theatre">Théâtre</span></div>
+            </div>
+            <div class="avi-card__photo avi-card__photo--theatre"><div class="avi-card__photo-placeholder" aria-hidden="true">🎭</div></div>
+            <div class="avi-card__body">
+              <h3 class="avi-card__title">Le Premier sexe, ou la grosse arnaque de la virilité</h3>
+              <p class="avi-card__company">Déjà vu — Hélène le recommande</p>
+              <p class="avi-card__venue">📍 Théâtre Le 11 · Sud-Ouest · 19h10 · 1h15</p>
+            </div>
+            <div class="avi-card__footer">
+              <a href="https://lascala-provence.fr/programmation/le-premier-sexe/" class="avi-card__link" target="_blank" rel="noopener">Voir →</a>
+            </div>
+          </article>
+
+          <article class="avi-card reveal">
+            <div class="avi-card__topbar">
+              <span class="avi-card__h" style="color:var(--gris);letter-spacing:0;">·</span>
+              <div class="avi-card__right"><span class="avi-card__genre avi-card__genre--theatre">Théâtre</span></div>
+            </div>
+            <div class="avi-card__photo avi-card__photo--theatre"><div class="avi-card__photo-placeholder" aria-hidden="true">🎭</div></div>
+            <div class="avi-card__body">
+              <h3 class="avi-card__title">La vitesse de l'eau</h3>
+              
+              <p class="avi-card__venue">19h20 · 50 min</p>
+            </div>
+            <div class="avi-card__footer">
+              <a href="https://www.hivernalesavignon.com/spectacle/la-vitesse-de-l-eau" class="avi-card__link" target="_blank" rel="noopener">Voir →</a>
+            </div>
+          </article>
+
+          <article class="avi-card reveal">
+            <div class="avi-card__topbar">
+              <span class="avi-card__h" style="color:var(--gris);letter-spacing:0;">·</span>
+              <div class="avi-card__right"><span class="avi-card__genre avi-card__genre--theatre">Seul en scène</span></div>
+            </div>
+            <div class="avi-card__photo avi-card__photo--theatre"><div class="avi-card__photo-placeholder" aria-hidden="true">🎭</div></div>
+            <div class="avi-card__body">
+              <h3 class="avi-card__title">Le songe d'une nuit d'été</h3>
+              
+              <p class="avi-card__venue">📍 La Scala Provence · Centre Sud-Ouest · 19h30 · 1h50</p>
+            </div>
+            <div class="avi-card__footer">
+              <a href="https://lascierie.coop/festival-avignon-off/programmation/lesongedunenuitdeteOFF" class="avi-card__link" target="_blank" rel="noopener">Voir →</a>
+            </div>
+          </article>
+
+          <article class="avi-card reveal">
+            <div class="avi-card__topbar">
+              <span class="avi-card__h" style="color:var(--gris);letter-spacing:0;">·</span>
+              <div class="avi-card__right"><span class="avi-card__genre avi-card__genre--vivant">Humour</span></div>
+            </div>
+            <div class="avi-card__photo"><img src="assets/spectacles/avignon-2026/emma-bojan.jpg" alt="Emma Bojan — Attends-moi j'arrive" loading="lazy"></div>
+            <div class="avi-card__body">
+              <h3 class="avi-card__title">Emma Bojan — Attends-moi j'arrive</h3>
+              <p class="avi-card__company">« Fuck madame Bouléro et la 5e B qui n'avaient jamais cru en moi. » Sûrement son plus gros banger.</p><p class="avi-card__company" style="font-style:normal;color:var(--accent);font-weight:600;">?</p>
+              <p class="avi-card__venue">📍 La Scierie · Nord-Est (ext. remparts) · 20h · 1h15</p>
+            </div>
+            <div class="avi-card__footer">
+              <a href="https://www.festivaloffavignon.com/spectacles/9457-attends-moi-j-arrive" class="avi-card__link" target="_blank" rel="noopener">Voir →</a>
+            </div>
+          </article>
+
+          <article class="avi-card reveal">
+            <div class="avi-card__topbar">
+              <span class="avi-card__h" style="color:var(--gris);letter-spacing:0;">·</span>
+              <div class="avi-card__right"><span class="avi-card__genre avi-card__genre--cirque">Cirque</span></div>
+            </div>
+            <div class="avi-card__photo avi-card__photo--theatre"><div class="avi-card__photo-placeholder" aria-hidden="true">🎭</div></div>
+            <div class="avi-card__body">
+              <h3 class="avi-card__title">Olympe(s)</h3>
+              <p class="avi-card__company">Why not</p>
+              <p class="avi-card__venue">📍 Train Bleu — Le Parvis · 21h · 1h50</p>
+            </div>
+            <div class="avi-card__footer">
+              <span style="font-size:0.7rem;color:var(--gris);">Lien à venir</span>
+            </div>
+          </article>
+
+          <article class="avi-card reveal">
+            <div class="avi-card__topbar">
+              <span class="avi-card__h" style="color:var(--gris);letter-spacing:0;">·</span>
+              <div class="avi-card__right"><span class="avi-card__genre avi-card__genre--theatre">Théâtre immersif</span></div>
+            </div>
+            <div class="avi-card__photo avi-card__photo--theatre"><div class="avi-card__photo-placeholder" aria-hidden="true">🎭</div></div>
+            <div class="avi-card__body">
+              <h3 class="avi-card__title">Nous reviendrons au printemps (immersion dans la Cerisaie)</h3>
+              
+              <p class="avi-card__venue">📍 Villeneuve lez Avignon (relâches 12, 15 et 19) · 21h · 2h</p>
+            </div>
+            <div class="avi-card__footer">
+              <a href="https://www.festivalvilleneuveenscene.com/programmation/nous-reviendrons-au-printemps" class="avi-card__link" target="_blank" rel="noopener">Voir →</a>
+            </div>
+          </article>
+
+          <article class="avi-card reveal">
+            <div class="avi-card__topbar">
+              <span class="avi-card__h" style="color:var(--gris);letter-spacing:0;">·</span>
+              <div class="avi-card__right"><span class="avi-card__genre avi-card__genre--theatre">Spectacle du IN</span></div>
+            </div>
+            <div class="avi-card__photo avi-card__photo--theatre"><div class="avi-card__photo-placeholder" aria-hidden="true">🎭</div></div>
+            <div class="avi-card__body">
+              <h3 class="avi-card__title">Terces</h3>
+              
+              <p class="avi-card__venue">22h · 2h</p>
+            </div>
+            <div class="avi-card__footer">
+              <span style="font-size:0.7rem;color:var(--gris);">Lien à venir</span>
+            </div>
+          </article>
+
+          <article class="avi-card reveal">
+            <div class="avi-card__topbar">
+              <span class="avi-card__h" style="color:var(--gris);letter-spacing:0;">·</span>
+              <div class="avi-card__right"><span class="avi-card__genre avi-card__genre--danse">Danse — Spectacle du IN</span></div>
+            </div>
+            <div class="avi-card__photo avi-card__photo--theatre"><div class="avi-card__photo-placeholder" aria-hidden="true">🎭</div></div>
+            <div class="avi-card__body">
+              <h3 class="avi-card__title">The Last Hamlet</h3>
+              
+              <p class="avi-card__venue">📍 La Chartreuse de Villeneuve · 22h · 1h10</p>
+            </div>
+            <div class="avi-card__footer">
+              <span style="font-size:0.7rem;color:var(--gris);">Lien à venir</span>
+            </div>
+          </article>
+
+          <article class="avi-card reveal">
+            <div class="avi-card__topbar">
+              <span class="avi-card__h" style="color:var(--gris);letter-spacing:0;">·</span>
+              <div class="avi-card__right"><span class="avi-card__genre avi-card__genre--danse">Danse — Spectacle du IN</span></div>
+            </div>
+            <div class="avi-card__photo avi-card__photo--theatre"><div class="avi-card__photo-placeholder" aria-hidden="true">🎭</div></div>
+            <div class="avi-card__body">
+              <h3 class="avi-card__title">Le Pas du Monde</h3>
+              
+              <p class="avi-card__venue">22h · 1h</p>
+            </div>
+            <div class="avi-card__footer">
+              <span style="font-size:0.7rem;color:var(--gris);">Lien à venir</span>
+            </div>
+          </article>
+
+          <article class="avi-card reveal">
+            <div class="avi-card__topbar">
+              <span class="avi-card__h" style="color:var(--gris);letter-spacing:0;">·</span>
+              <div class="avi-card__right"><span class="avi-card__genre avi-card__genre--cirque">Cirque</span></div>
+            </div>
+            <div class="avi-card__photo"><img src="assets/spectacles/avignon-2026/la-vague.jpeg" alt="La vague" loading="lazy"></div>
+            <div class="avi-card__body">
+              <h3 class="avi-card__title">La vague</h3>
+              <p class="avi-card__company">Un professeur d'histoire propose à ses élèves une expérience pour comprendre comment naissent les régimes autoritaires. Très vite, tout dérape.</p><p class="avi-card__company" style="font-style:normal;color:var(--accent);font-weight:600;">Why not — peu de places restantes</p>
+              <p class="avi-card__venue">📍 Villeneuve en Scène · 22h05 · 1h20</p>
+            </div>
+            <div class="avi-card__footer">
+              <a href="https://www.la-factory.org/la-vague/" class="avi-card__link" target="_blank" rel="noopener">Voir →</a>
+            </div>
+          </article>
+
+          <article class="avi-card reveal">
+            <div class="avi-card__topbar">
+              <span class="avi-card__h" style="color:var(--gris);letter-spacing:0;">·</span>
+              <div class="avi-card__right"><span class="avi-card__genre avi-card__genre--theatre">Théâtre</span></div>
+            </div>
+            <div class="avi-card__photo"><img src="assets/spectacles/avignon-2026/je-sors-ce-soir.jpg" alt="Je sors ce soir" loading="lazy"></div>
+            <div class="avi-card__body">
+              <h3 class="avi-card__title">Je sors ce soir</h3>
+              <p class="avi-card__company">Why not</p>
+              <p class="avi-card__venue">📍 Théâtre Le 11 · Sud-Ouest · 23h · 50 min</p>
+            </div>
+            <div class="avi-card__footer">
+              <a href="https://lamanufacture.org/programmation/je-sors-ce-soir/" class="avi-card__link" target="_blank" rel="noopener">Voir →</a>
+            </div>
+          </article>
+
+        </div>
+      </section>
+
+      <!-- CTA cross-link -->
+      <div style="padding:clamp(36px,5vw,56px) 0;text-align:center;">
+        <a href="avignon-2025.html" class="btn btn--outline">← Voir la sélection Avignon 2025</a>
+      </div>
+
     </div>
   </main>
 
@@ -58,7 +2324,7 @@
     <div class="container">
       <div class="footer__grid">
         <div>
-          <p class="footer__logo">au <em>pestacle</em> ce soir</p>
+          <p class="footer__logo">Au <em>Pestacle</em> Ce Soir</p>
           <p class="footer__tagline">Des recommandations sincères pour vos prochaines sorties.</p>
         </div>
         <div class="footer__col">
@@ -67,6 +2333,7 @@
           <a href="recommandations.html">Les spectacles</a>
           <a href="avignon-2025.html">Avignon 2025</a>
           <a href="a-propos.html">À propos</a>
+          <a href="contact.html">Contact</a>
         </div>
         <div class="footer__col">
           <h4>Avignon</h4>
@@ -75,12 +2342,23 @@
         </div>
       </div>
       <div class="footer__bottom">
-        <span>© 2026 Au Pestacle ce soir — Hélène Micheau</span>
+        <span>© 2026 Au Pestacle Ce Soir — Hélène Micheau</span>
         <a href="mentions-legales.html">Mentions légales</a>
       </div>
     </div>
   </footer>
 
   <script src="js/main.js"></script>
+  <script>
+    /* Transforme H/HH/HHH en notation avec positions inactives en gris */
+    document.querySelectorAll('.avi-card__h, .avignon-section__h').forEach(el => {
+      const t = el.textContent.trim();
+      if(!/^H+$/.test(t)) return;
+      const n = t.length;
+      el.innerHTML = Array.from({length:3}, (_,i) =>
+        `<span style="color:${i<n?'var(--accent)':'#D8D8D8'};letter-spacing:2px;">H</span>`
+      ).join('');
+    });
+  </script>
 </body>
 </html>
