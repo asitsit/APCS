@@ -169,7 +169,7 @@
   <script src="js/likes.js"></script>
   <script>
   (function() {
-    const TYPE_LABELS = { spectacle: 'Spectacle', recommandation: 'Recommandation', communaute: 'Communauté' };
+    const TYPE_LABELS = { spectacle: 'Spectacle', recommandation: 'Recommandation', communaute: 'Sortie de la communauté' };
 
     function hRating(n) {
       if (!n) return '';
@@ -193,8 +193,8 @@
             <p class="spectacle-card__excerpt">${s.description||''}</p>
             <div class="spectacle-card__footer">
               <a href="${s.lien || ('spectacle.html?id=' + s.id)}" class="spectacle-card__link">Lire →</a>
-              <button class="like-btn" data-sid="${s.id}" aria-pressed="false" aria-label="Sauvegarder">
-                <span class="lk-icon">🔖</span><span class="lk-count">…</span>
+              <button class="like-btn" data-sid="${s.id}" aria-pressed="false" aria-label="Aimer ce spectacle">
+                <span class="lk-icon">🤍</span><span class="lk-count">…</span>
               </button>
             </div>
           </div>

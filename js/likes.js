@@ -68,11 +68,11 @@
     btn.classList.toggle('liked', liked);
     const iconEl  = btn.querySelector('.lk-icon');
     const countEl = btn.querySelector('.lk-count');
-    if (iconEl)  iconEl.textContent  = '🔖';
+    if (iconEl)  iconEl.textContent  = liked ? '❤️' : '🤍';
     if (countEl) countEl.textContent = ready ? total(id) : '…';
     btn.setAttribute('aria-pressed', liked ? 'true' : 'false');
     btn.setAttribute('aria-label',
-      (liked ? 'Retirer des spectacles sauvegardés' : 'Sauvegarder ce spectacle') +
+      (liked ? 'Retirer des spectacles likés' : 'Aimer ce spectacle') +
       ` — ${ready ? total(id) : '…'} personnes`);
   }
 

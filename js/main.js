@@ -77,11 +77,19 @@ const PERIODE_LABELS = {
 
 let activePeriode = 'toutes';
 let activeNote    = 'toutes';
+let activeType    = 'toutes';
 let activeLiked   = false;
+let activeSearch  = '';
 
-const periodeBtns = document.querySelectorAll('.filtre-btn--periode');
-const noteBtns    = document.querySelectorAll('.filtre-btn--note');
-const likedBtn    = document.getElementById('filtre-liked');
+const periodeBtns  = document.querySelectorAll('.filtre-btn--periode');
+const noteBtns     = document.querySelectorAll('.filtre-btn--note');
+const typeBtns     = document.querySelectorAll('.filtre-btn--type');
+const likedBtn     = document.getElementById('filtre-liked');
+const searchInput  = document.getElementById('search-input');
+
+function normalizeSearch(str) {
+  return (str || '').normalize('NFD').replace(/[̀-ͯ]/g, '').toLowerCase();
+}
 const activeBar   = document.getElementById('active-filters');
 const chipsWrap   = document.getElementById('filter-chips');
 const resetBtn    = document.getElementById('reset-filters');
@@ -112,9 +120,17 @@ function applyFilters() {
       show = show && note === parseInt(activeNote, 10);
     }
 
+    if (activeType !== 'toutes') {
+      show = show && (card.dataset.type || 'spectacle') === activeType;
+    }
+
     if (activeLiked) {
       const sid = card.dataset.sid;
       show = show && typeof window.apcsIsLiked === 'function' && window.apcsIsLiked(sid);
+    }
+
+    if (activeSearch) {
+      show = show && (card.dataset.search || '').includes(activeSearch);
     }
 
     if (show) { card.removeAttribute('data-hidden'); visible++; }
@@ -149,10 +165,24 @@ function updateChips() {
     has = true;
     const chip = document.createElement('button');
     chip.className = 'filter-chip';
-    chip.innerHTML = `🔖 Mes spectacles sauvegardés <span class="filter-chip__x">×</span>`;
+    chip.innerHTML = `❤️ Spectacles likés <span class="filter-chip__x">×</span>`;
     chip.addEventListener('click', () => {
       activeLiked = false;
       if (likedBtn) likedBtn.classList.remove('active');
+      applyFilters();
+    });
+    chipsWrap.appendChild(chip);
+  }
+
+  if (activeType !== 'toutes') {
+    has = true;
+    const typeLabel = { spectacle: 'Spectacles', communaute: 'Communauté' }[activeType] || activeType;
+    const chip = document.createElement('button');
+    chip.className = 'filter-chip';
+    chip.innerHTML = `${typeLabel} <span class="filter-chip__x">×</span>`;
+    chip.addEventListener('click', () => {
+      activeType = 'toutes';
+      typeBtns.forEach(b => b.classList.remove('active'));
       applyFilters();
     });
     chipsWrap.appendChild(chip);
@@ -179,10 +209,14 @@ function updateChips() {
 function resetFilters() {
   activePeriode = 'toutes';
   activeNote    = 'toutes';
+  activeType    = 'toutes';
   activeLiked   = false;
+  activeSearch  = '';
   periodeBtns.forEach(b => b.classList.remove('active'));
   noteBtns.forEach(b => b.classList.remove('active'));
+  typeBtns.forEach(b => b.classList.remove('active'));
   if (likedBtn) likedBtn.classList.remove('active');
+  if (searchInput) searchInput.value = '';
   applyFilters();
 }
 
@@ -215,6 +249,28 @@ noteBtns.forEach(btn => {
     applyFilters();
   });
 });
+
+typeBtns.forEach(btn => {
+  btn.addEventListener('click', () => {
+    const val = btn.dataset.filtreType || btn.dataset.filtretype;
+    if (activeType === val) {
+      activeType = 'toutes';
+      btn.classList.remove('active');
+    } else {
+      typeBtns.forEach(b => b.classList.remove('active'));
+      btn.classList.add('active');
+      activeType = val;
+    }
+    applyFilters();
+  });
+});
+
+if (searchInput) {
+  searchInput.addEventListener('input', () => {
+    activeSearch = normalizeSearch(searchInput.value.trim());
+    applyFilters();
+  });
+}
 
 if (resetBtn) resetBtn.addEventListener('click', resetFilters);
 

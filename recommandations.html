@@ -48,6 +48,32 @@
     .like-btn.liked .lk-icon { transform: scale(1.25); }
     .like-btn .lk-count { font-size: 0.75rem; font-variant-numeric: tabular-nums; }
     .spectacle-card__footer { display: flex; justify-content: space-between; align-items: center; }
+    .type-badge {
+      display: inline-block; align-self: flex-start; font-size: 0.65rem; font-weight: 700;
+      text-transform: uppercase; letter-spacing: 0.08em;
+      padding: 3px 9px; border-radius: 20px; margin-bottom: 8px;
+    }
+    .type-badge--spectacle      { background: rgba(181,212,75,0.18); color: var(--pistache-dark, #6a8f1e); }
+    .type-badge--recommandation { background: rgba(255,107,107,0.14); color: var(--corail, #E84040); }
+    .type-badge--communaute     { background: rgba(120,120,144,0.14); color: var(--gris); }
+    .spectacle-card__director {
+      font-size: 0.82rem; font-weight: 700; color: var(--noir);
+      margin-top: -8px; margin-bottom: 8px;
+    }
+    .search-bar {
+      display: flex; align-items: center; gap: 8px;
+      border: 1.5px solid var(--gris-border); border-radius: 4px;
+      padding: 8px 14px; max-width: 480px; width: 100%;
+      transition: border-color 0.15s;
+    }
+    .search-bar:focus-within { border-color: var(--accent); }
+    .search-bar__icon { font-size: 0.9rem; opacity: 0.6; flex-shrink: 0; }
+    .search-bar__input {
+      border: none; outline: none; background: none;
+      font-family: var(--font-corps); font-size: 0.88rem; color: var(--noir);
+      width: 100%;
+    }
+    .search-bar__input::placeholder { color: var(--gris); }
   </style>
 </head>
 <body>
@@ -115,6 +141,13 @@
   <div class="filtres" role="navigation" aria-label="Filtrer les spectacles">
     <div class="container">
 
+      <div class="filtres__row">
+        <div class="search-bar">
+          <span class="search-bar__icon" aria-hidden="true">🔍</span>
+          <input type="search" id="search-input" class="search-bar__input" placeholder="Rechercher un titre, un metteur en scène, un mot-clé…" aria-label="Rechercher une recommandation">
+        </div>
+      </div>
+
       <div class="filtres__row" style="display:flex;flex-wrap:wrap;gap:16px;align-items:center;">
         <span style="font-size:0.68rem;font-weight:700;text-transform:uppercase;letter-spacing:0.08em;color:var(--gris);">Filtre</span>
         <div style="display:flex;gap:4px;align-items:center;">
@@ -129,7 +162,12 @@
           <button class="filtre-btn filtre-btn--note" data-filtre-note="1" role="listitem" style="font-family:var(--font-titre);letter-spacing:2px;">H</button>
         </div>
         <div style="display:flex;gap:4px;align-items:center;">
-          <button class="filtre-btn filtre-btn--liked" id="filtre-liked" role="listitem" style="gap:6px;">🔖 Mes spectacles sauvegardés</button>
+          <span style="font-size:0.68rem;font-weight:700;text-transform:uppercase;letter-spacing:0.08em;color:var(--gris);margin-right:6px;">Type</span>
+          <button class="filtre-btn filtre-btn--type" data-filtre-type="spectacle" role="listitem">Spectacles</button>
+          <button class="filtre-btn filtre-btn--type" data-filtre-type="communaute" role="listitem">Communauté</button>
+        </div>
+        <div style="display:flex;gap:4px;align-items:center;">
+          <button class="filtre-btn filtre-btn--liked" id="filtre-liked" role="listitem" style="gap:6px;">❤️ Spectacles likés</button>
         </div>
       </div>
 
@@ -160,6 +198,15 @@
   <!-- Script de chargement dynamique depuis Supabase -->
   <script>
   (function() {
+    const TYPE_LABELS = { spectacle: 'Spectacle', recommandation: 'Recommandation', communaute: 'Sortie de la communauté' };
+
+    function normalize(str) {
+      return (str || '')
+        .normalize('NFD').replace(/[̀-ͯ]/g, '')
+        .toLowerCase()
+        .replace(/"/g, '&quot;');
+    }
+
     function hRating(n) {
       const spots = Array.from({length:3}, (_,i) =>
         `<span class="${i < n ? 'h-on' : 'h-off'}">H</span>`
@@ -195,34 +242,38 @@
     }
 
     function renderCard(s) {
+      const type = s.type || 'spectacle';
       const photo = s.photo
         ? `<img src="${s.photo}" alt="${s.titre}" loading="lazy" style="width:100%;height:100%;object-fit:cover;">`
         : `<div class="spectacle-card__img-placeholder" style="background:${s.couleur||'#E8E8E8'};" aria-hidden="true"></div>`;
       const period  = computePeriod(s.date_fin);
       const dateStr = buildDateStr(s.date_debut, s.date_fin);
       const meta = [
-        s.lieu    ? `<span>📍 <strong>${s.lieu}</strong></span>` : '',
-        dateStr   ? `<span>🗓 ${dateStr}</span>` : '',
-        s.duree   ? `<span>⏱ ${s.duree}</span>` : '',
+        s.lieu        ? `<span>📍 <strong>${s.lieu}</strong></span>` : '',
+        dateStr       ? `<span>🗓 ${dateStr}</span>` : '',
+        s.duree       ? `<span>⏱ ${s.duree}</span>` : '',
       ].filter(Boolean).join('');
+      const searchText = normalize([s.titre, s.description, s.realisateur, s.lieu, s.contenu].filter(Boolean).join(' '));
       return `
-        <article class="spectacle-card" data-period="${period}" data-note="${s.note||2}" data-sid="${s.id}" role="listitem">
+        <article class="spectacle-card" data-period="${period}" data-note="${s.note||2}" data-type="${type}" data-sid="${s.id}" data-search="${searchText}" role="listitem">
           <div class="spectacle-card__img">${photo}</div>
           <div class="spectacle-card__body">
+            <span class="type-badge type-badge--${type}">${TYPE_LABELS[type] || type}</span><br>
             ${hRating(s.note)}
             <h2 class="spectacle-card__show-title">${s.titre}</h2>
+            ${s.realisateur ? `<p class="spectacle-card__director">${s.realisateur}</p>` : ''}
             <p class="spectacle-card__excerpt">${s.description||''}</p>
             <div class="spectacle-card__meta">${meta}</div>
             <div class="spectacle-card__footer">
               <a href="${s.lien || ('spectacle.html?id=' + s.id)}" class="spectacle-card__link">Lire la reco →</a>
-              <button class="like-btn" data-sid="${s.id}" aria-pressed="false" aria-label="Coup de cœur">
-                <span class="lk-icon">♡</span><span class="lk-count">…</span>
+              <button class="like-btn" data-sid="${s.id}" aria-pressed="false" aria-label="Aimer ce spectacle">
+                <span class="lk-icon">🤍</span><span class="lk-count">…</span>
               </button>
             </div>
           </div>
         </article>`;
     }
-    fetch(`${SUPA_URL}/rest/v1/spectacles?actif=eq.true&type=eq.spectacle&order=created_at.asc`, { headers: SUPA_HEADERS })
+    fetch(`${SUPA_URL}/rest/v1/spectacles?actif=eq.true&type=in.(spectacle,communaute)&order=created_at.asc`, { headers: SUPA_HEADERS })
       .then(r => r.json())
       .then(data => {
         const grid  = document.getElementById('spectacles-grid');

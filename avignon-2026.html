@@ -179,24 +179,6 @@
     .avi-card__genre--danse   { color: #0A7A4A; }
     .avi-card__genre--cirque  { color: #C06000; }
     .avi-card__genre--vivant  { color: #1D5080; }
-    .avi-card__badge-sold {
-      font-size: 0.58rem;
-      font-weight: 700;
-      text-transform: uppercase;
-      letter-spacing: 0.04em;
-      color: var(--corail);
-      border: 1.5px solid var(--corail);
-      padding: 3px 7px;
-    }
-    .avi-card__badge-deja {
-      font-size: 0.58rem;
-      font-weight: 700;
-      text-transform: uppercase;
-      letter-spacing: 0.04em;
-      color: var(--gris);
-      border: 1.5px solid var(--gris);
-      padding: 3px 7px;
-    }
 
     /* Photo */
     .avi-card__photo {
@@ -270,9 +252,7 @@
       position: absolute;
       inset: 0;
     }
-    .avi-card__topbar,
-    .avi-card__badge-sold,
-    .avi-card__badge-deja {
+    .avi-card__topbar {
       position: relative;
       z-index: 1;
     }
@@ -484,7 +464,7 @@
           <article class="avi-card reveal">
             <div class="avi-card__topbar">
               <span class="avi-card__h">HHH</span>
-              <div class="avi-card__right"><span class="avi-card__badge-deja">Déjà vu</span><span class="avi-card__genre avi-card__genre--danse">Danse · Magie</span></div>
+              <div class="avi-card__right"><span class="avi-card__genre avi-card__genre--danse">Danse · Magie</span></div>
             </div>
             <div class="avi-card__photo avi-card__photo--theatre"><div class="avi-card__photo-placeholder" aria-hidden="true">🎭</div></div>
             <div class="avi-card__body">
@@ -596,7 +576,7 @@
           <article class="avi-card reveal avi-card--sold-out">
             <div class="avi-card__topbar">
               <span class="avi-card__h">HHH</span>
-              <div class="avi-card__right"><span class="avi-card__badge-sold">Complet</span><span class="avi-card__genre avi-card__genre--cirque">Cirque</span></div>
+              <div class="avi-card__right"><span class="avi-card__genre avi-card__genre--cirque">Cirque</span></div>
             </div>
             <div class="avi-card__photo"><img src="assets/spectacles/avignon-2026/fin-fin-et-fin.jpg" alt="Fin, fin et fin" loading="lazy"></div>
             <div class="avi-card__body">
@@ -612,7 +592,7 @@
           <article class="avi-card reveal avi-card--sold-out">
             <div class="avi-card__topbar">
               <span class="avi-card__h">HHH</span>
-              <div class="avi-card__right"><span class="avi-card__badge-sold">Complet</span><span class="avi-card__genre avi-card__genre--vivant">Comédie</span></div>
+              <div class="avi-card__right"><span class="avi-card__genre avi-card__genre--vivant">Comédie</span></div>
             </div>
             <div class="avi-card__photo"><img src="assets/spectacles/avignon-2026/le-dernier-cedre-du-liban.jpg" alt="Le dernier cèdre du Liban" loading="lazy"></div>
             <div class="avi-card__body">
@@ -628,7 +608,7 @@
           <article class="avi-card reveal avi-card--sold-out">
             <div class="avi-card__topbar">
               <span class="avi-card__h">HHH</span>
-              <div class="avi-card__right"><span class="avi-card__badge-sold">Complet</span><span class="avi-card__genre avi-card__genre--theatre">Expérience immersive</span></div>
+              <div class="avi-card__right"><span class="avi-card__genre avi-card__genre--theatre">Expérience immersive</span></div>
             </div>
             <div class="avi-card__photo"><img src="assets/spectacles/avignon-2026/la-zone-indigo.jpg" alt="La zone indigo" loading="lazy"></div>
             <div class="avi-card__body">
@@ -644,7 +624,7 @@
           <article class="avi-card reveal avi-card--sold-out">
             <div class="avi-card__topbar">
               <span class="avi-card__h">HHH</span>
-              <div class="avi-card__right"><span class="avi-card__badge-sold">Complet</span><span class="avi-card__genre avi-card__genre--vivant">Humour</span></div>
+              <div class="avi-card__right"><span class="avi-card__genre avi-card__genre--vivant">Humour</span></div>
             </div>
             <div class="avi-card__photo avi-card__photo--theatre"><div class="avi-card__photo-placeholder" aria-hidden="true">🎭</div></div>
             <div class="avi-card__body">
@@ -1976,7 +1956,7 @@
           <article class="avi-card reveal">
             <div class="avi-card__topbar">
               <span class="avi-card__h" style="color:var(--gris);letter-spacing:0;">·</span>
-              <div class="avi-card__right"><span class="avi-card__badge-deja">Déjà vu</span><span class="avi-card__genre avi-card__genre--vivant">Clown</span></div>
+              <div class="avi-card__right"><span class="avi-card__genre avi-card__genre--vivant">Clown</span></div>
             </div>
             <div class="avi-card__photo avi-card__photo--theatre"><div class="avi-card__photo-placeholder" aria-hidden="true">🎭</div></div>
             <div class="avi-card__body">
