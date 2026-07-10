@@ -8,25 +8,27 @@
   <link rel="icon" href="assets/Favicon_apcs_white.png" type="image/png">
   <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2/dist/umd/supabase.js"></script>
   <style>
+    @import url('https://fonts.googleapis.com/css2?family=Syne:wght@400;700;800&family=DM+Sans:ital,wght@0,400;0,500;0,700;1,400&display=swap');
     :root {
-      --noir: #1A1A2E;
-      --blanc: #FAFAF8;
-      --creme: #F5F0E8;
-      --creme-dark: #EDE8DC;
-      --pistache: #B5D44B;
-      --pistache-dark: #8AAA2A;
-      --gris: #787890;
-      --gris-border: rgba(26,26,46,0.1);
-      --corail: #FF6B6B;
-      --radius-sm: 6px;
-      --radius-md: 12px;
-      --radius-lg: 20px;
-      --shadow: 0 4px 24px rgba(26,26,46,0.1);
-      --font-titre: Georgia, 'Times New Roman', serif;
+      --noir: #0A0A0A;
+      --blanc: #FFFFFF;
+      --creme: #FFFFFF;
+      --creme-dark: #F5F5F5;
+      --pistache: #6e46ff;
+      --pistache-dark: #5030e0;
+      --gris: #666666;
+      --gris-border: #E0E0E0;
+      --corail: #FF3C3C;
+      --radius-sm: 2px;
+      --radius-md: 4px;
+      --radius-lg: 4px;
+      --shadow: 0 4px 20px rgba(0,0,0,0.10);
+      --font-titre: 'Syne', system-ui, sans-serif;
+      --font-corps: 'DM Sans', system-ui, -apple-system, sans-serif;
       --t: 0.2s ease;
     }
     *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
-    body { font-family: system-ui, -apple-system, sans-serif; background: #F0EDE8; color: var(--noir); min-height: 100vh; }
+    body { font-family: var(--font-corps); background: var(--creme-dark); color: var(--noir); min-height: 100vh; }
 
     /* ── LOGIN ─────────────────────────────────── */
     #screen-login {
@@ -78,7 +80,7 @@
     }
     tbody td { padding: 11px 16px; border-bottom: 1px solid var(--gris-border); font-size: 0.87rem; vertical-align: middle; }
     tbody tr:last-child td { border-bottom: none; }
-    tbody tr:hover td { background: rgba(181,212,75,0.04); }
+    tbody tr:hover td { background: rgba(110,70,255,0.04); }
 
     .t-photo { width: 50px; height: 38px; object-fit: cover; border-radius: 5px; display: block; }
     .t-photo-ph { width: 50px; height: 38px; border-radius: 5px; background: var(--creme-dark); display: flex; align-items: center; justify-content: center; font-size: 1.1rem; color: var(--gris); }
@@ -88,7 +90,7 @@
     .h-badge { font-family: var(--font-titre); font-weight: 700; color: var(--pistache-dark); letter-spacing: 3px; font-size: 0.9rem; }
 
     .badge { display: inline-block; padding: 3px 9px; border-radius: 20px; font-size: 0.7rem; font-weight: 700; white-space: nowrap; }
-    .badge-on  { background: rgba(181,212,75,0.18); color: var(--pistache-dark); }
+    .badge-on  { background: rgba(110,70,255,0.18); color: var(--pistache-dark); }
     .badge-off { background: rgba(120,120,144,0.12); color: var(--gris); }
 
     .row-actions { display: flex; gap: 7px; }
@@ -109,12 +111,12 @@
     .btn { display: inline-flex; align-items: center; justify-content: center; gap: 6px; padding: 10px 20px; border: none; border-radius: var(--radius-sm); font-size: 0.88rem; font-weight: 700; cursor: pointer; transition: all var(--t); white-space: nowrap; }
     .btn:disabled { opacity: 0.5; cursor: not-allowed; }
     .btn-noir   { background: var(--noir); color: var(--blanc); }
-    .btn-noir:hover:not(:disabled) { background: #333360; }
+    .btn-noir:hover:not(:disabled) { background: #1F1F1F; }
     .btn-vert   { background: var(--pistache); color: var(--noir); }
     .btn-vert:hover:not(:disabled) { background: var(--pistache-dark); color: var(--blanc); }
     .btn-ghost  { background: var(--creme); color: var(--noir); }
     .btn-ghost:hover { background: var(--creme-dark); }
-    .btn-danger { background: rgba(255,107,107,0.1); color: var(--corail); }
+    .btn-danger { background: rgba(255,60,60,0.1); color: var(--corail); }
     .btn-danger:hover { background: var(--corail); color: var(--blanc); }
     .btn-sm { padding: 6px 13px; font-size: 0.78rem; }
     .btn-full { width: 100%; }
@@ -128,7 +130,7 @@
       cursor: pointer; transition: all var(--t); text-align: center;
       color: var(--gris);
     }
-    .note-opt.on { border-color: var(--pistache); background: rgba(181,212,75,0.14); color: var(--pistache-dark); }
+    .note-opt.on { border-color: var(--pistache); background: rgba(110,70,255,0.14); color: var(--pistache-dark); }
 
     /* ── TOGGLE ────────────────────────────────── */
     .toggle-row { display: flex; align-items: center; gap: 11px; padding: 10px 0; }
@@ -151,7 +153,7 @@
     /* ── PANEL LATERAL ─────────────────────────── */
     #panel-bg {
       display: none; position: fixed; inset: 0;
-      background: rgba(26,26,46,0.45); z-index: 100;
+      background: rgba(0,0,0,0.45); z-index: 100;
       backdrop-filter: blur(3px);
     }
     #panel-bg.open { display: block; }
@@ -159,7 +161,7 @@
       position: fixed; top: 0; right: 0; bottom: 0;
       width: min(560px, 100vw);
       background: var(--blanc); overflow-y: auto;
-      padding: 28px 32px; box-shadow: -6px 0 40px rgba(26,26,46,0.18);
+      padding: 28px 32px; box-shadow: -6px 0 40px rgba(0,0,0,0.18);
       transform: translateX(100%); transition: transform 0.28s cubic-bezier(.4,0,.2,1);
       z-index: 101;
     }
@@ -199,7 +201,7 @@
       transition: border-color var(--t), background var(--t);
       background: var(--blanc); position: relative;
     }
-    .upload-zone:hover, .upload-zone.drag { border-color: var(--pistache); background: rgba(181,212,75,0.05); }
+    .upload-zone:hover, .upload-zone.drag { border-color: var(--pistache); background: rgba(110,70,255,0.05); }
     .upload-zone input[type=file] { position: absolute; inset: 0; opacity: 0; cursor: pointer; }
     .upload-preview { width: 100%; height: 140px; object-fit: cover; border-radius: var(--radius-sm); display: none; margin-bottom: 8px; }
     .upload-label { font-size: 0.82rem; color: var(--gris); }

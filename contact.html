@@ -131,16 +131,6 @@
     .contact-info-text strong { display: block; font-size: 0.88rem; font-weight: 700; color: var(--noir); margin-bottom: 3px; }
     .contact-info-text span   { font-size: 0.82rem; color: var(--gris); line-height: 1.5; display: block; }
 
-    .contact-note {
-      background: var(--creme-dark);
-      border-radius: var(--radius-lg);
-      padding: 24px 28px;
-      font-size: 0.88rem;
-      color: var(--noir-soft);
-      line-height: 1.65;
-    }
-    .contact-note strong { color: var(--noir); }
-
     /* Responsive */
     @media (max-width: 900px) {
       .contact-layout { grid-template-columns: 1fr; gap: 48px; }
@@ -177,7 +167,6 @@
 
   <header class="page-header" role="banner">
     <div class="container">
-      <p class="page-header__kicker">Écrire à Hélène</p>
       <h1 class="page-header__title">Contact</h1>
       <p class="page-header__lead">Une question sur une recommandation, un spectacle à me soumettre, un projet en commun ? Je lis tous les messages.</p>
     </div>
@@ -193,7 +182,7 @@
           <div class="form-success" id="form-success" role="alert">
             <div class="form-success__icon">✅</div>
             <p class="form-success__title">Message envoyé !</p>
-            <p class="form-success__sub">Merci, je vous réponds généralement sous 48h.</p>
+            <p class="form-success__sub">Merci pour votre message !</p>
           </div>
 
           <form class="contact-form" id="contact-form"
@@ -263,7 +252,7 @@
               <div class="contact-info-icon contact-info-icon--pistache">🎭</div>
               <div class="contact-info-text">
                 <strong>Soumettre un spectacle</strong>
-                <span>Vous êtes compagnie, producteur ou programmateur et souhaitez qu'Hélène voie votre spectacle.</span>
+                <span>Vous êtes compagnie, producteur ou programmateur et souhaitez que je vienne voir votre spectacle.<br>Vous êtes spectateur et avez eu un méga coup de cœur pour une pièce, partagez-le !</span>
               </div>
             </div>
 
@@ -279,13 +268,9 @@
               <div class="contact-info-icon contact-info-icon--corail">💬</div>
               <div class="contact-info-text">
                 <strong>Une question, un retour</strong>
-                <span>Vous avez vu un spectacle recommandé ici ? Partagez votre avis — je lis tout.</span>
+                <span>Vous avez vu un spectacle recommandé ici ? Partagez votre avis — je lis tout !</span>
               </div>
             </div>
-          </div>
-
-          <div class="contact-note">
-            <strong>Délai de réponse :</strong> je réponds à tous les messages sous 48h en semaine.
           </div>
 
         </aside>
