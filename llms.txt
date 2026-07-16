@@ -1,0 +1,14 @@
+# Au Pestacle Ce Soir
+
+> Recommandations théâtre & danse pour vos prochaines sorties, essentiellement sur Paris et au festival d'Avignon.
+
+Au Pestacle Ce Soir est un site de recommandations de spectacles (théâtre, danse) tenu par une spectatrice passionnée depuis plus de 25 ans. Les spectacles sont notés selon une échelle de 1 à 3 "H" (coup de cœur). Le site anime aussi une communauté de plus de 100 spectateurs à Paris, avec des sorties collectives régulières.
+
+## Pages principales
+
+- [Accueil](https://aupestaclecesoir.fr/): présentation du site, dernières recommandations, chiffres clés de la communauté
+- [Les spectacles](https://aupestaclecesoir.fr/recommandations.html): liste complète des recommandations, filtrable par note, période, type et mot-clé
+- [Avignon 2025](https://aupestaclecesoir.fr/avignon-2025.html): sélection des spectacles vus au Festival d'Avignon 2025
+- [Avignon 2026](https://aupestaclecesoir.fr/avignon-2026.html): sélection des spectacles repérés au Festival OFF d'Avignon 2026
+- [À propos](https://aupestaclecesoir.fr/a-propos.html): présentation de l'autrice et de la communauté
+- [Contact](https://aupestaclecesoir.fr/contact.html): pour soumettre un spectacle ou poser une question

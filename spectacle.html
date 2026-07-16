@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Chargement… — Au Pestacle Ce Soir</title>
+  <title>Au Pestacle Ce Soir — Chargement…</title>
   <meta name="description" content="">
   <meta name="author" content="Hélène">
   <link rel="icon" href="assets/Favicon_apcs_white.png" type="image/png">
@@ -167,7 +167,7 @@
 
       /* ── Titre de page ── */
       const titleParts = [s.titre, s.lieu].filter(Boolean);
-      document.title = titleParts.join(' — ') + ' — Au Pestacle Ce Soir';
+      document.title = 'Au Pestacle Ce Soir — ' + titleParts.join(' — ');
       const metaDesc = document.querySelector('meta[name="description"]');
       const metaText = s.description || s.intro || '';
       if (metaDesc && metaText) metaDesc.content = metaText.substring(0, 160);
