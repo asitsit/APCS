@@ -176,7 +176,7 @@ function updateChips() {
 
   if (activeType !== 'toutes') {
     has = true;
-    const typeLabel = { spectacle: 'Spectacles', communaute: 'Communauté' }[activeType] || activeType;
+    const typeLabel = { spectacle: 'Spectacles', communaute: 'Sorties Au Pestacle' }[activeType] || activeType;
     const chip = document.createElement('button');
     chip.className = 'filter-chip';
     chip.innerHTML = `${typeLabel} <span class="filter-chip__x">×</span>`;
@@ -190,7 +190,7 @@ function updateChips() {
 
   if (activeNote !== 'toutes') {
     has = true;
-    const noteLabel = { '3': 'HHH — Coup de cœur absolu', '2': 'HH — Très recommandés', '1': 'H — Recommandés' }[activeNote] || activeNote;
+    const noteLabel = { '3': 'HHH — Coup de cœur absolu', '2': 'HH — Carrément recommandé', '1': 'H — Recommandé', '0': 'Pourquoi pas' }[activeNote] || activeNote;
     const chip = document.createElement('button');
     chip.className = 'filter-chip filter-chip--note';
     chip.style.fontFamily = 'var(--font-titre)';

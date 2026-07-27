@@ -303,6 +303,7 @@
     <div class="field">
       <label>Note d'Hélène</label>
       <div class="note-row">
+        <button type="button" class="note-opt" data-n="0" style="font-size:0.72rem;">Pourquoi pas</button>
         <button type="button" class="note-opt" data-n="1">H</button>
         <button type="button" class="note-opt" data-n="2">HH</button>
         <button type="button" class="note-opt" data-n="3">HHH</button>
@@ -488,7 +489,7 @@ function rowHTML(s) {
     <td><div class="t-titre">${esc(s.titre)}</div><div class="t-lieu">${esc(s.lieu||'')}</div></td>
     <td>${esc(TYPE_LABELS[s.type] || s.type || '')}</td>
     <td class="t-dates">${dates}</td>
-    <td><span class="h-badge">${'H'.repeat(s.note||1)}</span></td>
+    <td><span class="h-badge">${'H'.repeat(s.note ?? 1) || '—'}</span></td>
     <td>${badge}</td>
     <td><div class="row-actions">
       <button class="btn btn-ghost btn-sm" onclick="openEdit('${s.id}')">Modifier</button>
@@ -575,7 +576,7 @@ function openEdit(id) {
   document.getElementById('f-lien').value     = s.lien         || '';
   document.getElementById('f-lien-officiel').value = s.lien_officiel || '';
   document.getElementById('f-actif').checked  = s.actif !== false;
-  setNote(s.note || 2);
+  setNote(s.note ?? 2);
   openPanel('Modifier le spectacle');
 }
 

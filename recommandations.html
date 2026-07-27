@@ -122,16 +122,20 @@
       <div style="display:flex;gap:28px;align-items:center;flex-wrap:wrap;">
         <span style="font-size:0.68rem;font-weight:700;text-transform:uppercase;letter-spacing:0.1em;color:var(--gris);">Note d'Hélène</span>
         <div style="display:flex;align-items:center;gap:8px;font-size:0.82rem;font-weight:600;">
-          <span style="font-family:var(--font-titre);font-weight:700;color:var(--accent);letter-spacing:3px;font-size:0.9rem;">HHH</span>
+          <span class="h-rating"><span class="h-on">H</span><span class="h-on">H</span><span class="h-on">H</span></span>
           Coup de cœur absolu
         </div>
         <div style="display:flex;align-items:center;gap:8px;font-size:0.82rem;font-weight:600;">
-          <span style="font-family:var(--font-titre);font-weight:700;color:var(--accent);letter-spacing:3px;font-size:0.9rem;">HH</span>
-          Très recommandé
+          <span class="h-rating"><span class="h-on">H</span><span class="h-on">H</span><span class="h-off">H</span></span>
+          Carrément recommandé
         </div>
         <div style="display:flex;align-items:center;gap:8px;font-size:0.82rem;font-weight:600;">
-          <span style="font-family:var(--font-titre);font-weight:700;color:var(--accent);letter-spacing:3px;font-size:0.9rem;">H</span>
+          <span class="h-rating"><span class="h-on">H</span><span class="h-off">H</span><span class="h-off">H</span></span>
           Recommandé
+        </div>
+        <div style="display:flex;align-items:center;gap:8px;font-size:0.82rem;font-weight:600;">
+          <span class="h-rating"><span class="h-off">H</span><span class="h-off">H</span><span class="h-off">H</span></span>
+          Pourquoi pas
         </div>
       </div>
     </div>
@@ -142,6 +146,7 @@
     <div class="container">
 
       <div class="filtres__row">
+        <span style="display:block;font-size:0.68rem;font-weight:700;text-transform:uppercase;letter-spacing:0.08em;color:var(--gris);margin-bottom:8px;">Filtre</span>
         <div class="search-bar">
           <span class="search-bar__icon" aria-hidden="true">🔍</span>
           <input type="search" id="search-input" class="search-bar__input" placeholder="Rechercher un titre, un metteur en scène, un mot-clé…" aria-label="Rechercher une recommandation">
@@ -149,7 +154,6 @@
       </div>
 
       <div class="filtres__row" style="display:flex;flex-wrap:wrap;gap:16px;align-items:center;">
-        <span style="font-size:0.68rem;font-weight:700;text-transform:uppercase;letter-spacing:0.08em;color:var(--gris);">Filtre</span>
         <div style="display:flex;gap:4px;align-items:center;">
           <span style="font-size:0.68rem;font-weight:700;text-transform:uppercase;letter-spacing:0.08em;color:var(--gris);margin-right:6px;">Période</span>
           <button class="filtre-btn filtre-btn--periode" data-filtre-periode="avoir"    role="listitem">À voir en ce moment</button>
@@ -160,11 +164,12 @@
           <button class="filtre-btn filtre-btn--note" data-filtre-note="3" role="listitem" style="font-family:var(--font-titre);letter-spacing:2px;">HHH</button>
           <button class="filtre-btn filtre-btn--note" data-filtre-note="2" role="listitem" style="font-family:var(--font-titre);letter-spacing:2px;">HH</button>
           <button class="filtre-btn filtre-btn--note" data-filtre-note="1" role="listitem" style="font-family:var(--font-titre);letter-spacing:2px;">H</button>
+          <button class="filtre-btn filtre-btn--note" data-filtre-note="0" role="listitem">Pourquoi pas</button>
         </div>
         <div style="display:flex;gap:4px;align-items:center;">
           <span style="font-size:0.68rem;font-weight:700;text-transform:uppercase;letter-spacing:0.08em;color:var(--gris);margin-right:6px;">Type</span>
           <button class="filtre-btn filtre-btn--type" data-filtre-type="spectacle" role="listitem">Spectacles</button>
-          <button class="filtre-btn filtre-btn--type" data-filtre-type="communaute" role="listitem">Communauté</button>
+          <button class="filtre-btn filtre-btn--type" data-filtre-type="communaute" role="listitem">Sorties Au Pestacle</button>
         </div>
         <div style="display:flex;gap:4px;align-items:center;">
           <button class="filtre-btn filtre-btn--liked" id="filtre-liked" role="listitem" style="gap:6px;">❤️ Spectacles likés</button>
@@ -255,7 +260,7 @@
       ].filter(Boolean).join('');
       const searchText = normalize([s.titre, s.description, s.realisateur, s.lieu, s.contenu].filter(Boolean).join(' '));
       return `
-        <article class="spectacle-card" data-period="${period}" data-note="${s.note||2}" data-type="${type}" data-sid="${s.id}" data-search="${searchText}" role="listitem">
+        <article class="spectacle-card" data-period="${period}" data-note="${s.note ?? 2}" data-type="${type}" data-sid="${s.id}" data-search="${searchText}" role="listitem">
           <div class="spectacle-card__img">${photo}</div>
           <div class="spectacle-card__body">
             <span class="type-badge type-badge--${type}">${TYPE_LABELS[type] || type}</span><br>
