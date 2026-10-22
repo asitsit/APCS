@@ -190,7 +190,7 @@ function updateChips() {
 
   if (activeNote !== 'toutes') {
     has = true;
-    const noteLabel = { '3': 'HHH — Coup de cœur absolu', '2': 'HH — Carrément recommandé', '1': 'H — Recommandé', '0': 'Pourquoi pas' }[activeNote] || activeNote;
+    const noteLabel = { '3': 'HHH — Coup de cœur absolu', '2': 'HH — Carrément recommandé', '1': 'H — Recommandé', '0': 'Bof' }[activeNote] || activeNote;
     const chip = document.createElement('button');
     chip.className = 'filter-chip filter-chip--note';
     chip.style.fontFamily = 'var(--font-titre)';
